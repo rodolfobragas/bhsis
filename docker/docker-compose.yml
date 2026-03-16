@@ -1,0 +1,235 @@
+services:
+  postgres:
+    image: postgis/postgis:15-3.3
+    container_name: delivery-postgres
+    environment:
+      POSTGRES_DB: delivery
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d delivery"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+
+  redis:
+    image: redis:7
+    container_name: delivery-redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "-h", "localhost", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 6380:6379
+
+  graphhopper:
+    image: swatrider/graphhopper:latest
+    container_name: delivery-graphhopper
+    environment:
+      MAX_HEAP_SIZE: 6g
+    command: server /data/brazil-latest.osm.pbf
+    ports:
+      - 8989:8989
+    volumes:
+      - ./graphhopper/data:/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "ls /data/*.osm-gh >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  traccar:
+    image: traccar/traccar:latest
+    container_name: delivery-traccar
+    environment:
+      TZ: America/Sao_Paulo
+    ports:
+      - 8082:8082
+    volumes:
+      - ./traccar/conf:/opt/traccar/conf
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8082/ >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api-core:
+    build: ../api-core
+    container_name: delivery-api-core
+    ports:
+      - 4000:4000
+    environment:
+      PORT: 4000
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: delivery
+      GRAPHOPPER_VRP_URL: http://graphhopper:8989/vrp
+      MARMITEX_API_URL: http://marmitex-system:3000
+      MARMITEX_SERVICE_TOKEN: changeme
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      TRACCAR_WEBHOOK_SECRET: changeme
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      graphhopper:
+        condition: service_healthy
+      marmitex-system:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:4000/dashboard/resumo >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  routing-service:
+    build: ../routing-service
+    container_name: delivery-routing-service
+    ports:
+      - 3021:3001
+    environment:
+      PORT: 3001
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: delivery
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      GRAPHOPPER_VRP_URL: http://graphhopper:8989/vrp
+      MARMITEX_API_URL: http://marmitex-system:3000
+      MARMITEX_SERVICE_TOKEN: changeme
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      graphhopper:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3001/health >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  tracking-service:
+    build: ../tracking-service
+    container_name: delivery-tracking-service
+    ports:
+      - 3002:3002
+    environment:
+      PORT: 3002
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: delivery
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      TRACCAR_WEBHOOK_SECRET: changeme
+      MARMITEX_API_URL: http://marmitex-system:3000
+      MARMITEX_SERVICE_TOKEN: changeme
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      marmitex-system:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3002/health >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  notification-service:
+    build: ../notification-service
+    container_name: delivery-notification-service
+    ports:
+      - 3010:3010
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ''
+      MARMITEX_API_URL: http://marmitex-system:3000
+      MARMITEX_SERVICE_TOKEN: changeme
+    depends_on:
+      redis:
+        condition: service_healthy
+      marmitex-system:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3010/health >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  dashboard-web:
+    build: ../dashboard-web
+    container_name: delivery-dashboard-web
+    ports:
+      - 4173:4173
+    depends_on:
+      api-core:
+        condition: service_healthy
+      tracking-service:
+        condition: service_healthy
+
+  motoboy-app:
+    build: ../motoboy-app
+    container_name: delivery-motoboy-app
+    ports:
+      - 4174:4174
+    depends_on:
+      api-core:
+        condition: service_healthy
+      tracking-service:
+        condition: service_healthy
+
+  marmitex-system:
+    build: ../marmitex-system
+    container_name: delivery-marmitex-system
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/delivery?options=-c%20search_path%3Dmarmitex%2Cpublic
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ''
+      SERVICE_TOKEN: changeme
+      NODE_ENV: production
+      VITE_APP_ID: delivery
+      JWT_SECRET: changeme
+      OAUTH_SERVER_URL: https://oauth.example.com
+      OWNER_OPEN_ID: owner123
+      BUILT_IN_FORGE_API_URL: https://forge.example.com
+      BUILT_IN_FORGE_API_KEY: forgekey
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/health >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  postgres-data:

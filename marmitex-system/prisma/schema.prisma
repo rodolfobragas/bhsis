@@ -1,0 +1,310 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================
+// USERS & AUTHENTICATION
+// ============================================
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      UserRole @default(ATTENDANT)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([role])
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  KITCHEN
+  ATTENDANT
+  CUSTOMER
+}
+
+// ============================================
+// CUSTOMERS
+// ============================================
+
+model Customer {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?  @unique
+  phone     String   @unique
+  address   String?
+  city      String?
+  state     String?
+  zipCode   String?
+  notes     String?
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders     Order[]
+  deliveries Delivery[]
+
+  @@index([phone])
+  @@index([email])
+  @@index([active])
+}
+
+// ============================================
+// PRODUCTS & RECIPES
+// ============================================
+
+model Recipe {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  cost        Float    @default(0)
+  prepTime    Int      @default(0) // in minutes
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  products Product[]
+
+  @@index([active])
+}
+
+model Product {
+  id        String   @id @default(cuid())
+  name      String
+  sku       String   @unique
+  category  String
+  price     Float
+  recipeId  String?
+  recipe    Recipe?  @relation(fields: [recipeId], references: [id])
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orderItems     OrderItem[]
+  inventoryItems InventoryItem[]
+  stockAlerts    StockAlert[]
+
+  @@index([category])
+  @@index([active])
+  @@index([recipeId])
+}
+
+// ============================================
+// INVENTORY & STOCK
+// ============================================
+
+model InventoryItem {
+  id              String    @id @default(cuid())
+  productId       String
+  product         Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity        Float     @default(0)
+  minQuantity     Float     @default(10)
+  maxQuantity     Float     @default(100)
+  unit            String    @default("un")
+  lastRestockDate DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  movements StockMovement[]
+  alerts    StockAlert[]
+
+  @@unique([productId])
+  @@index([productId])
+}
+
+model StockMovement {
+  id          String        @id @default(cuid())
+  inventoryId String
+  inventory   InventoryItem @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  type        MovementType
+  quantity    Float
+  reason      String?
+  orderId     String?
+  reference   String?
+  notes       String?
+  createdAt   DateTime      @default(now())
+
+  @@index([inventoryId])
+  @@index([type])
+  @@index([orderId])
+  @@index([createdAt])
+}
+
+enum MovementType {
+  IN
+  OUT
+  ADJUSTMENT
+  RETURN
+  WASTE
+}
+
+model StockAlert {
+  id          String        @id @default(cuid())
+  inventoryId String
+  inventory   InventoryItem @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  alertType   AlertType
+  quantity    Float
+  resolved    Boolean       @default(false)
+  resolvedAt  DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([inventoryId])
+  @@index([productId])
+  @@index([alertType])
+  @@index([resolved])
+}
+
+enum AlertType {
+  LOW_STOCK
+  OUT_OF_STOCK
+  OVERSTOCK
+  EXPIRING_SOON
+}
+
+enum DeliveryStatus {
+  PENDENTE
+  NA_ROTA
+  EM_ENTREGA
+  ENTREGUE
+  CANCELADO
+}
+
+// ============================================
+// ORDERS
+// ============================================
+
+model Order {
+  id          String      @id @default(cuid())
+  orderNumber String      @unique
+  customerId  String
+  customer    Customer    @relation(fields: [customerId], references: [id])
+  status      OrderStatus @default(PENDING)
+  total       Float       @default(0)
+  subtotal    Float       @default(0)
+  tax         Float       @default(0)
+  discount    Float       @default(0)
+  notes       String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  completedAt DateTime?
+
+  items      OrderItem[]
+  deliveries Delivery[]
+
+  @@index([customerId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([orderNumber])
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  READY
+  DELIVERED
+  CANCELLED
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Float
+  unitPrice Float
+  total     Float
+  notes     String?
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+// ============================================
+// SESSIONS (for Redis cache reference)
+// ============================================
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Motoboy {
+  id              String           @id @default(cuid())
+  nome            String
+  telefone        String
+  deviceIdTraccar String?          @map("device_id_traccar")
+  ativo           Boolean          @default(true)
+  deliveries      Delivery[]
+  positions       PosicaoMotoboy[]
+  routes          Rota[]
+}
+
+model Delivery {
+  id              String          @id @default(cuid())
+  orderId         String?         @map("order_id")
+  order           Order?          @relation(fields: [orderId], references: [id])
+  customerId      String?         @map("customer_id")
+  customer        Customer?       @relation(fields: [customerId], references: [id])
+  motoboyId       String?         @map("motoboy_id")
+  motoboy         Motoboy?        @relation(fields: [motoboyId], references: [id])
+  latitude        Decimal         @db.Decimal(10, 7)
+  longitude       Decimal         @db.Decimal(10, 7)
+  endereco        String
+  status          DeliveryStatus  @default(PENDENTE)
+  ordemRota       Int?            @map("ordem_rota")
+  previsaoEntrega DateTime?       @map("previsao_entrega")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  eventos         EventoEntrega[]
+}
+
+model EventoEntrega {
+  id        String   @id @default(cuid())
+  entregaId String   @map("entrega_id")
+  entrega   Delivery @relation(fields: [entregaId], references: [id])
+  tipo      String
+  detalhes  Json?
+  createdAt DateTime @default(now()) @map("created_at")
+}
+
+model PosicaoMotoboy {
+  id        String   @id @default(cuid())
+  motoboyId String   @map("motoboy_id")
+  motoboy   Motoboy  @relation(fields: [motoboyId], references: [id])
+  latitude  Decimal  @db.Decimal(10, 7)
+  longitude Decimal  @db.Decimal(10, 7)
+  speed     Decimal? @db.Decimal(6, 2)
+  timestamp DateTime @default(now())
+}
+
+model Rota {
+  id          String   @id @default(cuid())
+  motoboyId   String   @map("motoboy_id")
+  motoboy     Motoboy  @relation(fields: [motoboyId], references: [id])
+  entregasIds Json     @default("[]") @map("entregas_ids")
+  entregas    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+}

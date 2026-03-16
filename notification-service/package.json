@@ -1,0 +1,23 @@
+{
+  "name": "delivery-notification-service",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "bullmq": "^2.4.0",
+    "dotenv": "^16.4.0",
+    "express": "^4.19.2",
+    "reflect-metadata": "0.1.13"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3",
+    "@types/express": "^4.17.17"
+  }
+}

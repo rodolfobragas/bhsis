@@ -1,0 +1,12 @@
+node_modules/
+**/node_modules/
+dist/
+build/
+*.log
+.env
+.env.*
+.DS_Store
+coverage/
+docker/graphhopper/data/
+marmitex-system/node_modules/
+marmitex-system/node_modules_backup/
