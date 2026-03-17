@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+import { Entrega } from '../entities/entrega.entity';
 import { Motoboy } from '../entities/motoboy.entity';
 import { PosicaoMotoboy } from '../entities/posicao.entity';
 
@@ -10,7 +11,7 @@ export const createDataSource = () =>
     username: process.env.DATABASE_USER || 'postgres',
     password: process.env.DATABASE_PASSWORD || 'postgres',
     database: process.env.DATABASE_NAME || 'delivery',
-    entities: [Motoboy, PosicaoMotoboy],
+    entities: [Entrega, Motoboy, PosicaoMotoboy],
     synchronize: false,
     logging: false,
   });

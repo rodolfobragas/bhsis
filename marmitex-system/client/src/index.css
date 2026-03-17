@@ -155,6 +155,19 @@
     padding-right: 1rem;
   }
 
+  .page-fade-in {
+    animation: pageFadeIn 280ms ease-out both;
+  }
+
+  .card-raise {
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .card-raise:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  }
+
   .flex {
     min-height: 0;
     min-width: 0;
@@ -173,5 +186,16 @@
       padding-right: 2rem;
       max-width: 1280px; /* Standard content width */
     }
+  }
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

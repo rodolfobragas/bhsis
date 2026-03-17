@@ -18,6 +18,12 @@ interface Product {
   price: number;
   description?: string;
   active: boolean;
+  recipeId?: string | null;
+}
+
+interface Recipe {
+  id: string;
+  name: string;
 }
 
 const CATEGORIES = ["Marmitas", "Bebidas", "Sobremesas", "Acompanhamentos", "Pratos"];
@@ -25,6 +31,7 @@ const CATEGORIES = ["Marmitas", "Bebidas", "Sobremesas", "Acompanhamentos", "Pra
 export default function Products() {
   const { user, isAuthenticated } = useAuth();
   const [products, setProducts] = useState<Product[]>([]);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +43,7 @@ export default function Products() {
   // Fetch products on mount
   useEffect(() => {
     fetchProducts();
+    fetchRecipes();
   }, []);
 
   // Filter products based on search term
@@ -53,60 +61,22 @@ export default function Products() {
     try {
       setIsLoading(true);
       setError(null);
-      // Mock data for now - replace with API call
-      const mockProducts: Product[] = [
-        {
-          id: "1",
-          name: "Marmita de Frango",
-          sku: "MARM-001",
-          category: "Marmitas",
-          price: 25.0,
-          description: "Frango com arroz, feijão e salada",
-          active: true,
-        },
-        {
-          id: "2",
-          name: "Marmita de Peixe",
-          sku: "MARM-002",
-          category: "Marmitas",
-          price: 32.0,
-          description: "Peixe fresco com acompanhamentos",
-          active: true,
-        },
-        {
-          id: "3",
-          name: "Refrigerante 2L",
-          sku: "BEB-001",
-          category: "Bebidas",
-          price: 8.0,
-          description: "Refrigerante variados",
-          active: true,
-        },
-        {
-          id: "4",
-          name: "Suco Natural",
-          sku: "BEB-002",
-          category: "Bebidas",
-          price: 6.0,
-          description: "Suco de frutas naturais",
-          active: true,
-        },
-        {
-          id: "5",
-          name: "Brigadeiro",
-          sku: "SOBR-001",
-          category: "Sobremesas",
-          price: 3.0,
-          description: "Brigadeiro caseiro",
-          active: true,
-        },
-      ];
-      setProducts(mockProducts);
+      const data = await apiService.getProducts({ skip: 0, take: 200 });
+      setProducts(data);
     } catch (err) {
       setError("Erro ao carregar produtos");
       console.error(err);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchRecipes = async () => {
+    try {
+      const data = await apiService.getRecipes({ skip: 0, take: 200 });
+      setRecipes(data);
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -123,40 +93,19 @@ export default function Products() {
   const handleSubmitProduct = async (data: any) => {
     try {
       setIsSubmitting(true);
+      const payload = {
+        ...data,
+        recipeId: data.recipeId ? data.recipeId : undefined,
+      };
 
       if (selectedProduct) {
-        // Update product
-        // await apiService.updateProduct(selectedProduct.id, data);
-        setProducts(
-          products.map((p) =>
-            p.id === selectedProduct.id
-              ? {
-                  ...p,
-                  name: data.name,
-                  sku: data.sku,
-                  category: data.category,
-                  price: parseFloat(data.price),
-                  description: data.description,
-                }
-              : p
-          )
-        );
+        await apiService.updateProduct(selectedProduct.id, payload);
         toast.success("Produto atualizado com sucesso!");
       } else {
-        // Create product
-        // const newProduct = await apiService.createProduct(data);
-        const newProduct: Product = {
-          id: Date.now().toString(),
-          name: data.name,
-          sku: data.sku,
-          category: data.category,
-          price: parseFloat(data.price),
-          description: data.description,
-          active: true,
-        };
-        setProducts([...products, newProduct]);
+        await apiService.createProduct(payload);
         toast.success("Produto criado com sucesso!");
       }
+      fetchProducts();
     } catch (err) {
       toast.error("Erro ao salvar produto");
       console.error(err);
@@ -167,8 +116,8 @@ export default function Products() {
 
   const handleDeleteProduct = async (productId: string) => {
     try {
-      // await apiService.deleteProduct(productId);
-      setProducts(products.filter((p) => p.id !== productId));
+      await apiService.deleteProduct(productId);
+      fetchProducts();
       toast.success("Produto deletado com sucesso!");
     } catch (err) {
       toast.error("Erro ao deletar produto");
@@ -190,7 +139,7 @@ export default function Products() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-8">
+    <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -200,7 +149,7 @@ export default function Products() {
 
         {/* Error Alert */}
         {error && (
-          <Alert className="mb-6 border-red-500 bg-red-50">
+          <Alert className="mb-6 border-red-500 bg-red-50" role="alert">
             <AlertCircle className="h-4 w-4 text-red-600" />
             <AlertDescription className="text-red-800">{error}</AlertDescription>
           </Alert>
@@ -212,17 +161,21 @@ export default function Products() {
             <CardTitle>Pesquisar Produtos</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
               <div className="relative flex-1">
+                <label htmlFor="product-search" className="sr-only">
+                  Pesquisar produtos
+                </label>
                 <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
+                  id="product-search"
                   placeholder="Pesquise por nome, SKU ou categoria..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
                 />
               </div>
-              <Button variant="outline" onClick={fetchProducts}>
+              <Button variant="outline" onClick={fetchProducts} className="w-full md:w-auto">
                 Atualizar
               </Button>
             </div>
@@ -248,6 +201,7 @@ export default function Products() {
           onOpenChange={setDialogOpen}
           product={selectedProduct}
           categories={CATEGORIES}
+          recipes={recipes}
           onSubmit={handleSubmitProduct}
           isLoading={isSubmitting}
         />

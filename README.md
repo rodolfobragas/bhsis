@@ -12,6 +12,7 @@ Projeto modular com microserviços containerizados para gerenciar entregas, rote
 - `docker/`: Compose para PostgreSQL/PostGIS, Redis, Traccar, Graphhopper e todos os serviços.
 - `database/`: migrations PostGIS, seeds mínimos e scripts de execução.
 - `docs/`: guia de implantação colaborativo para múltiplas IAs.
+- `marmitex-system`: backend completo de restaurante (opcional no fluxo de delivery atual).
 
 ## Fluxo mínimo de implantação
 1. Rodar `docker/graphhopper/download-brazil.sh` (baixa e importa dados do Brasil no Graphhopper).

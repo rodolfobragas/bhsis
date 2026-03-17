@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react";
+import apiService from "@/services/api";
 
 interface User {
   id: string;
@@ -12,45 +13,12 @@ interface AuthContextType {
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<User>;
   logout: () => void;
-  register: (name: string, email: string, password: string) => Promise<void>;
+  register: (name: string, email: string, password: string) => Promise<User>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// Helper function to get user from token
-function getUserFromToken(token: string): User | null {
-  try {
-    // Parse token to get user info
-    const parts = token.split('.');
-    if (parts.length !== 3) return null;
-    
-    // For mock tokens, we'll determine user based on stored email
-    const storedEmail = localStorage.getItem("auth_email");
-    
-    if (storedEmail === "admin@marmitex.com") {
-      return {
-        id: "1",
-        email: "admin@marmitex.com",
-        name: "Admin User",
-        role: "admin",
-      };
-    } else if (storedEmail === "kitchen@marmitex.com") {
-      return {
-        id: "2",
-        email: "kitchen@marmitex.com",
-        name: "Kitchen Staff",
-        role: "kitchen",
-      };
-    }
-    
-    return null;
-  } catch (error) {
-    console.error("Error parsing token:", error);
-    return null;
-  }
-}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -59,22 +27,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Initialize auth from localStorage on mount
   useEffect(() => {
-    const initializeAuth = () => {
+    const initializeAuth = async () => {
       const storedToken = localStorage.getItem("auth_token");
-      const storedEmail = localStorage.getItem("auth_email");
-      
-      if (storedToken && storedEmail) {
-        const user = getUserFromToken(storedToken);
-        if (user) {
+      if (!storedToken) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const data = await apiService.getCurrentUser();
+        const resolvedUser = data.user ?? data;
+        if (resolvedUser) {
           setToken(storedToken);
-          setUser(user);
+          setUser({
+            id: resolvedUser.id ?? resolvedUser.userId,
+            email: resolvedUser.email,
+            name: resolvedUser.name ?? resolvedUser.email,
+            role: resolvedUser.role,
+          });
         } else {
-          // Clear invalid token
           localStorage.removeItem("auth_token");
           localStorage.removeItem("auth_email");
         }
+      } catch (error) {
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("auth_email");
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     initializeAuth();
@@ -84,40 +64,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
 
     try {
-      // Simulate API delay
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      const response = await apiService.login(email, password);
+      const resolvedUser = response.user ?? response;
 
-      let mockToken: string;
-      let mockUser: User;
-
-      if (email === "admin@marmitex.com" && password === "admin123") {
-        mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6ImFkbWluQG1hcm1pdGV4LmNvbSIsInJvbGUiOiJhZG1pbiJ9.mock";
-        mockUser = {
-          id: "1",
-          email: "admin@marmitex.com",
-          name: "Admin User",
-          role: "admin",
-        };
-      } else if (email === "kitchen@marmitex.com" && password === "kitchen123") {
-        mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJlbWFpbCI6ImtpdGNoZW5AbWFybWl0ZXguY29tIiwicm9sZSI6ImtpdGNoZW4ifQ.mock";
-        mockUser = {
-          id: "2",
-          email: "kitchen@marmitex.com",
-          name: "Kitchen Staff",
-          role: "kitchen",
-        };
-      } else {
-        throw new Error("Invalid credentials");
-      }
-
-      // Store token and email
-      localStorage.setItem("auth_token", mockToken);
-      localStorage.setItem("auth_email", email);
-      
-      // Update state
-      setToken(mockToken);
-      setUser(mockUser);
+      localStorage.setItem("auth_email", resolvedUser.email);
+      setToken(response.token);
+      const user: User = {
+        id: resolvedUser.id ?? resolvedUser.userId,
+        email: resolvedUser.email,
+        name: resolvedUser.name ?? resolvedUser.email,
+        role: resolvedUser.role,
+      };
+      setUser(user);
       setIsLoading(false);
+      return user;
     } catch (error) {
       setIsLoading(false);
       throw error;
@@ -136,22 +96,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
 
     try {
-      // Simulate API delay
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
-      const mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJlbWFpbCI6IiIgKyBlbWFpbCArICIiLCJyb2xlIjoidXNlciJ9.mock";
-      const mockUser: User = {
-        id: "3",
-        email,
-        name,
-        role: "customer",
+      const response = await apiService.register(email, password, name);
+      const resolvedUser = response.user ?? response;
+      localStorage.setItem("auth_email", resolvedUser.email);
+      setToken(response.token);
+      const user: User = {
+        id: resolvedUser.id ?? resolvedUser.userId,
+        email: resolvedUser.email,
+        name: resolvedUser.name ?? resolvedUser.email,
+        role: resolvedUser.role,
       };
-      
-      localStorage.setItem("auth_token", mockToken);
-      localStorage.setItem("auth_email", email);
-      setToken(mockToken);
-      setUser(mockUser);
+      setUser(user);
       setIsLoading(false);
+      return user;
     } catch (error) {
       setIsLoading(false);
       throw error;

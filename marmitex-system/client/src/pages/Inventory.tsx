@@ -15,9 +15,11 @@ import {
 } from "@/components/ui/table";
 import { toast } from "sonner";
 import { AlertCircle, Search, AlertTriangle } from "lucide-react";
+import apiService from "@/services/api";
 
 interface InventoryItem {
   id: string;
+  productId: string;
   productName: string;
   sku: string;
   currentStock: number;
@@ -55,56 +57,18 @@ export default function Inventory() {
     try {
       setIsLoading(true);
       setError(null);
-
-      // Mock data - replace with API call
-      const mockInventory: InventoryItem[] = [
-        {
-          id: "1",
-          productName: "Marmita de Frango",
-          sku: "MARM-001",
-          currentStock: 5,
-          minimumStock: 10,
-          unit: "unidades",
-          lastUpdated: new Date().toISOString(),
-        },
-        {
-          id: "2",
-          productName: "Marmita de Peixe",
-          sku: "MARM-002",
-          currentStock: 12,
-          minimumStock: 8,
-          unit: "unidades",
-          lastUpdated: new Date().toISOString(),
-        },
-        {
-          id: "3",
-          productName: "Refrigerante 2L",
-          sku: "BEB-001",
-          currentStock: 3,
-          minimumStock: 5,
-          unit: "garrafas",
-          lastUpdated: new Date().toISOString(),
-        },
-        {
-          id: "4",
-          productName: "Suco Natural",
-          sku: "BEB-002",
-          currentStock: 8,
-          minimumStock: 6,
-          unit: "litros",
-          lastUpdated: new Date().toISOString(),
-        },
-        {
-          id: "5",
-          productName: "Brigadeiro",
-          sku: "SOBR-001",
-          currentStock: 15,
-          minimumStock: 20,
-          unit: "unidades",
-          lastUpdated: new Date().toISOString(),
-        },
-      ];
-      setInventory(mockInventory);
+      const data = await apiService.getInventory();
+      const mapped: InventoryItem[] = data.map((item: any) => ({
+        id: item.id,
+        productId: item.productId,
+        productName: item.product?.name ?? "-",
+        sku: item.product?.sku ?? "-",
+        currentStock: item.quantity,
+        minimumStock: item.minQuantity,
+        unit: item.unit ?? "un",
+        lastUpdated: item.updatedAt,
+      }));
+      setInventory(mapped);
     } catch (err) {
       setError("Erro ao carregar inventário");
       console.error(err);
@@ -115,13 +79,11 @@ export default function Inventory() {
 
   const handleUpdateStock = async (itemId: string, newStock: number) => {
     try {
-      setInventory(
-        inventory.map((item) =>
-          item.id === itemId
-            ? { ...item, currentStock: newStock, lastUpdated: new Date().toISOString() }
-            : item
-        )
-      );
+      const item = inventory.find((entry) => entry.id === itemId);
+      if (!item) return;
+      const delta = newStock - item.currentStock;
+      await apiService.updateStock(item.productId, delta, "Ajuste manual");
+      fetchInventory();
       setEditingId(null);
       toast.success("Estoque atualizado com sucesso!");
     } catch (err) {
@@ -157,7 +119,7 @@ export default function Inventory() {
   const lowStockItems = getLowStockItems();
 
   return (
-    <div className="min-h-screen bg-background p-8">
+    <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -177,7 +139,7 @@ export default function Inventory() {
 
         {/* Error Alert */}
         {error && (
-          <Alert className="mb-6 border-red-500 bg-red-50">
+          <Alert className="mb-6 border-red-500 bg-red-50" role="alert">
             <AlertCircle className="h-4 w-4 text-red-600" />
             <AlertDescription className="text-red-800">{error}</AlertDescription>
           </Alert>
@@ -189,17 +151,21 @@ export default function Inventory() {
             <CardTitle>Pesquisar Produtos</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
               <div className="relative flex-1">
+                <label htmlFor="inventory-search" className="sr-only">
+                  Pesquisar inventário
+                </label>
                 <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
+                  id="inventory-search"
                   placeholder="Pesquise por nome ou SKU..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
                 />
               </div>
-              <Button variant="outline" onClick={fetchInventory}>
+              <Button variant="outline" onClick={fetchInventory} className="w-full md:w-auto">
                 Atualizar
               </Button>
             </div>
@@ -218,7 +184,7 @@ export default function Inventory() {
                 <p className="text-gray-600">Nenhum produto encontrado</p>
               </div>
             ) : (
-              <div className="border rounded-lg overflow-hidden">
+              <div className="border rounded-lg overflow-hidden overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow className="bg-gray-50">

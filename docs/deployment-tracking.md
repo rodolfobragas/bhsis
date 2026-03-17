@@ -56,6 +56,14 @@ Cada serviço que utiliza filas deve documentar o nome da fila e o payload esper
 - Use observações em `## Notas recentes` para registrar bloqueios, dúvidas ou decisões.
 
 ## Notas recentes
+- 2026-03-17T14:20:00Z (Codex): Fidelidade ganhou níveis/benefícios + notificações e mesas agora registram ocupação/turnover no painel.
+- 2026-03-17T13:03:47Z (Codex): PWA básica (manifest + SW) adicionada e estrutura inicial do app mobile documentada.
+- 2026-03-17T12:58:07Z (Codex): Fase 6 UX/UI concluída (responsividade, animações leves, feedback e acessibilidade básica).
+- 2026-03-17T12:47:14Z (Codex): Imagem v1.0.9 publicada com menu Pagamentos, histórico e reembolsos; tema com toggle.
+- 2026-03-17T12:42:53Z (Codex): Fase 6 iniciada com tema light/dark (toggle) e menu Pagamentos + página de histórico/reembolso.
+- 2026-03-17T12:25:20Z (Codex): Reembolso Stripe + relatório de receita + histórico de pagamentos (UI) implementados.
+- 2026-03-17T12:13:15Z (Codex): Stripe integrado no Marmitex (session/intent + webhook + tabela payments + paymentStatus em pedidos).
+- 2026-03-17T11:22:54Z (Codex): Login admin corrigido (client aponta para `/api` no mesmo host; verificação de role agora é case-insensitive) e nova imagem `rodolfobragas/bhsis:marmitex-system-v1.0.6` preparada para deploy.
 - 2026-03-16T14:00:00Z (Codex): completado scaffold do routing service com worker BullMQ, Graphhopper e health check.
 - 2026-03-16T12:05:00Z (Codex): iniciado scaffold do api-core NestJS com endpoints basicos e estrutura de modulos.
 - 2026-03-16T13:17:00Z (Codex): começando implementação do routing service para integrar com Graphhopper e filas BullMQ.
@@ -63,5 +71,15 @@ Cada serviço que utiliza filas deve documentar o nome da fila e o payload esper
 - 2026-03-16T16:10:00Z (Codex): notification service criado com worker BullMQ e canais simulados (WhatsApp/SMS/push).
 - 2026-03-16T17:35:00Z (Codex): frontends dashboard e motoboy prontos em Vite e infraestrutura Docker Compose com Graphhopper, Traccar e serviços principais.
 - 2026-03-16T18:15:00Z (Codex): iniciados migrations e seeds SQL para PostGIS, com scripts de execução para iniciar o banco.
+- 2026-03-17T03:13:54Z (Codex): testes vitest executados no Marmitex e imagem `rodolfobragas/bhsis:marmitex-system-v1.0.1` publicada no Docker Hub; docker compose atualizado.
+- 2026-03-17T03:27:15Z (Codex): Fase 4 do Marmitex finalizada (filtros, analytics, relatórios e auto-refresh) e documentação atualizada.
+- 2026-03-17T03:30:13Z (Codex): nova imagem `rodolfobragas/bhsis:marmitex-system-v1.0.2` publicada após testes; docker compose atualizado.
+- 2026-03-17T03:44:07Z (Codex): Fase 5 concluída para cupons, fidelidade e mesas (Stripe adiado); rotas e telas administrativas adicionadas.
+- 2026-03-17T03:48:58Z (Codex): testes executados e imagem `rodolfobragas/bhsis:marmitex-system-v1.0.3` publicada no Docker Hub.
+- 2026-03-17T10:30:32Z (Codex): admin integrado ao backend real (auth, produtos, clientes, pedidos, inventário e alertas).
+- 2026-03-17T10:39:48Z (Codex): KDS conectado ao WebSocket real, receitas integradas ao backend e client com retry/timeout/erros HTTP.
+- 2026-03-17T10:43:19Z (Codex): testes executados e imagem `rodolfobragas/bhsis:marmitex-system-v1.0.4` publicada no Docker Hub; compose atualizado.
+- 2026-03-17T10:54:43Z (Codex): migrations Prisma aplicadas contra Postgres local (5433); nenhuma pendente.
+- 2026-03-17T10:56:54Z (Codex): drift detectado no Prisma; `db push` sincronizou schema `marmitex` e endpoints de health/products/recipes responderam 200.
 
 > **Dica**: Mantenha esta documentação viva. Um novo bloco deve ser adicionado ao final sempre que uma IA ou desenvolvedor concluir um passo crítico ou esbarrar em um bloqueio.

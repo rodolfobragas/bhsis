@@ -55,8 +55,8 @@ export const startNotificationWorker = () => {
       if (payload.entregaId && !phone) {
         try {
           const delivery = await getDelivery(payload.entregaId);
-          if (delivery.customer?.phone) {
-            payload.phone = delivery.customer.phone;
+          if (delivery.cliente?.telefone) {
+            payload.phone = delivery.cliente.telefone;
           }
         } catch (error) {
           console.warn('Não foi possível buscar a entrega para notificação', error);

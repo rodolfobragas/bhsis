@@ -15,12 +15,16 @@
    - O volume continha dados compatíveis apenas com 16; ao iniciar a imagem 15 ele falhava. ✅ Correção: `docker compose down -v` e reinicialização limpa permitiram rodar PostgreSQL 15 normalmente.
 7. **Aviso em runtime sobre `OAUTH_SERVER_URL` ausente**
    - O backend loga que a variável não foi configurada; ainda não está definida no compose. → Continua como lembrete até ser preenchida.
+8. **Stripe requer variáveis de ambiente específicas**
+   - Sem `STRIPE_SECRET_KEY` e `STRIPE_WEBHOOK_SECRET`, os endpoints de pagamento retornam erro. ✅ Correção: variáveis adicionadas no compose e rota `/api/payments/webhook` configurada com body raw.
 
 ## Correções aplicadas
 - Dockerfile atualizado (Node 20, cópia do `patches`, geração do Prisma client após copiar o schema, link para `.prisma`).
 - Nova estrutura `server/_core/serveStatic.ts`, carregamento dinâmico de `setupVite` no desenvolvimento e externalização do `./vite` no `esbuild`.
 - `docker-compose.yml` agora publica apenas `NODE_ENV=production` e executa `pnpm start`, mantendo Postgres e Redis como serviços definidos.
 - Executado `docker compose up --build` e `docker compose up -d` para validar toda a stack (Postgres/Redis/backend) em produção.
+- Stripe integrado com endpoints `/api/payments/*`, webhook e tabela `Payment` no Prisma.
+- Reembolsos Stripe disponíveis via `/api/payments/:paymentId/refund` e relatório agregado em `/api/payments/report`.
 
 ## Sugestões de melhoria contínua
 1. **Gerenciar variáveis sensíveis em `.env` e referenciá-las via `env_file` no compose**, reduzindo checks faltantes (JWT, OAuth, URLs externas).

@@ -1,18 +1,17 @@
 import { io, Socket } from 'socket.io-client';
 
-const WS_URL = process.env.REACT_APP_WS_URL || 'http://localhost:3000';
+const WS_URL = import.meta.env.VITE_WS_URL || 'http://localhost:3001';
 
 interface OrderEvent {
   id: string;
-  customerId: string;
-  customerName: string;
+  orderNumber?: string;
   items: Array<{
     productId: string;
     productName: string;
     quantity: number;
     price: number;
   }>;
-  status: 'pending' | 'preparing' | 'ready' | 'completed';
+  status: 'PENDING' | 'CONFIRMED' | 'PREPARING' | 'READY' | 'DELIVERED' | 'CANCELLED';
   total: number;
   createdAt: string;
   updatedAt: string;
@@ -26,6 +25,14 @@ interface StockAlertEvent {
   severity: 'critical' | 'warning';
 }
 
+interface LoyaltyPointsEvent {
+  accountId: string;
+  customerId?: string;
+  delta: number;
+  balance: number;
+  tier: 'BRONZE' | 'SILVER' | 'GOLD';
+}
+
 interface ConnectionStatus {
   connected: boolean;
   error?: string;
@@ -33,12 +40,14 @@ interface ConnectionStatus {
 
 type OrderCallback = (order: OrderEvent) => void;
 type StockAlertCallback = (alert: StockAlertEvent) => void;
+type LoyaltyCallback = (event: LoyaltyPointsEvent) => void;
 type StatusCallback = (status: ConnectionStatus) => void;
 
 class WebSocketClient {
   private socket: Socket | null = null;
   private orderCallbacks: OrderCallback[] = [];
   private stockAlertCallbacks: StockAlertCallback[] = [];
+  private loyaltyCallbacks: LoyaltyCallback[] = [];
   private statusCallbacks: StatusCallback[] = [];
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 5;
@@ -76,8 +85,8 @@ class WebSocketClient {
         });
 
         // Order events
-        this.socket.on('order:created', (order: OrderEvent) => {
-          console.log('New order created:', order);
+        this.socket.on('order:new', (order: OrderEvent) => {
+          console.log('New order:', order);
           this.notifyOrderCallbacks(order);
         });
 
@@ -86,9 +95,9 @@ class WebSocketClient {
           this.notifyOrderCallbacks(order);
         });
 
-        this.socket.on('order:status-changed', (data: { orderId: string; status: string }) => {
-          console.log('Order status changed:', data);
-          // Fetch full order data or emit to callbacks
+        this.socket.on('order:completed', (order: OrderEvent) => {
+          console.log('Order completed:', order);
+          this.notifyOrderCallbacks(order);
         });
 
         // Stock alert events
@@ -106,6 +115,12 @@ class WebSocketClient {
         this.socket.on('kitchen:order-ready', (order: OrderEvent) => {
           console.log('Order ready in kitchen:', order);
           this.notifyOrderCallbacks(order);
+        });
+
+        // Loyalty events
+        this.socket.on('loyalty:points', (event: LoyaltyPointsEvent) => {
+          console.log('Loyalty points update:', event);
+          this.notifyLoyaltyCallbacks(event);
         });
       } catch (error) {
         console.error('Failed to initialize WebSocket:', error);
@@ -141,6 +156,14 @@ class WebSocketClient {
     };
   }
 
+  // Subscribe to loyalty events
+  onLoyaltyPoints(callback: LoyaltyCallback): () => void {
+    this.loyaltyCallbacks.push(callback);
+    return () => {
+      this.loyaltyCallbacks = this.loyaltyCallbacks.filter(cb => cb !== callback);
+    };
+  }
+
   // Subscribe to connection status
   onStatusChange(callback: StatusCallback): () => void {
     this.statusCallbacks.push(callback);
@@ -152,19 +175,25 @@ class WebSocketClient {
   // Emit events
   updateOrderStatus(orderId: string, status: string): void {
     if (this.socket?.connected) {
-      this.socket.emit('order:update-status', { orderId, status });
+      this.socket.emit('order:status-updated', { id: orderId, status });
     }
   }
 
-  joinKitchenRoom(): void {
+  joinKitchenRoom(userId: string): void {
     if (this.socket?.connected) {
-      this.socket.emit('join-room', { room: 'kitchen' });
+      this.socket.emit('join-room', { role: 'KITCHEN', userId });
     }
   }
 
-  joinAdminRoom(): void {
+  joinAdminRoom(userId: string): void {
     if (this.socket?.connected) {
-      this.socket.emit('join-room', { room: 'admin' });
+      this.socket.emit('join-room', { role: 'ADMIN', userId });
+    }
+  }
+
+  joinManagerRoom(userId: string): void {
+    if (this.socket?.connected) {
+      this.socket.emit('join-room', { role: 'MANAGER', userId });
     }
   }
 
@@ -191,6 +220,16 @@ class WebSocketClient {
         callback(alert);
       } catch (error) {
         console.error('Error in stock alert callback:', error);
+      }
+    });
+  }
+
+  private notifyLoyaltyCallbacks(event: LoyaltyPointsEvent): void {
+    this.loyaltyCallbacks.forEach(callback => {
+      try {
+        callback(event);
+      } catch (error) {
+        console.error('Error in loyalty callback:', error);
       }
     });
   }

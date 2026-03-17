@@ -16,6 +16,9 @@ const createOrderSchema = z.object({
     })
   ),
   notes: z.string().optional(),
+  couponCode: z.string().optional(),
+  loyaltyPointsToRedeem: z.number().int().nonnegative().optional(),
+  tableId: z.string().optional(),
 });
 
 const updateStatusSchema = z.object({

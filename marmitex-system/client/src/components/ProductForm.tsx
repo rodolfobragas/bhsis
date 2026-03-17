@@ -21,6 +21,7 @@ const productSchema = z.object({
   category: z.string().min(1, "Categoria é obrigatória"),
   price: z.string().refine((val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0, "Preço deve ser maior que zero"),
   description: z.string().optional(),
+  recipeId: z.string().optional(),
 });
 
 type ProductFormData = {
@@ -29,11 +30,13 @@ type ProductFormData = {
   category: string;
   price: number | string;
   description?: string;
+  recipeId?: string;
 };
 
 interface ProductFormProps {
   product?: ProductFormData & { id: string };
   categories: string[];
+  recipes: Array<{ id: string; name: string }>;
   onSubmit: (data: ProductFormData) => Promise<void>;
   onCancel: () => void;
   isLoading?: boolean;
@@ -42,6 +45,7 @@ interface ProductFormProps {
 export default function ProductForm({
   product,
   categories,
+  recipes,
   onSubmit,
   onCancel,
   isLoading = false,
@@ -62,6 +66,7 @@ export default function ProductForm({
       category: product?.category || "",
       price: product?.price?.toString() || "0",
       description: product?.description || "",
+      recipeId: product?.recipeId || "",
     },
   });
 
@@ -148,6 +153,27 @@ export default function ProductForm({
           disabled={isSubmitting || isLoading}
           rows={4}
         />
+      </div>
+
+      {/* Receita */}
+      <div className="space-y-2">
+        <Label htmlFor="recipeId">Receita vinculada</Label>
+        <Select
+          value={watch("recipeId") || "none"}
+          onValueChange={(value) => setValue("recipeId", value === "none" ? "" : value)}
+        >
+          <SelectTrigger id="recipeId" disabled={isSubmitting || isLoading}>
+            <SelectValue placeholder="Selecione uma receita" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="none">Sem receita</SelectItem>
+            {recipes.map((recipe) => (
+              <SelectItem key={recipe.id} value={recipe.id}>
+                {recipe.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Botões */}

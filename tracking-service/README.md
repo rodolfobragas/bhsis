@@ -11,7 +11,7 @@ Microserviço dedicado ao rastreamento em tempo real dos motoboys. Ele consome w
 
 ## WebSocket em tempo real
 - URL: `http://<host>:<port>/realtime/socket.io`
-- Evento emitido: `posicao-motoboy` com payload `{ motoboyId, latitude, longitude, speed, timestamp }`
+- Evento emitido: `posicao-motoboy` com payload `{ motoboyId, latitude, longitude, speed, timestamp, deliveries }`
 
 ## Filas
 - `notificacoes.cliente`: job é disparado quando o status for `em_entrega`, permitindo que o Notification Service envie alertas ao cliente mais adiante.

@@ -1,9 +1,9 @@
-import { DataSource } from 'typeorm';
+import { DataSource, In, Not } from 'typeorm';
 import { Server } from 'socket.io';
 import { Queue } from 'bullmq';
+import { Entrega } from '../entities/entrega.entity';
 import { Motoboy } from '../entities/motoboy.entity';
 import { PosicaoMotoboy } from '../entities/posicao.entity';
-import { listDeliveries, recordPosition } from './marmitex.client';
 
 interface LocationPayload {
   latitude: number;
@@ -13,7 +13,7 @@ interface LocationPayload {
   status?: string;
 }
 
-interface MarmitexDeliverySnapshot {
+interface DeliverySnapshot {
   id: string;
   ordemRota?: number;
   status: string;
@@ -22,6 +22,7 @@ interface MarmitexDeliverySnapshot {
 export class TrackingService {
   private readonly posicaoRepository = this.dataSource.getRepository(PosicaoMotoboy);
   private readonly motoboyRepository = this.dataSource.getRepository(Motoboy);
+  private readonly entregaRepository = this.dataSource.getRepository(Entrega);
 
   constructor(
     private readonly dataSource: DataSource,
@@ -45,7 +46,7 @@ export class TrackingService {
 
     const saved = await this.posicaoRepository.save(position);
 
-    const deliveries = await this.syncWithMarmitex(motoboy.id, payload);
+    const deliveries = await this.buildDeliverySnapshot(motoboy.id);
     this.io.emit('posicao-motoboy', {
       motoboyId: motoboy.id,
       latitude: Number(saved.latitude),
@@ -55,7 +56,7 @@ export class TrackingService {
       deliveries,
     });
 
-    if (this.notificationQueue && payload.status === 'em_entrega') {
+    if (this.notificationQueue && this.normalizeStatus(payload.status) === 'em_entrega') {
       await this.notificationQueue.add('cliente.proximo', { motoboyId: motoboy.id });
     }
 
@@ -78,25 +79,21 @@ export class TrackingService {
     return this.persistAndBroadcast(motoboy, payload);
   }
 
-  private async syncWithMarmitex(motoboyId: string, payload: LocationPayload) {
-    const deliveries = await listDeliveries(motoboyId);
-    const active = deliveries.filter((delivery) =>
-      ['NA_ROTA', 'EM_ENTREGA'].includes(delivery.status || ''),
-    );
+  private normalizeStatus(status?: string) {
+    return status?.toString().toLowerCase();
+  }
 
-    await Promise.all(
-      active.map((delivery) =>
-        recordPosition(delivery.id, {
-          latitude: payload.latitude,
-          longitude: payload.longitude,
-          speed: payload.speed,
-          timestamp: typeof payload.timestamp === 'string' ? payload.timestamp : payload.timestamp?.toString(),
-          motoboyId,
-          status: payload.status,
-        }),
-      ),
-    );
+  private async buildDeliverySnapshot(motoboyId: string): Promise<DeliverySnapshot[]> {
+    const excludedStatuses = ['entregue', 'cancelado'];
+    const deliveries = await this.entregaRepository.find({
+      where: { motoboyId, status: Not(In(excludedStatuses)) },
+      order: { ordemRota: 'ASC' },
+    });
 
-    return deliveries;
+    return deliveries.map((entrega) => ({
+      id: entrega.id,
+      ordemRota: entrega.ordemRota,
+      status: entrega.status,
+    }));
   }
 }

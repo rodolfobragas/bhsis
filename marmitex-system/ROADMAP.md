@@ -83,35 +83,35 @@ Este documento apresenta o roadmap de desenvolvimento do Marmitex System, um sis
 
 ---
 
-### **FASE 4: Enhanced Dashboard (Semanas 7-8) - 🔄 PRÓXIMA**
+### **FASE 4: Enhanced Dashboard (Semanas 7-8) - ✅ COMPLETO**
 
-**Status:** Planejado  
+**Status:** Concluído  
 **Objetivo:** Criar dashboard avançado com gráficos e analytics
 
 #### Funcionalidades a Implementar:
 
 **4.1 Dashboard Principal com Gráficos**
-- [ ] Gráfico de vendas por período (dia, semana, mês)
-- [ ] Gráfico de pedidos por hora
-- [ ] Produtos mais vendidos (top 10)
-- [ ] Receita total e ticket médio
-- [ ] Taxa de conversão de pedidos
-- [ ] Tempo médio de preparo
-- [ ] Filtros por data, período e categoria
+- [x] Gráfico de vendas por período (dia, semana, mês)
+- [x] Gráfico de pedidos por hora
+- [x] Produtos mais vendidos (top 10)
+- [x] Receita total e ticket médio
+- [x] Taxa de conversão de pedidos
+- [x] Tempo médio de preparo
+- [x] Filtros por data, período e categoria
 
 **4.2 Analytics em Tempo Real**
-- [ ] Pedidos em processamento
-- [ ] Taxa de ocupação da cozinha
-- [ ] Produtos em falta
-- [ ] Clientes mais frequentes
-- [ ] Horários de pico
+- [x] Pedidos em processamento
+- [x] Taxa de ocupação da cozinha
+- [x] Produtos em falta
+- [x] Clientes mais frequentes
+- [x] Horários de pico
 
 **4.3 Relatórios**
-- [ ] Relatório de vendas (PDF/Excel)
-- [ ] Relatório de estoque
-- [ ] Relatório de clientes
-- [ ] Relatório de performance da cozinha
-- [ ] Agendamento de relatórios automáticos
+- [x] Relatório de vendas (PDF/Excel)
+- [x] Relatório de estoque
+- [x] Relatório de clientes
+- [x] Relatório de performance da cozinha
+- [x] Agendamento de relatórios automáticos
 
 #### Tecnologias:
 - Recharts para gráficos
@@ -122,41 +122,41 @@ Este documento apresenta o roadmap de desenvolvimento do Marmitex System, um sis
 
 ---
 
-### **FASE 5: Advanced Features (Semanas 9-10) - 🔄 PRÓXIMA**
+### **FASE 5: Advanced Features (Semanas 9-10) - 🔄 EM ANDAMENTO**
 
-**Status:** Planejado  
+**Status:** Em andamento (Stripe concluído; faltam níveis/benefícios de fidelidade e métricas de mesas)  
 **Objetivo:** Implementar funcionalidades avançadas de negócio
 
 #### Funcionalidades a Implementar:
 
 **5.1 Sistema de Cupons e Descontos**
-- [ ] Criar cupons com código único
-- [ ] Definir desconto percentual ou fixo
-- [ ] Definir validade e limite de uso
-- [ ] Aplicar cupom ao pedido
-- [ ] Histórico de cupons utilizados
-- [ ] Análise de efetividade de cupons
+- [x] Criar cupons com código único
+- [x] Definir desconto percentual ou fixo
+- [x] Definir validade e limite de uso
+- [x] Aplicar cupom ao pedido
+- [x] Histórico de cupons utilizados
+- [x] Análise de efetividade de cupons
 
 **5.2 Sistema de Fidelidade**
-- [ ] Pontos por compra (1 real = 1 ponto)
-- [ ] Resgate de pontos
+- [x] Pontos por compra (1 real = 1 ponto)
+- [x] Resgate de pontos
 - [ ] Níveis de cliente (Bronze, Prata, Ouro)
 - [ ] Benefícios por nível
-- [ ] Histórico de pontos
+- [x] Histórico de pontos
 - [ ] Notificações de pontos
 
 **5.3 Integração de Pagamento (Stripe)**
-- [ ] Configuração de conta Stripe
-- [ ] Pagamento online no checkout
-- [ ] Webhook para confirmação de pagamento
-- [ ] Histórico de transações
-- [ ] Reembolsos
-- [ ] Relatório de receita
+- [x] Configuração de conta Stripe (env + chave)
+- [x] Pagamento online no checkout
+- [x] Webhook para confirmação de pagamento
+- [x] Histórico de transações (tabela + API)
+- [x] Reembolsos
+- [x] Relatório de receita
 
 **5.4 Gerenciamento de Mesas**
-- [ ] Cadastro de mesas
-- [ ] Status de mesa (disponível, ocupada, reservada)
-- [ ] Associação de pedido com mesa
+- [x] Cadastro de mesas
+- [x] Status de mesa (disponível, ocupada, reservada)
+- [x] Associação de pedido com mesa
 - [ ] Tempo de ocupação
 - [ ] Rotatividade de mesas
 
@@ -164,20 +164,20 @@ Este documento apresenta o roadmap de desenvolvimento do Marmitex System, um sis
 
 ---
 
-### **FASE 6: Mobile & UX (Semanas 11-12) - 🔄 PRÓXIMA**
+### **FASE 6: Mobile & UX (Semanas 11-12) - 🔄 EM ANDAMENTO**
 
-**Status:** Planejado  
+**Status:** Em andamento  
 **Objetivo:** Melhorar experiência do usuário e adicionar suporte mobile
 
 #### Funcionalidades a Implementar:
 
 **6.1 Melhorias de UX/UI**
-- [ ] Tema escuro/claro completo
-- [ ] Responsividade mobile (tablets, smartphones)
-- [ ] Animações e transições suaves
-- [ ] Ícones em todas as páginas
-- [ ] Feedback visual melhorado (loading, success, error)
-- [ ] Acessibilidade (WCAG 2.1)
+- [x] Tema escuro/claro completo
+- [x] Responsividade mobile (tablets, smartphones)
+- [x] Animações e transições suaves
+- [x] Ícones em todas as páginas
+- [x] Feedback visual melhorado (loading, success, error)
+- [x] Acessibilidade (WCAG 2.1)
 
 **6.2 App Mobile (React Native/Expo)**
 - [ ] App para clientes (cardápio, pedidos, rastreamento)
@@ -187,10 +187,10 @@ Este documento apresenta o roadmap de desenvolvimento do Marmitex System, um sis
 - [ ] Offline support
 
 **6.3 PWA (Progressive Web App)**
-- [ ] Service Worker
-- [ ] Cache de assets
-- [ ] Instalação na home screen
-- [ ] Offline functionality
+- [x] Service Worker
+- [x] Cache de assets
+- [x] Instalação na home screen
+- [x] Offline functionality
 - [ ] Sincronização em background
 
 #### Estimativa: 3 semanas

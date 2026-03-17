@@ -3,7 +3,7 @@
 ## Base URL
 
 ```
-http://localhost:3001/api
+http://localhost:3000/api
 ```
 
 ## Autenticação
@@ -166,6 +166,261 @@ Authorization: Bearer {token}
   "items": [...],
   "customer": {...},
   "createdAt": "2026-03-14T20:30:00Z"
+}
+```
+
+---
+
+## Pagamentos (Stripe)
+
+### Criar sessão de checkout
+
+**POST** `/payments/checkout-session`
+
+**Body**:
+```json
+{
+  "orderId": "uuid"
+}
+```
+
+**Resposta (200)**:
+```json
+{
+  "paymentId": "uuid",
+  "sessionId": "cs_test_123",
+  "url": "https://checkout.stripe.com/..."
+}
+```
+
+### Criar Payment Intent
+
+**POST** `/payments/intent`
+
+**Body**:
+```json
+{
+  "orderId": "uuid"
+}
+```
+
+**Resposta (200)**:
+```json
+{
+  "paymentId": "uuid",
+  "clientSecret": "pi_123_secret_456",
+  "paymentIntentId": "pi_123"
+}
+```
+
+### Listar pagamentos de um pedido
+
+**GET** `/payments/orders/:orderId`
+
+**Resposta (200)**:
+```json
+[
+  {
+    "id": "uuid",
+    "orderId": "uuid",
+    "status": "SUCCEEDED",
+    "amount": 11000,
+    "currency": "brl",
+    "stripePaymentIntentId": "pi_123",
+    "createdAt": "2026-03-17T12:00:00Z"
+  }
+]
+```
+
+---
+
+## Fidelidade
+
+### Listar níveis de fidelidade
+
+**GET** `/loyalty/tiers`
+
+**Resposta (200)**:
+```json
+[
+  {
+    "tier": "BRONZE",
+    "minEarned": 0,
+    "benefits": ["Pontos base por compra"]
+  }
+]
+```
+
+### Obter conta de fidelidade do cliente
+
+**GET** `/loyalty/customers/:customerId`
+
+**Resposta (200)**:
+```json
+{
+  "id": "uuid",
+  "customerId": "uuid",
+  "pointsBalance": 120,
+  "totalEarned": 300,
+  "totalRedeemed": 180,
+  "tier": "SILVER"
+}
+```
+
+### Listar transações de fidelidade
+
+**GET** `/loyalty/customers/:customerId/transactions`
+
+**Resposta (200)**:
+```json
+[
+  {
+    "id": "uuid",
+    "type": "EARN",
+    "points": 50,
+    "notes": "Pontos por pedido entregue",
+    "createdAt": "2026-03-17T12:00:00Z"
+  }
+]
+```
+
+### Ajustar pontos manualmente
+
+**POST** `/loyalty/customers/:customerId/adjust`
+
+**Body**:
+```json
+{
+  "points": -10,
+  "notes": "Correção"
+}
+```
+
+**Resposta (200)**:
+```json
+{
+  "success": true
+}
+```
+
+---
+
+## Mesas
+
+### Listar mesas
+
+**GET** `/tables`
+
+**Resposta (200)**:
+```json
+[
+  {
+    "id": "uuid",
+    "name": "Mesa 01",
+    "capacity": 4,
+    "status": "AVAILABLE",
+    "location": "Salão principal",
+    "active": true,
+    "occupiedSince": null,
+    "totalOccupiedMinutes": 120,
+    "turnovers": 3
+  }
+]
+```
+
+### Criar mesa
+
+**POST** `/tables`
+
+**Body**:
+```json
+{
+  "name": "Mesa 02",
+  "capacity": 2,
+  "status": "AVAILABLE",
+  "location": "Varanda"
+}
+```
+
+### Atualizar mesa
+
+**PUT** `/tables/:id`
+
+### Atualizar status
+
+**PATCH** `/tables/:id/status`
+
+**Body**:
+```json
+{
+  "status": "OCCUPIED"
+}
+```
+
+### Desativar mesa
+
+**DELETE** `/tables/:id`
+
+### Listar pagamentos (filtro por período)
+
+**GET** `/payments?from=2026-03-01&to=2026-03-31`
+
+**Resposta (200)**:
+```json
+[
+  {
+    "id": "uuid",
+    "orderId": "uuid",
+    "status": "SUCCEEDED",
+    "amount": 11000,
+    "currency": "brl",
+    "createdAt": "2026-03-17T12:00:00Z"
+  }
+]
+```
+
+### Webhook Stripe
+
+**POST** `/payments/webhook`
+
+> Requer `STRIPE_WEBHOOK_SECRET` configurado e assinatura `stripe-signature`.
+
+### Reembolsar pagamento
+
+**POST** `/payments/:paymentId/refund`
+
+**Body (opcional)**:
+```json
+{
+  "amount": 25.5
+}
+```
+
+**Resposta (200)**:
+```json
+{
+  "refundId": "re_123",
+  "status": "succeeded",
+  "amount": 2550,
+  "currency": "brl"
+}
+```
+
+### Relatório de receita
+
+**GET** `/payments/report?from=2026-03-01&to=2026-03-31`
+
+**Resposta (200)**:
+```json
+{
+  "currency": "brl",
+  "gross": 120000,
+  "refunded": 5000,
+  "net": 115000,
+  "succeededCount": 12,
+  "refundedCount": 1,
+  "from": "2026-03-01T00:00:00.000Z",
+  "to": "2026-03-31T23:59:59.000Z"
 }
 ```
 

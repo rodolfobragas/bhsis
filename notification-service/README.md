@@ -17,3 +17,6 @@ npm run dev
 ```
 
 O serviço expõe `/health` e consome automaticamente jobs, logando mensagens para acompanhamento manual.
+
+## Dependências
+- API Core em `API_CORE_URL` para resolver telefone de cliente quando faltante.

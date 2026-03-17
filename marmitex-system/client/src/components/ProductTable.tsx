@@ -24,7 +24,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { MoreHorizontal, Edit, Trash2, Plus } from "lucide-react";
+import { MoreHorizontal, Edit, Trash2, Plus, AlertCircle } from "lucide-react";
 
 interface Product {
   id: string;
@@ -76,15 +76,15 @@ export default function ProductTable({
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <h2 className="text-2xl font-bold">Produtos</h2>
-        <Button onClick={onAdd} className="gap-2">
+        <Button onClick={onAdd} className="gap-2 w-full md:w-auto">
           <Plus className="h-4 w-4" />
           Novo Produto
         </Button>
       </div>
 
-      <div className="border rounded-lg overflow-hidden">
+      <div className="border rounded-lg overflow-hidden overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/50">
@@ -106,7 +106,10 @@ export default function ProductTable({
             ) : products.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                  Nenhum produto encontrado
+                  <div className="flex flex-col items-center gap-2">
+                    <AlertCircle className="h-5 w-5" />
+                    <span>Nenhum produto encontrado</span>
+                  </div>
                 </TableCell>
               </TableRow>
             ) : (

@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Edit2, Trash2, Plus } from "lucide-react";
+import { Loader2, Edit2, Trash2, Plus, AlertCircle } from "lucide-react";
 
 interface Customer {
   id: string;
@@ -47,7 +47,10 @@ export default function CustomerTable({
   if (customers.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-600 mb-4">Nenhum cliente encontrado</p>
+        <div className="flex flex-col items-center gap-2 mb-4 text-gray-600">
+          <AlertCircle className="h-5 w-5" />
+          <p>Nenhum cliente encontrado</p>
+        </div>
         <Button onClick={onAdd}>
           <Plus className="h-4 w-4 mr-2" />
           Novo Cliente
@@ -59,13 +62,13 @@ export default function CustomerTable({
   return (
     <div className="space-y-4">
       <div className="flex justify-end">
-        <Button onClick={onAdd}>
+        <Button onClick={onAdd} className="w-full md:w-auto">
           <Plus className="h-4 w-4 mr-2" />
           Novo Cliente
         </Button>
       </div>
 
-      <div className="border rounded-lg overflow-hidden">
+      <div className="border rounded-lg overflow-hidden overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow className="bg-gray-50">

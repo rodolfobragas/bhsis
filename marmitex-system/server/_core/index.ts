@@ -11,6 +11,17 @@ import { serveStatic } from "./serveStatic";
 import { setupWebSocketEvents } from "../websocket/events";
 import { setSocketServer } from "../websocket/socket";
 import deliveryRoutes from "../routes/delivery.routes";
+import dashboardRoutes from "../routes/dashboard.routes";
+import authRoutes from "../routes/auth.routes";
+import ordersRoutes from "../routes/orders.routes";
+import productsRoutes from "../routes/products.routes";
+import customersRoutes from "../routes/customers.routes";
+import inventoryRoutes from "../routes/inventory.routes";
+import couponsRoutes from "../routes/coupons.routes";
+import loyaltyRoutes from "../routes/loyalty.routes";
+import tablesRoutes from "../routes/tables.routes";
+import recipesRoutes from "../routes/recipes.routes";
+import { paymentsRoutes, paymentsWebhookRoutes } from "../routes/payments.routes";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -42,12 +53,28 @@ async function startServer() {
   });
   setSocketServer(io);
   setupWebSocketEvents(io);
+  app.use(
+    "/api/payments/webhook",
+    express.raw({ type: "application/json" }),
+    paymentsWebhookRoutes
+  );
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+  app.use("/api/auth", authRoutes);
   app.use("/api/deliveries", deliveryRoutes);
+  app.use("/api/dashboard", dashboardRoutes);
+  app.use("/api/orders", ordersRoutes);
+  app.use("/api/products", productsRoutes);
+  app.use("/api/customers", customersRoutes);
+  app.use("/api/inventory", inventoryRoutes);
+  app.use("/api/coupons", couponsRoutes);
+  app.use("/api/loyalty", loyaltyRoutes);
+  app.use("/api/tables", tablesRoutes);
+  app.use("/api/recipes", recipesRoutes);
+  app.use("/api/payments", paymentsRoutes);
 
   // tRPC API
   app.use(

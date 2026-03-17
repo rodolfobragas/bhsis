@@ -50,6 +50,9 @@
 - [ ] Create stock alerts page
 - [ ] Create user management page (admin only)
 - [ ] Create reports/analytics page
+- [x] Create coupons management page
+- [x] Create loyalty management page
+- [x] Create tables management page
 - [x] Implement responsive design
 - [x] Add dark/light theme support
 

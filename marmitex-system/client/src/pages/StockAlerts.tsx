@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { AlertCircle, CheckCircle, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { apiClient } from "@/services/apiClient";
+import apiService from "@/services/api";
 
 interface StockAlert {
   id: string;
@@ -22,37 +22,6 @@ export default function StockAlerts() {
   const [alerts, setAlerts] = useState<StockAlert[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Mock data for demo
-  const mockAlerts: StockAlert[] = [
-    {
-      id: "1",
-      productId: "prod-1",
-      productName: "Arroz Integral",
-      currentStock: 2,
-      minimumStock: 10,
-      status: "critical",
-      createdAt: new Date(Date.now() - 3600000).toISOString(),
-    },
-    {
-      id: "2",
-      productId: "prod-2",
-      productName: "Feijão Carioca",
-      currentStock: 5,
-      minimumStock: 15,
-      status: "warning",
-      createdAt: new Date(Date.now() - 7200000).toISOString(),
-    },
-    {
-      id: "3",
-      productId: "prod-3",
-      productName: "Óleo de Soja",
-      currentStock: 8,
-      minimumStock: 20,
-      status: "warning",
-      createdAt: new Date(Date.now() - 1800000).toISOString(),
-    },
-  ];
-
   useEffect(() => {
     loadAlerts();
   }, []);
@@ -60,14 +29,18 @@ export default function StockAlerts() {
   const loadAlerts = async () => {
     setIsLoading(true);
     try {
-      // Try to fetch from API, fallback to mock data
-      try {
-        const response = await apiClient.getStockAlerts();
-        setAlerts(response);
-      } catch (error) {
-        // Fallback to mock data
-        setAlerts(mockAlerts);
-      }
+      const response = await apiService.getStockAlerts();
+      const mapped: StockAlert[] = response.map((alert: any) => ({
+        id: alert.id,
+        productId: alert.productId,
+        productName: alert.product?.name ?? "-",
+        currentStock: alert.quantity,
+        minimumStock: alert.inventory?.minQuantity ?? 0,
+        status: alert.alertType === "OUT_OF_STOCK" ? "critical" : "warning",
+        createdAt: alert.createdAt,
+        dismissedAt: alert.resolvedAt ?? undefined,
+      }));
+      setAlerts(mapped);
     } catch (error) {
       toast.error("Erro ao carregar alertas de estoque");
     } finally {
@@ -80,13 +53,14 @@ export default function StockAlerts() {
     toast.success("Alerta descartado");
   };
 
-  const handleResolve = (id: string) => {
-    setAlerts(alerts.map(alert =>
-      alert.id === id
-        ? { ...alert, status: "normal", dismissedAt: new Date().toISOString() }
-        : alert
-    ));
-    toast.success("Alerta resolvido");
+  const handleResolve = async (id: string) => {
+    try {
+      await apiService.resolveAlert(id);
+      await loadAlerts();
+      toast.success("Alerta resolvido");
+    } catch (error) {
+      toast.error("Falha ao resolver alerta");
+    }
   };
 
   const activeAlerts = alerts.filter(a => !a.dismissedAt);
@@ -124,7 +98,7 @@ export default function StockAlerts() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card>
+        <Card className="card-raise">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium">Alertas Críticos</CardTitle>
           </CardHeader>
@@ -134,7 +108,7 @@ export default function StockAlerts() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="card-raise">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium">Avisos</CardTitle>
           </CardHeader>
@@ -144,7 +118,7 @@ export default function StockAlerts() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="card-raise">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium">Total de Alertas</CardTitle>
           </CardHeader>

@@ -14,6 +14,7 @@ interface Product {
   category: string;
   price: number;
   description?: string;
+  recipeId?: string | null;
 }
 
 interface ProductDialogProps {
@@ -21,6 +22,7 @@ interface ProductDialogProps {
   onOpenChange: (open: boolean) => void;
   product?: Product;
   categories: string[];
+  recipes: Array<{ id: string; name: string }>;
   onSubmit: (data: any) => Promise<void>;
   isLoading?: boolean;
 }
@@ -30,6 +32,7 @@ export default function ProductDialog({
   onOpenChange,
   product,
   categories,
+  recipes,
   onSubmit,
   isLoading = false,
 }: ProductDialogProps) {
@@ -52,6 +55,7 @@ export default function ProductDialog({
         <ProductForm
           product={product}
           categories={categories}
+          recipes={recipes}
           onSubmit={handleSubmit}
           onCancel={() => onOpenChange(false)}
           isLoading={isLoading}

@@ -27,16 +27,14 @@ export default function ProtectedRoute({ children, requiredRole }: ProtectedRout
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
-    // Only redirect if not already on login page
-    if (typeof window !== 'undefined') {
-      console.log("Not authenticated, redirecting to login. Token:", token, "User:", user);
-    }
     setLocation("/login");
     return null;
   }
 
   // Check role-based access
-  if (requiredRole && user?.role !== requiredRole) {
+  const normalizedRequiredRole = requiredRole?.toLowerCase();
+  const normalizedUserRole = user?.role?.toLowerCase();
+  if (normalizedRequiredRole && normalizedUserRole !== normalizedRequiredRole) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Card className="max-w-md">

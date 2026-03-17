@@ -21,26 +21,32 @@ import {
 } from "@/components/ui/sidebar";
 import { getLoginUrl } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft, Users } from "lucide-react";
+import { LogOut, PanelLeft, Moon, Sun } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
-
-const menuItems = [
-  { icon: LayoutDashboard, label: "Page 1", path: "/" },
-  { icon: Users, label: "Page 2", path: "/some-path" },
-];
+import { useTheme } from "@/contexts/ThemeContext";
+import { wsClient } from "@/services/websocketClient";
+import { toast } from "sonner";
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
 const DEFAULT_WIDTH = 280;
 const MIN_WIDTH = 200;
 const MAX_WIDTH = 480;
 
+export type DashboardMenuItem = {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  path: string;
+};
+
 export default function DashboardLayout({
   children,
+  menuItems,
 }: {
   children: React.ReactNode;
+  menuItems: DashboardMenuItem[];
 }) {
   const [sidebarWidth, setSidebarWidth] = useState(() => {
     const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
@@ -90,7 +96,7 @@ export default function DashboardLayout({
         } as CSSProperties
       }
     >
-      <DashboardLayoutContent setSidebarWidth={setSidebarWidth}>
+      <DashboardLayoutContent setSidebarWidth={setSidebarWidth} menuItems={menuItems}>
         {children}
       </DashboardLayoutContent>
     </SidebarProvider>
@@ -100,13 +106,15 @@ export default function DashboardLayout({
 type DashboardLayoutContentProps = {
   children: React.ReactNode;
   setSidebarWidth: (width: number) => void;
+  menuItems: DashboardMenuItem[];
 };
 
 function DashboardLayoutContent({
   children,
   setSidebarWidth,
+  menuItems,
 }: DashboardLayoutContentProps) {
-  const { user, logout } = useAuth();
+  const { user, logout, token } = useAuth();
   const [location, setLocation] = useLocation();
   const { state, toggleSidebar } = useSidebar();
   const isCollapsed = state === "collapsed";
@@ -114,6 +122,42 @@ function DashboardLayoutContent({
   const sidebarRef = useRef<HTMLDivElement>(null);
   const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
+  const { theme, toggleTheme, switchable } = useTheme();
+
+  useEffect(() => {
+    if (!user) return;
+
+    const connect = async () => {
+      if (!wsClient.isConnected()) {
+        await wsClient.connect(token ?? undefined);
+      }
+
+      if (user.role === "admin") {
+        wsClient.joinAdminRoom(user.id);
+      }
+
+      if (user.role === "manager") {
+        wsClient.joinManagerRoom(user.id);
+      }
+    };
+
+    connect().catch((error) => {
+      console.error("WebSocket connection failed:", error);
+    });
+
+    const unsubscribe = wsClient.onLoyaltyPoints((event) => {
+      if (user.role !== "admin" && user.role !== "manager") return;
+      const deltaLabel = event.delta > 0 ? `+${event.delta}` : `${event.delta}`;
+      toast(`Fidelidade: ${deltaLabel} pontos`, {
+        description: `Saldo ${event.balance} • Nível ${event.tier}`,
+      });
+    });
+
+    return () => {
+      unsubscribe();
+      wsClient.disconnect();
+    };
+  }, [user, token]);
 
   useEffect(() => {
     if (isCollapsed) {
@@ -202,6 +246,16 @@ function DashboardLayoutContent({
           </SidebarContent>
 
           <SidebarFooter className="p-3">
+            {switchable ? (
+              <Button
+                variant="outline"
+                className="mb-3 w-full justify-center gap-2 group-data-[collapsible=icon]:hidden"
+                onClick={toggleTheme}
+              >
+                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                <span>{theme === "dark" ? "Modo claro" : "Modo escuro"}</span>
+              </Button>
+            ) : null}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center gap-3 rounded-lg px-1 py-1 hover:bg-accent/50 transition-colors w-full text-left group-data-[collapsible=icon]:justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-ring">
@@ -221,6 +275,16 @@ function DashboardLayoutContent({
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
+                {switchable ? (
+                  <DropdownMenuItem onClick={toggleTheme} className="cursor-pointer">
+                    {theme === "dark" ? (
+                      <Sun className="mr-2 h-4 w-4" />
+                    ) : (
+                      <Moon className="mr-2 h-4 w-4" />
+                    )}
+                    <span>{theme === "dark" ? "Modo claro" : "Modo escuro"}</span>
+                  </DropdownMenuItem>
+                ) : null}
                 <DropdownMenuItem
                   onClick={logout}
                   className="cursor-pointer text-destructive focus:text-destructive"
@@ -255,9 +319,20 @@ function DashboardLayoutContent({
                 </div>
               </div>
             </div>
+            {switchable ? (
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-9 w-9"
+                onClick={toggleTheme}
+                aria-label="Alternar tema"
+              >
+                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </Button>
+            ) : null}
           </div>
         )}
-        <main className="flex-1 p-4">{children}</main>
+        <main className="flex-1 p-4 page-fade-in">{children}</main>
       </SidebarInset>
     </>
   );

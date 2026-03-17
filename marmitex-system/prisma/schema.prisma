@@ -7,6 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  schemas  = ["marmitex"]
 }
 
 // ============================================
@@ -25,6 +26,7 @@ model User {
 
   @@index([email])
   @@index([role])
+  @@schema("marmitex")
 }
 
 enum UserRole {
@@ -33,6 +35,7 @@ enum UserRole {
   KITCHEN
   ATTENDANT
   CUSTOMER
+  @@schema("marmitex")
 }
 
 // ============================================
@@ -55,10 +58,12 @@ model Customer {
 
   orders     Order[]
   deliveries Delivery[]
+  loyaltyAccount LoyaltyAccount?
 
   @@index([phone])
   @@index([email])
   @@index([active])
+  @@schema("marmitex")
 }
 
 // ============================================
@@ -69,6 +74,8 @@ model Recipe {
   id          String   @id @default(cuid())
   name        String
   description String?
+  ingredients String?
+  instructions String?
   cost        Float    @default(0)
   prepTime    Int      @default(0) // in minutes
   active      Boolean  @default(true)
@@ -78,6 +85,7 @@ model Recipe {
   products Product[]
 
   @@index([active])
+  @@schema("marmitex")
 }
 
 model Product {
@@ -99,6 +107,7 @@ model Product {
   @@index([category])
   @@index([active])
   @@index([recipeId])
+  @@schema("marmitex")
 }
 
 // ============================================
@@ -122,6 +131,7 @@ model InventoryItem {
 
   @@unique([productId])
   @@index([productId])
+  @@schema("marmitex")
 }
 
 model StockMovement {
@@ -140,6 +150,7 @@ model StockMovement {
   @@index([type])
   @@index([orderId])
   @@index([createdAt])
+  @@schema("marmitex")
 }
 
 enum MovementType {
@@ -148,6 +159,7 @@ enum MovementType {
   ADJUSTMENT
   RETURN
   WASTE
+  @@schema("marmitex")
 }
 
 model StockAlert {
@@ -167,6 +179,7 @@ model StockAlert {
   @@index([productId])
   @@index([alertType])
   @@index([resolved])
+  @@schema("marmitex")
 }
 
 enum AlertType {
@@ -174,6 +187,7 @@ enum AlertType {
   OUT_OF_STOCK
   OVERSTOCK
   EXPIRING_SOON
+  @@schema("marmitex")
 }
 
 enum DeliveryStatus {
@@ -182,6 +196,7 @@ enum DeliveryStatus {
   EM_ENTREGA
   ENTREGUE
   CANCELADO
+  @@schema("marmitex")
 }
 
 // ============================================
@@ -194,10 +209,18 @@ model Order {
   customerId  String
   customer    Customer    @relation(fields: [customerId], references: [id])
   status      OrderStatus @default(PENDING)
+  paymentStatus OrderPaymentStatus @default(UNPAID)
+  paymentMethod String?
   total       Float       @default(0)
   subtotal    Float       @default(0)
   tax         Float       @default(0)
   discount    Float       @default(0)
+  couponId    String?
+  coupon      Coupon?     @relation(fields: [couponId], references: [id])
+  loyaltyPointsRedeemed Int @default(0)
+  loyaltyPointsEarned   Int @default(0)
+  tableId     String?
+  table       DiningTable? @relation(fields: [tableId], references: [id])
   notes       String?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
@@ -205,11 +228,16 @@ model Order {
 
   items      OrderItem[]
   deliveries Delivery[]
+  payments   Payment[]
 
   @@index([customerId])
   @@index([status])
+  @@index([paymentStatus])
   @@index([createdAt])
   @@index([orderNumber])
+  @@index([couponId])
+  @@index([tableId])
+  @@schema("marmitex")
 }
 
 enum OrderStatus {
@@ -219,6 +247,75 @@ enum OrderStatus {
   READY
   DELIVERED
   CANCELLED
+  @@schema("marmitex")
+}
+
+enum OrderPaymentStatus {
+  UNPAID
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+  @@schema("marmitex")
+}
+
+enum PaymentStatus {
+  PENDING
+  REQUIRES_ACTION
+  SUCCEEDED
+  FAILED
+  CANCELED
+  REFUNDED
+  @@schema("marmitex")
+}
+
+model Payment {
+  id        String        @id @default(cuid())
+  orderId   String
+  order     Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  provider  String        @default("stripe")
+  status    PaymentStatus @default(PENDING)
+  amount    Int
+  currency  String        @default("brl")
+  stripePaymentIntentId String? @unique
+  stripeCheckoutSessionId String? @unique
+  stripeCustomerId String?
+  metadata  Json?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([orderId])
+  @@index([status])
+  @@index([provider])
+  @@schema("marmitex")
+}
+
+enum CouponType {
+  PERCENT
+  FIXED
+  @@schema("marmitex")
+}
+
+enum LoyaltyTransactionType {
+  EARN
+  REDEEM
+  ADJUST
+  @@schema("marmitex")
+}
+
+enum LoyaltyTier {
+  BRONZE
+  SILVER
+  GOLD
+  @@schema("marmitex")
+}
+
+enum TableStatus {
+  AVAILABLE
+  OCCUPIED
+  RESERVED
+  OUT_OF_SERVICE
+  @@schema("marmitex")
 }
 
 model OrderItem {
@@ -235,6 +332,100 @@ model OrderItem {
 
   @@index([orderId])
   @@index([productId])
+  @@schema("marmitex")
+}
+
+model Coupon {
+  id           String              @id @default(cuid())
+  code         String              @unique
+  description  String?
+  type         CouponType
+  value        Float
+  minOrder     Float               @default(0)
+  maxDiscount  Float?
+  maxUses      Int?
+  usesCount    Int                 @default(0)
+  startsAt     DateTime?
+  endsAt       DateTime?
+  active       Boolean             @default(true)
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  redemptions  CouponRedemption[]
+  orders       Order[]
+
+  @@index([code])
+  @@index([active])
+  @@schema("marmitex")
+}
+
+model CouponRedemption {
+  id             String   @id @default(cuid())
+  couponId       String
+  coupon         Coupon   @relation(fields: [couponId], references: [id])
+  orderId        String?
+  customerId     String?
+  discountAmount Float    @default(0)
+  createdAt      DateTime @default(now())
+
+  @@index([couponId])
+  @@index([orderId])
+  @@index([customerId])
+  @@schema("marmitex")
+}
+
+model LoyaltyAccount {
+  id            String               @id @default(cuid())
+  customerId    String               @unique
+  customer      Customer             @relation(fields: [customerId], references: [id])
+  pointsBalance Int                  @default(0)
+  totalEarned   Int                  @default(0)
+  totalRedeemed Int                  @default(0)
+  tier          LoyaltyTier          @default(BRONZE)
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+
+  transactions  LoyaltyTransaction[]
+
+  @@index([customerId])
+  @@schema("marmitex")
+}
+
+model LoyaltyTransaction {
+  id         String                  @id @default(cuid())
+  accountId  String
+  account    LoyaltyAccount          @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  orderId    String?
+  type       LoyaltyTransactionType
+  points     Int
+  notes      String?
+  createdAt  DateTime                @default(now())
+
+  @@index([accountId])
+  @@index([orderId])
+  @@index([type])
+  @@schema("marmitex")
+}
+
+model DiningTable {
+  id             String      @id @default(cuid())
+  name           String
+  capacity       Int         @default(2)
+  status         TableStatus @default(AVAILABLE)
+  location       String?
+  active         Boolean     @default(true)
+  currentOrderId String?
+  occupiedSince  DateTime?
+  totalOccupiedMinutes Int   @default(0)
+  turnovers      Int         @default(0)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  orders Order[]
+
+  @@index([status])
+  @@index([active])
+  @@schema("marmitex")
 }
 
 // ============================================
@@ -250,6 +441,7 @@ model Session {
 
   @@index([userId])
   @@index([expiresAt])
+  @@schema("marmitex")
 }
 
 model Motoboy {
@@ -261,6 +453,7 @@ model Motoboy {
   deliveries      Delivery[]
   positions       PosicaoMotoboy[]
   routes          Rota[]
+  @@schema("marmitex")
 }
 
 model Delivery {
@@ -279,6 +472,7 @@ model Delivery {
   previsaoEntrega DateTime?       @map("previsao_entrega")
   createdAt       DateTime        @default(now()) @map("created_at")
   eventos         EventoEntrega[]
+  @@schema("marmitex")
 }
 
 model EventoEntrega {
@@ -288,6 +482,7 @@ model EventoEntrega {
   tipo      String
   detalhes  Json?
   createdAt DateTime @default(now()) @map("created_at")
+  @@schema("marmitex")
 }
 
 model PosicaoMotoboy {
@@ -298,6 +493,7 @@ model PosicaoMotoboy {
   longitude Decimal  @db.Decimal(10, 7)
   speed     Decimal? @db.Decimal(6, 2)
   timestamp DateTime @default(now())
+  @@schema("marmitex")
 }
 
 model Rota {
@@ -307,4 +503,5 @@ model Rota {
   entregasIds Json     @default("[]") @map("entregas_ids")
   entregas    Json?
   createdAt   DateTime @default(now()) @map("created_at")
+  @@schema("marmitex")
 }

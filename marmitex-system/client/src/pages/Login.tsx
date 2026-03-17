@@ -50,7 +50,7 @@ export default function Login() {
       setError(null);
 
       // Use AuthContext login
-      await authLogin(data.email, data.password);
+      const user = await authLogin(data.email, data.password);
 
       if (data.rememberMe) {
         localStorage.setItem("remember_email", data.email);
@@ -59,9 +59,9 @@ export default function Login() {
       toast.success("Login realizado com sucesso!");
       
       // Redirect based on role
-      if (data.email === "admin@marmitex.com") {
+      if (user.role === "admin" || user.role === "manager") {
         setLocation("/admin");
-      } else if (data.email === "kitchen@marmitex.com") {
+      } else if (user.role === "kitchen") {
         setLocation("/kitchen");
       } else {
         setLocation("/");

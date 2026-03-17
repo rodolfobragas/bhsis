@@ -8,6 +8,7 @@ import CustomerTable from "@/components/CustomerTable";
 import CustomerDialog from "@/components/CustomerDialog";
 import { toast } from "sonner";
 import { AlertCircle, Search } from "lucide-react";
+import apiService from "@/services/api";
 
 interface Customer {
   id: string;
@@ -51,40 +52,8 @@ export default function Customers() {
     try {
       setIsLoading(true);
       setError(null);
-
-      // Mock data - replace with API call
-      const mockCustomers: Customer[] = [
-        {
-          id: "1",
-          name: "João Silva",
-          email: "joao@email.com",
-          phone: "(11) 99999-9999",
-          address: "Rua das Flores, 123",
-          city: "São Paulo",
-          zipCode: "01310-100",
-          notes: "Cliente frequente",
-        },
-        {
-          id: "2",
-          name: "Maria Santos",
-          email: "maria@email.com",
-          phone: "(11) 98888-8888",
-          address: "Av. Paulista, 456",
-          city: "São Paulo",
-          zipCode: "01311-100",
-          notes: "Preferência por marmitas de frango",
-        },
-        {
-          id: "3",
-          name: "Pedro Oliveira",
-          email: "pedro@email.com",
-          phone: "(11) 97777-7777",
-          address: "Rua Augusta, 789",
-          city: "São Paulo",
-          zipCode: "01305-100",
-        },
-      ];
-      setCustomers(mockCustomers);
+      const data = await apiService.getCustomers({ skip: 0, take: 200 });
+      setCustomers(data);
     } catch (err) {
       setError("Erro ao carregar clientes");
       console.error(err);
@@ -108,27 +77,13 @@ export default function Customers() {
       setIsSubmitting(true);
 
       if (selectedCustomer) {
-        // Update customer
-        setCustomers(
-          customers.map((c) =>
-            c.id === selectedCustomer.id
-              ? {
-                  ...c,
-                  ...data,
-                }
-              : c
-          )
-        );
+        await apiService.updateCustomer(selectedCustomer.id, data);
         toast.success("Cliente atualizado com sucesso!");
       } else {
-        // Create customer
-        const newCustomer: Customer = {
-          id: Date.now().toString(),
-          ...data,
-        };
-        setCustomers([...customers, newCustomer]);
+        await apiService.createCustomer(data);
         toast.success("Cliente criado com sucesso!");
       }
+      fetchCustomers();
     } catch (err) {
       toast.error("Erro ao salvar cliente");
       console.error(err);
@@ -139,7 +94,8 @@ export default function Customers() {
 
   const handleDeleteCustomer = async (customerId: string) => {
     try {
-      setCustomers(customers.filter((c) => c.id !== customerId));
+      await apiService.deleteCustomer(customerId);
+      fetchCustomers();
       toast.success("Cliente deletado com sucesso!");
     } catch (err) {
       toast.error("Erro ao deletar cliente");
@@ -161,7 +117,7 @@ export default function Customers() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-8">
+    <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -171,7 +127,7 @@ export default function Customers() {
 
         {/* Error Alert */}
         {error && (
-          <Alert className="mb-6 border-red-500 bg-red-50">
+          <Alert className="mb-6 border-red-500 bg-red-50" role="alert">
             <AlertCircle className="h-4 w-4 text-red-600" />
             <AlertDescription className="text-red-800">{error}</AlertDescription>
           </Alert>
@@ -183,17 +139,21 @@ export default function Customers() {
             <CardTitle>Pesquisar Clientes</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
               <div className="relative flex-1">
+                <label htmlFor="customer-search" className="sr-only">
+                  Pesquisar clientes
+                </label>
                 <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
+                  id="customer-search"
                   placeholder="Pesquise por nome, email ou telefone..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
                 />
               </div>
-              <Button variant="outline" onClick={fetchCustomers}>
+              <Button variant="outline" onClick={fetchCustomers} className="w-full md:w-auto">
                 Atualizar
               </Button>
             </div>

@@ -14,6 +14,12 @@ import ordersRoutes from "./routes/orders.routes";
 import productsRoutes from "./routes/products.routes";
 import customersRoutes from "./routes/customers.routes";
 import inventoryRoutes from "./routes/inventory.routes";
+import dashboardRoutes from "./routes/dashboard.routes";
+import couponsRoutes from "./routes/coupons.routes";
+import loyaltyRoutes from "./routes/loyalty.routes";
+import tablesRoutes from "./routes/tables.routes";
+import recipesRoutes from "./routes/recipes.routes";
+import { paymentsRoutes, paymentsWebhookRoutes } from "./routes/payments.routes";
 
 const app = express();
 const httpServer = createServer(app);
@@ -25,6 +31,7 @@ const io = new Server(httpServer, {
 });
 
 // Middleware
+app.use("/api/payments/webhook", express.raw({ type: "application/json" }), paymentsWebhookRoutes);
 app.use(express.json());
 app.use(cors());
 
@@ -39,6 +46,12 @@ app.use("/api/orders", ordersRoutes);
 app.use("/api/products", productsRoutes);
 app.use("/api/customers", customersRoutes);
 app.use("/api/inventory", inventoryRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/coupons", couponsRoutes);
+app.use("/api/loyalty", loyaltyRoutes);
+app.use("/api/tables", tablesRoutes);
+app.use("/api/recipes", recipesRoutes);
+app.use("/api/payments", paymentsRoutes);
 
 // WebSocket events
 setupWebSocketEvents(io);

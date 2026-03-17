@@ -1,5 +1,6 @@
 import prisma from "../config/database";
 import logger from "../config/logger";
+import { getSocketServer } from "../websocket/socket";
 
 export class InventoryService {
   async getInventory(productId?: string) {
@@ -97,7 +98,7 @@ export class InventoryService {
       });
 
       if (!existingAlert) {
-        await prisma.stockAlert.create({
+        const alert = await prisma.stockAlert.create({
           data: {
             inventoryId,
             productId,
@@ -106,6 +107,9 @@ export class InventoryService {
           },
         });
         logger.warn(`Low stock alert created for product ${productId}`);
+        const io = getSocketServer();
+        io?.to("role:ADMIN").emit("inventory:alert", alert);
+        io?.to("role:MANAGER").emit("inventory:alert", alert);
       }
     }
 
@@ -120,7 +124,7 @@ export class InventoryService {
       });
 
       if (!existingAlert) {
-        await prisma.stockAlert.create({
+        const alert = await prisma.stockAlert.create({
           data: {
             inventoryId,
             productId,
@@ -129,6 +133,9 @@ export class InventoryService {
           },
         });
         logger.warn(`Out of stock alert created for product ${productId}`);
+        const io = getSocketServer();
+        io?.to("role:ADMIN").emit("inventory:alert", alert);
+        io?.to("role:MANAGER").emit("inventory:alert", alert);
       }
     }
 

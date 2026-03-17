@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Clock, CheckCircle, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import apiService from "@/services/api";
+import { wsClient } from "@/services/websocketClient";
 
 interface OrderItem {
   id: string;
@@ -25,50 +27,71 @@ export default function KitchenDisplay() {
   const [selectedOrder, setSelectedOrder] = useState<string | null>(null);
   const [time, setTime] = useState(new Date());
 
-  // Mock data
   useEffect(() => {
-    const mockOrders: OrderItem[] = [
-      {
-        id: "1",
-        orderNumber: "ORD-001",
-        items: [
-          { productName: "Marmita de Frango", quantity: 2, notes: "Sem cebola" },
-          { productName: "Arroz Integral", quantity: 1 },
-        ],
-        status: "PENDING",
-        createdAt: new Date(Date.now() - 5 * 60000).toISOString(),
-        timeInPrep: 5,
-      },
-      {
-        id: "2",
-        orderNumber: "ORD-002",
-        items: [
-          { productName: "Marmita de Peixe", quantity: 1 },
-          { productName: "Feijão", quantity: 1 },
-        ],
-        status: "PREPARING",
-        createdAt: new Date(Date.now() - 12 * 60000).toISOString(),
-        timeInPrep: 12,
-      },
-      {
-        id: "3",
-        orderNumber: "ORD-003",
-        items: [{ productName: "Marmita Vegetariana", quantity: 3 }],
-        status: "READY",
-        createdAt: new Date(Date.now() - 20 * 60000).toISOString(),
-        timeInPrep: 20,
-      },
-    ];
+    if (!isAuthenticated || !user) return;
 
-    setOrders(mockOrders);
+    const fetchOrders = async () => {
+      const data = await apiService.getOrders({ skip: 0, take: 200 });
+      const mapped: OrderItem[] = data.map((order: any) => ({
+        id: order.id,
+        orderNumber: order.orderNumber ?? order.id,
+        items: order.items.map((item: any) => ({
+          productName: item.product?.name ?? "-",
+          quantity: item.quantity,
+          notes: item.notes,
+        })),
+        status: order.status,
+        createdAt: order.createdAt,
+      }));
+      setOrders(mapped);
+    };
 
-    // Update time every second
+    fetchOrders();
+
+    wsClient
+      .connect()
+      .then(() => {
+        wsClient.joinKitchenRoom(user.id);
+      })
+      .catch(() => null);
+
+    const unsubscribe = wsClient.onOrderCreated((order) => {
+      setOrders((prev) => {
+        const existing = prev.find((item) => item.id === order.id);
+        const mapped: OrderItem = {
+          id: order.id,
+          orderNumber: order.orderNumber ?? order.id,
+          items: order.items.map((item) => ({
+            productName: item.productName,
+            quantity: item.quantity,
+          })),
+          status: order.status,
+          createdAt: order.createdAt,
+        };
+        if (existing) {
+          return prev.map((item) => (item.id === order.id ? { ...item, ...mapped } : item));
+        }
+        return [mapped, ...prev];
+      });
+    });
+
     const interval = setInterval(() => {
       setTime(new Date());
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => {
+      unsubscribe();
+      wsClient.disconnect();
+      clearInterval(interval);
+    };
+  }, [isAuthenticated, user]);
+
+  const ordersWithTime = useMemo(() => {
+    return orders.map((order) => ({
+      ...order,
+      timeInPrep: Math.max(0, Math.round((time.getTime() - new Date(order.createdAt).getTime()) / 60000)),
+    }));
+  }, [orders, time]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -96,13 +119,13 @@ export default function KitchenDisplay() {
     return labels[status] || status;
   };
 
-  const handleStatusUpdate = (orderId: string, newStatus: string) => {
-    setOrders(
-      orders.map((order) =>
+  const handleStatusUpdate = async (orderId: string, newStatus: string) => {
+    await apiService.updateOrderStatus(orderId, newStatus);
+    setOrders((prev) =>
+      prev.map((order) =>
         order.id === orderId ? { ...order, status: newStatus as any } : order
       )
     );
-    // TODO: Send update to API via WebSocket
   };
 
   if (!isAuthenticated) {
@@ -118,9 +141,9 @@ export default function KitchenDisplay() {
     );
   }
 
-  const pendingOrders = orders.filter((o) => o.status === "PENDING");
-  const preparingOrders = orders.filter((o) => o.status === "PREPARING");
-  const readyOrders = orders.filter((o) => o.status === "READY");
+  const pendingOrders = ordersWithTime.filter((o) => o.status === "PENDING");
+  const preparingOrders = ordersWithTime.filter((o) => o.status === "PREPARING");
+  const readyOrders = ordersWithTime.filter((o) => o.status === "READY");
 
   return (
     <div className="min-h-screen bg-background p-4">

@@ -2,14 +2,19 @@
 
 Baseado na documentação de arquitetura (ARCHITECTURE.md), aqui estão as funcionalidades que ainda precisam ser implementadas:
 
+## ✅ Itens já implantados no ambiente local
+- [x] Frontend Marmitex aberto em `http://localhost:3000`
+- [x] Login local funcional (credenciais admin/kitchen)
+- [x] Acesso ao painel administrativo pós-login
+
 ## 🔴 CRÍTICAS (Essenciais para Produção)
 
 ### 1. Integração com API Backend Real
-- [ ] Conectar autenticação com endpoints JWT do Express.js (/api/auth/login, /api/auth/register)
-- [ ] Integrar CRUD de produtos com API (/api/products)
-- [ ] Integrar CRUD de clientes com API (/api/customers)
-- [ ] Integrar CRUD de pedidos com API (/api/orders)
-- [ ] Integrar gerenciamento de inventário com API (/api/inventory)
+- [x] Conectar autenticação com endpoints JWT do Express.js (/api/auth/login, /api/auth/register)
+- [x] Integrar CRUD de produtos com API (/api/products)
+- [x] Integrar CRUD de clientes com API (/api/customers)
+- [x] Integrar CRUD de pedidos com API (/api/orders)
+- [x] Integrar gerenciamento de inventário com API (/api/inventory)
 - [ ] Implementar tratamento de erros HTTP (401, 403, 500, etc)
 - [ ] Adicionar retry logic e timeout handling
 
@@ -21,32 +26,32 @@ Baseado na documentação de arquitetura (ARCHITECTURE.md), aqui estão as funci
 - [ ] Adicionar reconexão automática em caso de desconexão
 
 ### 3. Sistema de Alertas de Estoque
-- [ ] Implementar verificação de estoque mínimo
-- [ ] Enviar alertas para admin/manager quando estoque baixo
-- [ ] Criar página de alertas de estoque
+- [x] Implementar verificação de estoque mínimo
+- [x] Enviar alertas para admin/manager quando estoque baixo
+- [x] Criar página de alertas de estoque
 - [ ] Implementar notificações push/toast para alertas
 
 ### 4. Gerenciamento de Receitas
-- [ ] Criar CRUD de receitas (recipes)
-- [ ] Integrar receitas com produtos
-- [ ] Implementar cálculo de ingredientes por pedido
-- [ ] Criar página de gerenciamento de receitas
+- [x] Criar CRUD de receitas (recipes)
+- [x] Integrar receitas com produtos
+- [x] Implementar cálculo de ingredientes por pedido
+- [x] Criar página de gerenciamento de receitas
 
 ## 🟡 IMPORTANTES (Melhoram Experiência)
 
 ### 5. Dashboard com Gráficos
-- [ ] Implementar dashboard com estatísticas de vendas
-- [ ] Adicionar gráfico de pedidos por hora/dia
-- [ ] Adicionar gráfico de produtos mais vendidos
-- [ ] Adicionar gráfico de receita por período
-- [ ] Implementar filtros de data no dashboard
+- [x] Implementar dashboard com estatísticas de vendas
+- [x] Adicionar gráfico de pedidos por hora/dia
+- [x] Adicionar gráfico de produtos mais vendidos
+- [x] Adicionar gráfico de receita por período
+- [x] Implementar filtros de data no dashboard
 
 ### 6. Sistema de Relatórios
-- [ ] Criar gerador de relatórios em PDF
-- [ ] Criar gerador de relatórios em Excel
-- [ ] Implementar relatório de vendas por período
-- [ ] Implementar relatório de estoque
-- [ ] Implementar relatório de clientes
+- [x] Criar gerador de relatórios em PDF
+- [x] Criar gerador de relatórios em Excel
+- [x] Implementar relatório de vendas por período
+- [x] Implementar relatório de estoque
+- [x] Implementar relatório de clientes
 - [ ] Adicionar filtros de data, cliente, produto
 
 ### 7. Melhorias no KDS
@@ -66,9 +71,10 @@ Baseado na documentação de arquitetura (ARCHITECTURE.md), aqui estão as funci
 ## 🟢 NICE-TO-HAVE (Extras)
 
 ### 9. Funcionalidades Avançadas
-- [ ] Implementar sistema de cupons/descontos
-- [ ] Implementar sistema de fidelidade (pontos)
-- [ ] Integrar com gateway de pagamento (Stripe)
+- [x] Implementar sistema de cupons/descontos
+- [x] Implementar sistema de fidelidade (pontos)
+- [x] Implementar gerenciamento de mesas
+- [x] Integrar com gateway de pagamento (Stripe)
 - [ ] Implementar relatórios de lucratividade
 - [ ] Implementar análise de comportamento de clientes
 - [ ] Criar app mobile (React Native)

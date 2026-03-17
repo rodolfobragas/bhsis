@@ -17,6 +17,11 @@ import Orders from "./pages/Orders";
 import Inventory from "./pages/Inventory";
 import Recipes from "./pages/Recipes";
 import StockAlerts from "./pages/StockAlerts";
+import Coupons from "./pages/Coupons";
+import Loyalty from "./pages/Loyalty";
+import Tables from "./pages/Tables";
+import Payments from "./pages/Payments";
+import AdminLayout from "./components/AdminLayout";
 
 function Router() {
   return (
@@ -26,37 +31,79 @@ function Router() {
       <Route path="/register" component={Register} />
       <Route path="/admin">
         <ProtectedRoute requiredRole="admin">
-          <AdminDashboard />
+          <AdminLayout>
+            <AdminDashboard />
+          </AdminLayout>
         </ProtectedRoute>
       </Route>
       <Route path="/products">
         <ProtectedRoute requiredRole="admin">
-          <Products />
+          <AdminLayout>
+            <Products />
+          </AdminLayout>
         </ProtectedRoute>
       </Route>
       <Route path="/customers">
         <ProtectedRoute requiredRole="admin">
-          <Customers />
+          <AdminLayout>
+            <Customers />
+          </AdminLayout>
         </ProtectedRoute>
       </Route>
       <Route path="/orders">
         <ProtectedRoute requiredRole="admin">
-          <Orders />
+          <AdminLayout>
+            <Orders />
+          </AdminLayout>
         </ProtectedRoute>
       </Route>
       <Route path="/inventory">
         <ProtectedRoute requiredRole="admin">
-          <Inventory />
+          <AdminLayout>
+            <Inventory />
+          </AdminLayout>
         </ProtectedRoute>
       </Route>
       <Route path="/recipes">
         <ProtectedRoute requiredRole="admin">
-          <Recipes />
+          <AdminLayout>
+            <Recipes />
+          </AdminLayout>
         </ProtectedRoute>
       </Route>
       <Route path="/stock-alerts">
         <ProtectedRoute requiredRole="admin">
-          <StockAlerts />
+          <AdminLayout>
+            <StockAlerts />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/coupons">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <Coupons />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/loyalty">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <Loyalty />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/tables">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <Tables />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/payments">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <Payments />
+          </AdminLayout>
         </ProtectedRoute>
       </Route>
       <Route path="/kitchen">
@@ -80,10 +127,10 @@ function App() {
   return (
     <ErrorBoundary>
       <AuthProvider>
-        <ThemeProvider
-          defaultTheme="light"
-          // switchable
-        >
+      <ThemeProvider
+        defaultTheme="light"
+        switchable
+      >
           <TooltipProvider>
             <Toaster />
             <Router />

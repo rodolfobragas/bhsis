@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { apiClient } from "@/services/apiClient";
+import apiService from "@/services/api";
 
 interface Recipe {
   id: string;
@@ -54,30 +54,6 @@ export default function Recipes() {
     },
   });
 
-  // Mock data for demo
-  const mockRecipes: Recipe[] = [
-    {
-      id: "1",
-      name: "Arroz com Frango",
-      description: "Arroz branco com frango desfiado",
-      ingredients: "Arroz, frango, cebola, alho, sal, óleo",
-      instructions: "1. Cozinhe o frango. 2. Refogue a cebola e alho. 3. Adicione o arroz. 4. Cozinhe até ficar macio.",
-      cost: 12.50,
-      prepTime: 30,
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: "2",
-      name: "Feijoada",
-      description: "Feijoada tradicional brasileira",
-      ingredients: "Feijão, carne seca, linguiça, cebola, alho",
-      instructions: "1. Deixe o feijão de molho. 2. Cozinhe com as carnes. 3. Tempere a gosto.",
-      cost: 18.00,
-      prepTime: 120,
-      createdAt: new Date().toISOString(),
-    },
-  ];
-
   useEffect(() => {
     loadRecipes();
   }, []);
@@ -85,14 +61,8 @@ export default function Recipes() {
   const loadRecipes = async () => {
     setIsLoading(true);
     try {
-      // Try to fetch from API, fallback to mock data
-      try {
-        const response = await apiClient.getRecipes();
-        setRecipes(response.data);
-      } catch (error) {
-        // Fallback to mock data
-        setRecipes(mockRecipes);
-      }
+      const response = await apiService.getRecipes({ skip: 0, take: 200 });
+      setRecipes(response);
     } catch (error) {
       toast.error("Erro ao carregar receitas");
     } finally {
@@ -104,26 +74,10 @@ export default function Recipes() {
     try {
       if (editingId) {
         // Try to update via API, fallback to local update
-        try {
-          await apiClient.updateRecipe(editingId, data);
-        } catch (error) {
-          // Fallback to local update
-          setRecipes(recipes.map(r => r.id === editingId ? { ...r, ...data } : r));
-        }
+        await apiService.updateRecipe(editingId, data);
         toast.success("Receita atualizada com sucesso!");
       } else {
-        // Try to create via API, fallback to local creation
-        try {
-          await apiClient.createRecipe(data);
-        } catch (error) {
-          // Fallback to local creation
-          const newRecipe: Recipe = {
-            id: Date.now().toString(),
-            ...data,
-            createdAt: new Date().toISOString(),
-          };
-          setRecipes([...recipes, newRecipe]);
-        }
+        await apiService.createRecipe(data);
         toast.success("Receita criada com sucesso!");
       }
       form.reset();
@@ -145,12 +99,7 @@ export default function Recipes() {
     if (confirm("Tem certeza que deseja deletar esta receita?")) {
       try {
         // Try to delete via API, fallback to local deletion
-        try {
-          await apiClient.deleteRecipe(id);
-        } catch (error) {
-          // Fallback to local deletion
-          setRecipes(recipes.filter(r => r.id !== id));
-        }
+        await apiService.deleteRecipe(id);
         toast.success("Receita deletada com sucesso!");
         loadRecipes();
       } catch (error) {
@@ -172,7 +121,7 @@ export default function Recipes() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-3xl font-bold">Gerenciamento de Receitas</h1>
           <p className="text-gray-600">Gerencie as receitas e ingredientes do seu restaurante</p>

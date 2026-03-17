@@ -24,7 +24,12 @@ CREATE TABLE IF NOT EXISTS clientes (
 );
 
 -- Status possiveis guardados via constraint
-CREATE TYPE delivery_status AS ENUM ('pendente', 'na_rota', 'em_entrega', 'entregue', 'cancelado');
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'delivery_status') THEN
+    CREATE TYPE delivery_status AS ENUM ('pendente', 'na_rota', 'em_entrega', 'entregue', 'cancelado');
+  END IF;
+END$$;
 
 -- Tabela de entregas
 CREATE TABLE IF NOT EXISTS entregas (

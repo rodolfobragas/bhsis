@@ -1,9 +1,8 @@
-import { DataSource, In } from 'typeorm';
+import { DataSource, In, Not } from 'typeorm';
 import { Queue, Worker } from 'bullmq';
 import { GraphhopperService } from '../services/graphhopper.service';
 import { Entrega } from '../entities/entrega.entity';
 import { Rota } from '../entities/rota.entity';
-import { listActiveDeliveries, updateDeliveryStatus } from '../services/marmitex.client';
 
 const REDIS_OPTIONS = {
   host: process.env.REDIS_HOST || 'localhost',
@@ -34,7 +33,10 @@ export const startRoutingWorker = async (dataSource: DataSource) => {
         start?: { latitude?: number; longitude?: number };
       };
 
-      const activeDeliveries = await listActiveDeliveries(motoboyId);
+      const excludedStatuses = ['entregue', 'cancelado'];
+      const activeDeliveries = await repository.find({
+        where: { motoboyId, status: Not(In(excludedStatuses)) },
+      });
       const ids = entregaIds.length ? entregaIds : activeDeliveries.map((d) => d.id);
 
       const entregas = await repository.findBy({ id: In(ids) });
@@ -94,12 +96,12 @@ export const startRoutingWorker = async (dataSource: DataSource) => {
       for (const activity of activities) {
         const entregaId = String(activity.shipment_id);
         await repository.update(entregaId, { ordemRota: ordem, status: 'na_rota' });
-        const updatedDelivery = await updateDeliveryStatus(entregaId, 'NA_ROTA');
+        const updatedDelivery = await repository.findOne({ where: { id: entregaId } });
         if (ordem === 1 && updatedDelivery) {
           nextDeliveryToNotify = {
             entregaId: updatedDelivery.id,
             motoboyId,
-            phone: updatedDelivery.customer?.phone,
+            phone: updatedDelivery.cliente?.telefone,
             deviceId: updatedDelivery.motoboy?.deviceIdTraccar,
           };
         }

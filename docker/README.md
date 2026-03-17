@@ -15,10 +15,16 @@ Este diretório agrupa o `docker-compose` que orquestra toda a pilha de microsse
    Após o primeiro `docker compose up`, acesse `http://localhost:8082` (usuário padrão `admin`/`admin`).
    No menu `Web Hooks`, crie uma nova integração apontando para `http://tracking-service:3002/tracking/update` e inclua os dados esperados (`deviceId`, `latitude`, `longitude`, `speed`, `timestamp`).
 
-## Rodar a stack completa
+## Rodar a stack completa (Docker Hub v1.0.0)
 ```bash
 cd docker
-docker compose up --build
+docker compose up -d
+```
+
+## Rodar a stack usando Docker Hub (v1.0.0)
+```bash
+cd docker
+docker compose -f docker-compose.hub.yml up -d
 ```
 
 ## Banco de dados
@@ -40,4 +46,5 @@ docker compose up --build
 ## Observações
 - Os aplicativos frontend assumem que a API Core está em `http://localhost:4000` e o tracking service em `http://localhost:3002`.
 - As filas BullMQ utilizam o Redis compartilhado (`redis:6379`).
+- O `notification-service` consulta a API Core (`/entregas/:id`) quando precisa enriquecer mensagens com telefone do cliente.
 - Eventuais problemas de CORS devem ser tratados nas aplicações (já habilitei `app.enableCors()` no NestJS e nos sockets).
