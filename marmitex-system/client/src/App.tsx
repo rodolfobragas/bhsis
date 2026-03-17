@@ -30,6 +30,20 @@ import CadastroCaixaVenda from "./pages/CadastroCaixaVenda";
 import CadastroUsuario from "./pages/CadastroUsuario";
 import CadastroVeiculo from "./pages/CadastroVeiculo";
 import CadastroSetor from "./pages/CadastroSetor";
+import FaturamentoNotasFiscaisEletronicas from "./pages/FaturamentoNotasFiscaisEletronicas";
+import FaturamentoNotasFiscaisServico from "./pages/FaturamentoNotasFiscaisServico";
+import FaturamentoManifestoDocumentos from "./pages/FaturamentoManifestoDocumentos";
+import FaturamentoConhecimentoTransporte from "./pages/FaturamentoConhecimentoTransporte";
+import FaturamentoConhecimentoTransporteOS from "./pages/FaturamentoConhecimentoTransporteOS";
+import FaturamentoOrcamento from "./pages/FaturamentoOrcamento";
+import FaturamentoCondicional from "./pages/FaturamentoCondicional";
+import FaturamentoPedidoVenda from "./pages/FaturamentoPedidoVenda";
+import FaturamentoOrdemServico from "./pages/FaturamentoOrdemServico";
+import FaturamentoVendaFuturaRetiradas from "./pages/FaturamentoVendaFuturaRetiradas";
+import FaturamentoVendaExternaRetorno from "./pages/FaturamentoVendaExternaRetorno";
+import FaturamentoGeracaoReajusteContrato from "./pages/FaturamentoGeracaoReajusteContrato";
+import FaturamentoRomaneiroCargaEntrega from "./pages/FaturamentoRomaneiroCargaEntrega";
+import FaturamentoImportacaoXmlNfeNfceCte from "./pages/FaturamentoImportacaoXmlNfeNfceCte";
 
 function Router() {
   return (
@@ -167,6 +181,104 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <CadastroSetor />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-eletronicas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNotasFiscaisEletronicas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-servico">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNotasFiscaisServico />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/manifesto-documentos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoManifestoDocumentos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoConhecimentoTransporte />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte-os">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoConhecimentoTransporteOS />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/orcamento">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoOrcamento />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/condicional">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCondicional />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/pedido-venda">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoPedidoVenda />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/ordem-servico">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoOrdemServico />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/venda-futura-retiradas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoVendaFuturaRetiradas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/venda-externa-retorno">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoVendaExternaRetorno />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/geracao-reajuste-contrato">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoGeracaoReajusteContrato />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/romaneiro-carga-entrega">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoRomaneiroCargaEntrega />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/importacao-xml-nfe-nfce-cte">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoImportacaoXmlNfeNfceCte />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

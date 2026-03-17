@@ -12,6 +12,7 @@ Um sistema completo de gerenciamento de restaurante com painel administrativo, p
 - **Kitchen Display System (KDS)**: Tela em tempo real para a cozinha
 - **Painel Administrativo**: Interface completa para gerenciamento
 - **Módulo Cadastro (expansível)**: Itens de cadastro agrupados no menu lateral (Produto, Participante, Fiscal, Financeiro, Caixa Venda, Usuário, Veículo, Setor)
+- **Módulo Faturamento (expansível)**: Emissão fiscal, documentos de transporte, orçamentos e vendas com submenus dedicados
 - **WebSocket em Tempo Real**: Atualizações instantâneas entre sistemas
 - **Cache com Redis**: Otimização de performance
 
