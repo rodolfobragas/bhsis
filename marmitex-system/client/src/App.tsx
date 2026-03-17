@@ -44,6 +44,84 @@ import FaturamentoVendaExternaRetorno from "./pages/FaturamentoVendaExternaRetor
 import FaturamentoGeracaoReajusteContrato from "./pages/FaturamentoGeracaoReajusteContrato";
 import FaturamentoRomaneiroCargaEntrega from "./pages/FaturamentoRomaneiroCargaEntrega";
 import FaturamentoImportacaoXmlNfeNfceCte from "./pages/FaturamentoImportacaoXmlNfeNfceCte";
+import PdvCaixa from "./pages/PdvCaixa";
+import PdvVendas from "./pages/PdvVendas";
+import PdvConfiguracao from "./pages/PdvConfiguracao";
+import EntradaNotaCadastrar from "./pages/EntradaNotaCadastrar";
+import EntradaNotaConsultar from "./pages/EntradaNotaConsultar";
+import EntradaNotaImportacaoXml from "./pages/EntradaNotaImportacaoXml";
+import EntradaNotaTributacaoNfeEntrada from "./pages/EntradaNotaTributacaoNfeEntrada";
+import DocumentosRecebidosConsultaNfes from "./pages/DocumentosRecebidosConsultaNfes";
+import DocumentosRecebidosConsultaCtes from "./pages/DocumentosRecebidosConsultaCtes";
+import DocumentosRecebidosImportacaoNfes from "./pages/DocumentosRecebidosImportacaoNfes";
+import DocumentosRecebidosImportacaoCtes from "./pages/DocumentosRecebidosImportacaoCtes";
+import DocumentosRecebidosEventosVinculadosNfes from "./pages/DocumentosRecebidosEventosVinculadosNfes";
+import DocumentosRecebidosManifestacaoNfesUsuario from "./pages/DocumentosRecebidosManifestacaoNfesUsuario";
+import PedidoCompraCadastrar from "./pages/PedidoCompraCadastrar";
+import PedidoCompraConsultar from "./pages/PedidoCompraConsultar";
+import PedidoCompraCotacao from "./pages/PedidoCompraCotacao";
+import AssinadorPainelAssinaturas from "./pages/AssinadorPainelAssinaturas";
+import FinanceiroCaixa from "./pages/FinanceiroCaixa";
+import FinanceiroLancamentoFinanceiro from "./pages/FinanceiroLancamentoFinanceiro";
+import FinanceiroConsultaLancamentos from "./pages/FinanceiroConsultaLancamentos";
+import FinanceiroRecebimentoCartoes from "./pages/FinanceiroRecebimentoCartoes";
+import FinanceiroLancamentosRecorrentes from "./pages/FinanceiroLancamentosRecorrentes";
+import FinanceiroContasAbertoClientes from "./pages/FinanceiroContasAbertoClientes";
+import FinanceiroContasAbertoDocumentos from "./pages/FinanceiroContasAbertoDocumentos";
+import FinanceiroBoletos from "./pages/FinanceiroBoletos";
+import FinanceiroCustoFixo from "./pages/FinanceiroCustoFixo";
+import FinanceiroExtratoBancario from "./pages/FinanceiroExtratoBancario";
+import FinanceiroControleCheques from "./pages/FinanceiroControleCheques";
+import FinanceiroMovimentacoesEntreContas from "./pages/FinanceiroMovimentacoesEntreContas";
+import FinanceiroConsultaTransacoesIntegracoes from "./pages/FinanceiroConsultaTransacoesIntegracoes";
+import FiscalLancamentos from "./pages/FiscalLancamentos";
+import FiscalArquivosFiscais from "./pages/FiscalArquivosFiscais";
+import FiscalRegistroInventario from "./pages/FiscalRegistroInventario";
+import FiscalGestaoDocumentos from "./pages/FiscalGestaoDocumentos";
+import EstoqueEntradas from "./pages/EstoqueEntradas";
+import EstoqueEntradasSaidas from "./pages/EstoqueEntradasSaidas";
+import EstoqueEntradasSaidasDetalhado from "./pages/EstoqueEntradasSaidasDetalhado";
+import EstoqueCurvaAbc from "./pages/EstoqueCurvaAbc";
+import EstoqueUltimasVendas from "./pages/EstoqueUltimasVendas";
+import EstoqueSintetico from "./pages/EstoqueSintetico";
+import EstoqueLucro from "./pages/EstoqueLucro";
+import EstoqueTabelaPrecos from "./pages/EstoqueTabelaPrecos";
+import EstoqueGiroMercadoria from "./pages/EstoqueGiroMercadoria";
+import EstoqueLancarInicial from "./pages/EstoqueLancarInicial";
+import EstoqueQuantidade from "./pages/EstoqueQuantidade";
+import EstoquePorLocalizacao from "./pages/EstoquePorLocalizacao";
+import EstoqueMinimoMaximo from "./pages/EstoqueMinimoMaximo";
+import EstoquePosicaoAtual from "./pages/EstoquePosicaoAtual";
+import EstoqueAjustePorProduto from "./pages/EstoqueAjustePorProduto";
+import EstoqueQuantidadeGrade from "./pages/EstoqueQuantidadeGrade";
+import EstoqueContagemAjuste from "./pages/EstoqueContagemAjuste";
+import ProducaoCadastrar from "./pages/ProducaoCadastrar";
+import ProducaoConsultar from "./pages/ProducaoConsultar";
+import ProducaoGerarProducao from "./pages/ProducaoGerarProducao";
+import ProducaoTipoMateriaPrima from "./pages/ProducaoTipoMateriaPrima";
+import ProducaoConsultarGeradas from "./pages/ProducaoConsultarGeradas";
+import DeliveryPainel from "./pages/DeliveryPainel";
+import DeliveryEntregador from "./pages/DeliveryEntregador";
+import DeliveryQrCode from "./pages/DeliveryQrCode";
+import RelatoriosLogSistema from "./pages/RelatoriosLogSistema";
+import RelatoriosGerenciais from "./pages/RelatoriosGerenciais";
+import RelatoriosLancasPrevisaoDre from "./pages/RelatoriosLancasPrevisaoDre";
+import RelatoriosGerador from "./pages/RelatoriosGerador";
+import RelatoriosEnvioWhatsapp from "./pages/RelatoriosEnvioWhatsapp";
+import RelatoriosNotasFiscaisSaida from "./pages/RelatoriosNotasFiscaisSaida";
+import RelatoriosNotasFiscaisEntrada from "./pages/RelatoriosNotasFiscaisEntrada";
+import RelatoriosNotasFiscaisServico from "./pages/RelatoriosNotasFiscaisServico";
+import RelatoriosConhecimentosEletronicos from "./pages/RelatoriosConhecimentosEletronicos";
+import RelatoriosManifestoDocumentos from "./pages/RelatoriosManifestoDocumentos";
+import RelatoriosNotasFiscaisConsumidor from "./pages/RelatoriosNotasFiscaisConsumidor";
+import RelatoriosProdutos from "./pages/RelatoriosProdutos";
+import RelatoriosFinanceiro from "./pages/RelatoriosFinanceiro";
+import RelatoriosOrcamento from "./pages/RelatoriosOrcamento";
+import RelatoriosLivrosFiscais from "./pages/RelatoriosLivrosFiscais";
+import RelatoriosVendaExterna from "./pages/RelatoriosVendaExterna";
+import RelatoriosPedidoVenda from "./pages/RelatoriosPedidoVenda";
+import RelatoriosOrdensServico from "./pages/RelatoriosOrdensServico";
+import RelatoriosLucroVendaComissoesOutros from "./pages/RelatoriosLucroVendaComissoesOutros";
 
 function Router() {
   return (
@@ -279,6 +357,552 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <FaturamentoImportacaoXmlNfeNfceCte />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/caixa">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvCaixa />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/vendas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvVendas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/configuracao">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvConfiguracao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/entrada-nota/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EntradaNotaCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/entrada-nota/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EntradaNotaConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/entrada-nota/importacao-xml">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EntradaNotaImportacaoXml />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/entrada-nota/tributacao-nfe-entrada">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EntradaNotaTributacaoNfeEntrada />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/documentos-recebidos/consulta-nfes-recebidas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <DocumentosRecebidosConsultaNfes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/documentos-recebidos/consulta-ctes-recebidas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <DocumentosRecebidosConsultaCtes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/documentos-recebidos/importacao-nfes-recebidas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <DocumentosRecebidosImportacaoNfes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/documentos-recebidos/importacao-ctes-recebidas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <DocumentosRecebidosImportacaoCtes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/documentos-recebidos/eventos-vinculados-nfes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <DocumentosRecebidosEventosVinculadosNfes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/documentos-recebidos/manifestacao-nfes-usuario">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <DocumentosRecebidosManifestacaoNfesUsuario />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pedido-compra/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PedidoCompraCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pedido-compra/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PedidoCompraConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pedido-compra/cotacao">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PedidoCompraCotacao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/assinador/painel-assinaturas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <AssinadorPainelAssinaturas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/caixa">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCaixa />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/lancamento-financeiro">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroLancamentoFinanceiro />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/consulta-lancamentos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroConsultaLancamentos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/recebimento-cartoes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroRecebimentoCartoes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/lancamentos-recorrentes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroLancamentosRecorrentes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/contas-aberto-clientes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroContasAbertoClientes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/contas-aberto-documentos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroContasAbertoDocumentos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/boletos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroBoletos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/custo-fixo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCustoFixo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/extrato-bancario">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroExtratoBancario />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/controle-cheques">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroControleCheques />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/movimentacoes-entre-contas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroMovimentacoesEntreContas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/consulta-transacoes-integracoes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroConsultaTransacoesIntegracoes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/fiscal/lancamentos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FiscalLancamentos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/fiscal/arquivos-fiscais">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FiscalArquivosFiscais />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/fiscal/registro-inventario">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FiscalRegistroInventario />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/fiscal/gestao-documentos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FiscalGestaoDocumentos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/entradas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueEntradas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/entradas-saidas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueEntradasSaidas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/entradas-saidas-detalhado">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueEntradasSaidasDetalhado />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/curva-abc">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueCurvaAbc />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/ultimas-vendas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueUltimasVendas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/estoque-sintetico">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueSintetico />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/lucro-estoque">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueLucro />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/tabela-precos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueTabelaPrecos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/giro-mercadoria">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueGiroMercadoria />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/lancar-estoque-inicial">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueLancarInicial />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/quantidade-estoque">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueQuantidade />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/estoque-por-localizacao">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoquePorLocalizacao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/estoque-minimo-maximo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueMinimoMaximo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/posicao-atual">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoquePosicaoAtual />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/ajuste-por-produto">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueAjustePorProduto />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/quantidade-grade">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueQuantidadeGrade />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/estoque/contagem-ajuste">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EstoqueContagemAjuste />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/producao/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <ProducaoCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/producao/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <ProducaoConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/producao/gerar-producao">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <ProducaoGerarProducao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/producao/tipo-materia-prima">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <ProducaoTipoMateriaPrima />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/producao/consultar-producoes-geradas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <ProducaoConsultarGeradas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/delivery/delivery">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <DeliveryPainel />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/delivery/entregador">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <DeliveryEntregador />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/delivery/gerar-qr-code">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <DeliveryQrCode />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/log-sistema">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosLogSistema />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/relatorios-gerenciais">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosGerenciais />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/lancas-previsao-dre">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosLancasPrevisaoDre />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/gerador-relatorios">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosGerador />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/envio-whatsapp">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosEnvioWhatsapp />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-saida">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisSaida />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-entrada">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisEntrada />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-servico">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisServico />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/conhecimentos-eletronicos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosConhecimentosEletronicos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/manifesto-documentos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosManifestoDocumentos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-consumidor">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisConsumidor />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/produtos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosProdutos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/financeiro">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosFinanceiro />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/orcamento">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosOrcamento />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/livros-fiscais">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosLivrosFiscais />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/venda-externa">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosVendaExterna />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/pedido-venda">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosPedidoVenda />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/ordens-servico">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosOrdensServico />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/lucro-venda-comissoes-outros">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosLucroVendaComissoesOutros />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

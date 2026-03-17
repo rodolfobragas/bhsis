@@ -13,6 +13,17 @@ Um sistema completo de gerenciamento de restaurante com painel administrativo, p
 - **Painel Administrativo**: Interface completa para gerenciamento
 - **Módulo Cadastro (expansível)**: Itens de cadastro agrupados no menu lateral (Produto, Participante, Fiscal, Financeiro, Caixa Venda, Usuário, Veículo, Setor)
 - **Módulo Faturamento (expansível)**: Emissão fiscal, documentos de transporte, orçamentos e vendas com submenus dedicados
+- **Módulo PDV (expansível)**: Caixa, vendas e configurações do ponto de venda
+- **Módulo Entrada de Nota (expansível)**: Cadastro, consulta, importação XML e tributação de NFe de entrada
+- **Módulo Documentos Recebidos (expansível)**: Consultas, importações e manifestação de NFe/CTe recebidas
+- **Módulo Pedido de Compra (expansível)**: Cadastro, consulta e cotação de compras
+- **Módulo Assinador (expansível)**: Painel de assinaturas
+- **Módulo Financeiro (expansível)**: Caixa, lançamentos, boletos, conciliações e controle financeiro
+- **Módulo Fiscal (expansível)**: Lançamentos, arquivos fiscais, inventário e gestão de documentos
+- **Módulo Estoque (expansível)**: Entradas, saídas, análises e ajustes de estoque
+- **Módulo Produção (expansível)**: Ordens de produção, geração e matérias-primas
+- **Módulo Delivery (expansível)**: Painel, entregadores e QR Code
+- **Módulo Relatórios (expansível)**: Gerenciais, fiscais, financeiros e operacionais
 - **WebSocket em Tempo Real**: Atualizações instantâneas entre sistemas
 - **Cache com Redis**: Otimização de performance
 
