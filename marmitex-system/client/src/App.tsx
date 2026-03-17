@@ -22,6 +22,14 @@ import Loyalty from "./pages/Loyalty";
 import Tables from "./pages/Tables";
 import Payments from "./pages/Payments";
 import AdminLayout from "./components/AdminLayout";
+import CadastroProduto from "./pages/CadastroProduto";
+import CadastroParticipante from "./pages/CadastroParticipante";
+import CadastroFiscal from "./pages/CadastroFiscal";
+import CadastroFinanceiro from "./pages/CadastroFinanceiro";
+import CadastroCaixaVenda from "./pages/CadastroCaixaVenda";
+import CadastroUsuario from "./pages/CadastroUsuario";
+import CadastroVeiculo from "./pages/CadastroVeiculo";
+import CadastroSetor from "./pages/CadastroSetor";
 
 function Router() {
   return (
@@ -103,6 +111,62 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <Payments />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/produto">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroProduto />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/participante">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroParticipante />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/fiscal">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFiscal />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/financeiro">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFinanceiro />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/caixa-venda">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroCaixaVenda />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/usuario">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroUsuario />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/veiculo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroVeiculo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/setor">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroSetor />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

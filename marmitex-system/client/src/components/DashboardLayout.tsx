@@ -10,18 +10,24 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
   SidebarProvider,
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 import { getLoginUrl } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LogOut, PanelLeft, Moon, Sun } from "lucide-react";
+import { LogOut, PanelLeft, Moon, Sun, ChevronDown, ChevronRight } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
@@ -36,9 +42,59 @@ const MIN_WIDTH = 200;
 const MAX_WIDTH = 480;
 
 export type DashboardMenuItem = {
-  icon: React.ComponentType<{ className?: string }>;
+  type?: "item";
+  icon?: React.ComponentType<{ className?: string }>;
   label: string;
   path: string;
+  children?: DashboardMenuItem[];
+};
+
+type DashboardMenuSection = {
+  type: "section";
+  label: string;
+};
+
+export type DashboardMenuEntry = DashboardMenuItem | DashboardMenuSection;
+
+type MenuGroup = {
+  label?: string;
+  items: DashboardMenuItem[];
+};
+
+const buildMenuGroups = (menuItems: DashboardMenuEntry[]): MenuGroup[] => {
+  const groups: MenuGroup[] = [];
+  let current: MenuGroup = { items: [] };
+
+  menuItems.forEach((item) => {
+    if (item.type === "section") {
+      if (current.label || current.items.length) {
+        groups.push(current);
+      }
+      current = { label: item.label, items: [] };
+      return;
+    }
+
+    current.items.push(item);
+  });
+
+  if (current.label || current.items.length) {
+    groups.push(current);
+  }
+
+  return groups;
+};
+
+const findActiveMenuItem = (
+  menuItems: DashboardMenuEntry[],
+  location: string
+): DashboardMenuItem | undefined => {
+  for (const item of menuItems) {
+    if (item.type === "section") continue;
+    if (item.path === location) return item;
+    const child = item.children?.find(childItem => childItem.path === location);
+    if (child) return child;
+  }
+  return undefined;
 };
 
 export default function DashboardLayout({
@@ -46,7 +102,7 @@ export default function DashboardLayout({
   menuItems,
 }: {
   children: React.ReactNode;
-  menuItems: DashboardMenuItem[];
+  menuItems: DashboardMenuEntry[];
 }) {
   const [sidebarWidth, setSidebarWidth] = useState(() => {
     const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
@@ -106,7 +162,7 @@ export default function DashboardLayout({
 type DashboardLayoutContentProps = {
   children: React.ReactNode;
   setSidebarWidth: (width: number) => void;
-  menuItems: DashboardMenuItem[];
+  menuItems: DashboardMenuEntry[];
 };
 
 function DashboardLayoutContent({
@@ -120,9 +176,17 @@ function DashboardLayoutContent({
   const isCollapsed = state === "collapsed";
   const [isResizing, setIsResizing] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const activeMenuItem = menuItems.find(item => item.path === location);
+  const activeMenuItem = findActiveMenuItem(menuItems, location);
+  const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({});
   const isMobile = useIsMobile();
   const { theme, toggleTheme, switchable } = useTheme();
+  const menuGroups = buildMenuGroups(menuItems);
+  const toggleMenu = (key: string) => {
+    setExpandedMenus((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
 
   useEffect(() => {
     if (!user) return;
@@ -223,26 +287,82 @@ function DashboardLayoutContent({
           </SidebarHeader>
 
           <SidebarContent className="gap-0">
-            <SidebarMenu className="px-2 py-1">
-              {menuItems.map(item => {
-                const isActive = location === item.path;
-                return (
-                  <SidebarMenuItem key={item.path}>
-                    <SidebarMenuButton
-                      isActive={isActive}
-                      onClick={() => setLocation(item.path)}
-                      tooltip={item.label}
-                      className={`h-10 transition-all font-normal`}
-                    >
-                      <item.icon
-                        className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
-                      />
-                      <span>{item.label}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
+            {menuGroups.map((group, index) => (
+              <SidebarGroup key={`${group.label ?? "default"}-${index}`} className="py-1">
+                {group.label ? (
+                  <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+                ) : null}
+                <SidebarGroupContent>
+                  <SidebarMenu className="px-2 py-1">
+                    {group.items.map(item => {
+                      const isActive = location === item.path;
+                      const hasChildren = (item.children?.length ?? 0) > 0;
+                      const hasActiveChild = item.children?.some(child => child.path === location) ?? false;
+                      const menuKey = item.path || item.label;
+                      const isOpen = expandedMenus[menuKey] ?? hasActiveChild;
+                      return (
+                        <SidebarMenuItem key={item.path}>
+                          <SidebarMenuButton
+                            isActive={isActive || hasActiveChild}
+                            onClick={() => {
+                              if (hasChildren) {
+                                toggleMenu(menuKey);
+                                return;
+                              }
+                              setLocation(item.path);
+                            }}
+                            tooltip={item.label}
+                            className="h-10 transition-all font-normal"
+                          >
+                            {item.icon ? (
+                              <item.icon
+                                className={`h-4 w-4 ${isActive || hasActiveChild ? "text-primary" : ""}`}
+                              />
+                            ) : null}
+                            <span>{item.label}</span>
+                            {hasChildren ? (
+                              isOpen ? (
+                                <ChevronDown className="ml-auto h-4 w-4 text-muted-foreground" />
+                              ) : (
+                                <ChevronRight className="ml-auto h-4 w-4 text-muted-foreground" />
+                              )
+                            ) : null}
+                          </SidebarMenuButton>
+                          {hasChildren && isOpen ? (
+                            <SidebarMenuSub>
+                              {item.children?.map(child => {
+                                const isChildActive = location === child.path;
+                                return (
+                                  <SidebarMenuSubItem key={child.path}>
+                                    <SidebarMenuSubButton
+                                      asChild
+                                      isActive={isChildActive}
+                                    >
+                                      <button
+                                        type="button"
+                                        onClick={() => setLocation(child.path)}
+                                        className="w-full text-left"
+                                      >
+                                        {child.icon ? (
+                                          <child.icon
+                                            className={`h-4 w-4 ${isChildActive ? "text-primary" : ""}`}
+                                          />
+                                        ) : null}
+                                        <span>{child.label}</span>
+                                      </button>
+                                    </SidebarMenuSubButton>
+                                  </SidebarMenuSubItem>
+                                );
+                              })}
+                            </SidebarMenuSub>
+                          ) : null}
+                        </SidebarMenuItem>
+                      );
+                    })}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
+            ))}
           </SidebarContent>
 
           <SidebarFooter className="p-3">

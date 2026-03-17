@@ -88,6 +88,7 @@ Modelos devem atualizar apenas os blocos correspondentes às áreas que tocam, s
 4. Se identificar bloqueio externo (ex.: download lento, serviço offline), adicione novo bloco `## Bloqueios` com descrição e traceback breve.
 
 ## Notas recentes
+- 2026-03-17T22:40:14Z (Codex): Menu lateral do Marmitex recebeu módulo CADASTRO expansível com subitens (Produto, Participante, Fiscal, Financeiro, Caixa Venda, Usuário, Veículo, Setor) e rotas placeholder dedicadas.
 - 2026-03-17T14:20:00Z (Codex): Fidelidade recebeu níveis/benefícios e notificações; mesas passaram a registrar ocupação/turnover no admin.
 - 2026-03-17T13:03:47Z (Codex): PWA básica habilitada (manifest + service worker) e estrutura inicial de app mobile documentada.
 - 2026-03-17T12:58:07Z (Codex): Fase 6 (UX/UI) com responsividade, animações leves, feedback visual e ajustes de acessibilidade (labels/alerta) concluídos.

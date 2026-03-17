@@ -11,6 +11,7 @@ Um sistema completo de gerenciamento de restaurante com painel administrativo, p
 - **Gerenciamento de Estoque**: Controle de inventário com alertas de baixo estoque
 - **Kitchen Display System (KDS)**: Tela em tempo real para a cozinha
 - **Painel Administrativo**: Interface completa para gerenciamento
+- **Módulo Cadastro (expansível)**: Itens de cadastro agrupados no menu lateral (Produto, Participante, Fiscal, Financeiro, Caixa Venda, Usuário, Veículo, Setor)
 - **WebSocket em Tempo Real**: Atualizações instantâneas entre sistemas
 - **Cache com Redis**: Otimização de performance
 

@@ -192,6 +192,8 @@ services:
 
   marmitex-system:
     image: rodolfobragas/bhsis:marmitex-system-v1.0.10
+    build:
+      context: ../marmitex-system
     container_name: delivery-marmitex-system
     ports:
       - 3000:3000
