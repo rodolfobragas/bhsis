@@ -62,6 +62,18 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
   - Cadastrar
   - Consultar
 - Faturamento
+- Faturamento → Notas Fiscais Eletrônicas
+  - Emissão de NFe
+  - Consultar NFe's
+  - Consultar Situação NFe
+  - Carta Correção Eletrônica
+  - Consulta/Inutilização NFe
+  - Consultar/Emitir Duplicatas
+  - Geração NFe por Nota Entrada
+  - Declaração de Importação - DI
+- Faturamento → Notas Fiscais de Serviço
+  - Emissão de NFSe
+  - Consultar NFSe's
 - PDV
 - Entrada de Nota
 - Documentos Recebidos

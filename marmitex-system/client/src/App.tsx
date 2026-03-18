@@ -80,6 +80,16 @@ import FaturamentoVendaExternaRetorno from "./pages/FaturamentoVendaExternaRetor
 import FaturamentoGeracaoReajusteContrato from "./pages/FaturamentoGeracaoReajusteContrato";
 import FaturamentoRomaneiroCargaEntrega from "./pages/FaturamentoRomaneiroCargaEntrega";
 import FaturamentoImportacaoXmlNfeNfceCte from "./pages/FaturamentoImportacaoXmlNfeNfceCte";
+import FaturamentoNfeEmissao from "./pages/FaturamentoNfeEmissao";
+import FaturamentoNfeConsultar from "./pages/FaturamentoNfeConsultar";
+import FaturamentoNfeConsultarSituacao from "./pages/FaturamentoNfeConsultarSituacao";
+import FaturamentoNfeCartaCorrecao from "./pages/FaturamentoNfeCartaCorrecao";
+import FaturamentoNfeConsultaInutilizacao from "./pages/FaturamentoNfeConsultaInutilizacao";
+import FaturamentoNfeDuplicatas from "./pages/FaturamentoNfeDuplicatas";
+import FaturamentoNfeGeracaoNotaEntrada from "./pages/FaturamentoNfeGeracaoNotaEntrada";
+import FaturamentoNfeDeclaracaoImportacao from "./pages/FaturamentoNfeDeclaracaoImportacao";
+import FaturamentoNfseEmissao from "./pages/FaturamentoNfseEmissao";
+import FaturamentoNfseConsultar from "./pages/FaturamentoNfseConsultar";
 import PdvCaixa from "./pages/PdvCaixa";
 import PdvVendas from "./pages/PdvVendas";
 import PdvConfiguracao from "./pages/PdvConfiguracao";
@@ -557,10 +567,80 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/faturamento/notas-fiscais-eletronicas/emissao-nfe">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNfeEmissao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-eletronicas/consultar-nfes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNfeConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-eletronicas/consultar-situacao-nfe">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNfeConsultarSituacao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-eletronicas/carta-correcao-eletronica">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNfeCartaCorrecao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-eletronicas/consulta-inutilizacao-nfe">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNfeConsultaInutilizacao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-eletronicas/consultar-emitir-duplicatas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNfeDuplicatas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-eletronicas/geracao-nfe-nota-entrada">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNfeGeracaoNotaEntrada />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-eletronicas/declaracao-importacao-di">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNfeDeclaracaoImportacao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/faturamento/notas-fiscais-servico">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <FaturamentoNotasFiscaisServico />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-servico/emissao-nfse">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNfseEmissao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/notas-fiscais-servico/consultar-nfses">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoNfseConsultar />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

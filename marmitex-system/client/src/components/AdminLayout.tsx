@@ -126,8 +126,31 @@ const adminMenuItems: DashboardMenuEntry[] = [
     label: "Faturamento",
     path: "/faturamento",
     children: [
-      { label: "Notas Fiscais Eletrônicas", path: "/faturamento/notas-fiscais-eletronicas" },
-      { label: "Notas Fiscais de Serviço", path: "/faturamento/notas-fiscais-servico" },
+      {
+        label: "Notas Fiscais Eletrônicas",
+        path: "/faturamento/notas-fiscais-eletronicas",
+        children: [
+          { label: "Emissão de NFe", path: "/faturamento/notas-fiscais-eletronicas/emissao-nfe" },
+          { label: "Consultar NFe's", path: "/faturamento/notas-fiscais-eletronicas/consultar-nfes" },
+          { label: "Consultar Situação NFe", path: "/faturamento/notas-fiscais-eletronicas/consultar-situacao-nfe" },
+          { label: "Carta Correção Eletrônica", path: "/faturamento/notas-fiscais-eletronicas/carta-correcao-eletronica" },
+          { label: "Consulta/Inutilização NFe", path: "/faturamento/notas-fiscais-eletronicas/consulta-inutilizacao-nfe" },
+          { label: "Consultar/Emitir Duplicatas", path: "/faturamento/notas-fiscais-eletronicas/consultar-emitir-duplicatas" },
+          {
+            label: "Geração NFe por Nota Entrada",
+            path: "/faturamento/notas-fiscais-eletronicas/geracao-nfe-nota-entrada",
+          },
+          { label: "Declaração de Importação - DI", path: "/faturamento/notas-fiscais-eletronicas/declaracao-importacao-di" },
+        ],
+      },
+      {
+        label: "Notas Fiscais de Serviço",
+        path: "/faturamento/notas-fiscais-servico",
+        children: [
+          { label: "Emissão de NFSe", path: "/faturamento/notas-fiscais-servico/emissao-nfse" },
+          { label: "Consultar NFSe's", path: "/faturamento/notas-fiscais-servico/consultar-nfses" },
+        ],
+      },
       { label: "Manifesto de Documentos", path: "/faturamento/manifesto-documentos" },
       { label: "Conhecimento de Transporte", path: "/faturamento/conhecimento-transporte" },
       { label: "Conhecimento de Transporte - OS", path: "/faturamento/conhecimento-transporte-os" },
