@@ -169,6 +169,12 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
   - Importar
   - Conciliar
   - Excluir Lançamentos não Conciliados
+- Fiscal → Lançamentos
+  - Nota Série D
+  - Transporte
+  - Nota Fiscal de Prestação de Serviços
+  - Água, Luz, Gás
+  - Comunicação e Telecomunicação
 - Entrada de Nota → Tributação NFe Entrada
   - Cadastrar
   - Consultar

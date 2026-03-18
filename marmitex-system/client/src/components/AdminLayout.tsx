@@ -433,7 +433,23 @@ const adminMenuItems: DashboardMenuEntry[] = [
     label: "Fiscal",
     path: "/fiscal",
     children: [
-      { label: "Lançamentos", path: "/fiscal/lancamentos" },
+      {
+        label: "Lançamentos",
+        path: "/fiscal/lancamentos",
+        children: [
+          { label: "Nota Série D", path: "/fiscal/lancamentos/nota-serie-d" },
+          { label: "Transporte", path: "/fiscal/lancamentos/transporte" },
+          {
+            label: "Nota Fiscal de Prestação de Serviços",
+            path: "/fiscal/lancamentos/nota-fiscal-prestacao-servicos",
+          },
+          { label: "Água, Luz, Gás", path: "/fiscal/lancamentos/agua-luz-gas" },
+          {
+            label: "Comunicação e Telecomunicação",
+            path: "/fiscal/lancamentos/comunicacao-telecomunicacao",
+          },
+        ],
+      },
       { label: "Arquivos Fiscais", path: "/fiscal/arquivos-fiscais" },
       { label: "Registro de Inventário", path: "/fiscal/registro-inventario" },
       { label: "Gestão de Documentos", path: "/fiscal/gestao-documentos" },

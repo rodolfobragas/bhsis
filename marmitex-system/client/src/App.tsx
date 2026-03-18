@@ -170,6 +170,11 @@ import FinanceiroCustoFixoConsultar from "./pages/FinanceiroCustoFixoConsultar";
 import FinanceiroExtratoImportar from "./pages/FinanceiroExtratoImportar";
 import FinanceiroExtratoConciliar from "./pages/FinanceiroExtratoConciliar";
 import FinanceiroExtratoExcluirNaoConciliados from "./pages/FinanceiroExtratoExcluirNaoConciliados";
+import FiscalLancamentoNotaSerieD from "./pages/FiscalLancamentoNotaSerieD";
+import FiscalLancamentoTransporte from "./pages/FiscalLancamentoTransporte";
+import FiscalLancamentoPrestacaoServicos from "./pages/FiscalLancamentoPrestacaoServicos";
+import FiscalLancamentoAguaLuzGas from "./pages/FiscalLancamentoAguaLuzGas";
+import FiscalLancamentoComunicacaoTelecom from "./pages/FiscalLancamentoComunicacaoTelecom";
 import PdvCaixa from "./pages/PdvCaixa";
 import PdvVendas from "./pages/PdvVendas";
 import PdvConfiguracao from "./pages/PdvConfiguracao";
@@ -1554,6 +1559,41 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <FinanceiroExtratoExcluirNaoConciliados />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/fiscal/lancamentos/nota-serie-d">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FiscalLancamentoNotaSerieD />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/fiscal/lancamentos/transporte">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FiscalLancamentoTransporte />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/fiscal/lancamentos/nota-fiscal-prestacao-servicos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FiscalLancamentoPrestacaoServicos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/fiscal/lancamentos/agua-luz-gas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FiscalLancamentoAguaLuzGas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/fiscal/lancamentos/comunicacao-telecomunicacao">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FiscalLancamentoComunicacaoTelecom />
           </AdminLayout>
         </ProtectedRoute>
       </Route>
