@@ -100,6 +100,10 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
   - Cadastrar
   - Consultar
   - Produtos em Condicional
+- Faturamento → Ordem de Serviço
+  - Cadastrar
+  - Consultar
+  - Produtos Reservados
 - PDV
 - Entrada de Nota
 - Documentos Recebidos

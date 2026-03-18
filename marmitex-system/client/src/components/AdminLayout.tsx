@@ -206,7 +206,15 @@ const adminMenuItems: DashboardMenuEntry[] = [
         ],
       },
       { label: "Pedido de Venda", path: "/faturamento/pedido-venda" },
-      { label: "Ordem de Serviço", path: "/faturamento/ordem-servico" },
+      {
+        label: "Ordem de Serviço",
+        path: "/faturamento/ordem-servico",
+        children: [
+          { label: "Cadastrar", path: "/faturamento/ordem-servico/cadastrar" },
+          { label: "Consultar", path: "/faturamento/ordem-servico/consultar" },
+          { label: "Produtos Reservados", path: "/faturamento/ordem-servico/produtos-reservados" },
+        ],
+      },
       { label: "Venda Futura/Retiradas", path: "/faturamento/venda-futura-retiradas" },
       { label: "Venda Externa/Retorno", path: "/faturamento/venda-externa-retorno" },
       { label: "Geração/Reajuste Contrato", path: "/faturamento/geracao-reajuste-contrato" },
