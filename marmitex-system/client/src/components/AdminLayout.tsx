@@ -205,7 +205,15 @@ const adminMenuItems: DashboardMenuEntry[] = [
           { label: "Produtos em Condicional", path: "/faturamento/condicional/produtos-condicional" },
         ],
       },
-      { label: "Pedido de Venda", path: "/faturamento/pedido-venda" },
+      {
+        label: "Pedido de Venda",
+        path: "/faturamento/pedido-venda",
+        children: [
+          { label: "Cadastrar", path: "/faturamento/pedido-venda/cadastrar" },
+          { label: "Consultar", path: "/faturamento/pedido-venda/consultar" },
+          { label: "Tipo Pedido Venda", path: "/faturamento/pedido-venda/tipo-pedido-venda" },
+        ],
+      },
       {
         label: "Ordem de Serviço",
         path: "/faturamento/ordem-servico",
@@ -215,11 +223,50 @@ const adminMenuItems: DashboardMenuEntry[] = [
           { label: "Produtos Reservados", path: "/faturamento/ordem-servico/produtos-reservados" },
         ],
       },
-      { label: "Venda Futura/Retiradas", path: "/faturamento/venda-futura-retiradas" },
-      { label: "Venda Externa/Retorno", path: "/faturamento/venda-externa-retorno" },
-      { label: "Geração/Reajuste Contrato", path: "/faturamento/geracao-reajuste-contrato" },
-      { label: "Romaneiro de Carga/Entrega", path: "/faturamento/romaneiro-carga-entrega" },
-      { label: "Importação XML NFe/NFCe/CTe", path: "/faturamento/importacao-xml-nfe-nfce-cte" },
+      {
+        label: "Venda Futura/Retiradas",
+        path: "/faturamento/venda-futura-retiradas",
+        children: [
+          { label: "Cadastrar", path: "/faturamento/venda-futura-retiradas/cadastrar" },
+          { label: "Consultar", path: "/faturamento/venda-futura-retiradas/consultar" },
+          { label: "Produtos a Retirar", path: "/faturamento/venda-futura-retiradas/produtos-retirar" },
+        ],
+      },
+      {
+        label: "Venda Externa/Retornos",
+        path: "/faturamento/venda-externa-retorno",
+        children: [
+          { label: "Cadastrar", path: "/faturamento/venda-externa-retorno/cadastrar" },
+          { label: "Consultar", path: "/faturamento/venda-externa-retorno/consultar" },
+        ],
+      },
+      {
+        label: "Geração/Reajuste Contrato",
+        path: "/faturamento/geracao-reajuste-contrato",
+        children: [
+          { label: "Cadastrar", path: "/faturamento/geracao-reajuste-contrato/cadastrar" },
+          { label: "Consultar", path: "/faturamento/geracao-reajuste-contrato/consultar" },
+          { label: "Faturamento", path: "/faturamento/geracao-reajuste-contrato/faturamento" },
+          { label: "Modelo de Contrato", path: "/faturamento/geracao-reajuste-contrato/modelo-contrato" },
+          { label: "Tabela Geral de Reajuste", path: "/faturamento/geracao-reajuste-contrato/tabela-geral-reajuste" },
+        ],
+      },
+      {
+        label: "Romaneio de Carga/Entrega",
+        path: "/faturamento/romaneiro-carga-entrega",
+        children: [
+          { label: "Cadastrar", path: "/faturamento/romaneiro-carga-entrega/cadastrar" },
+          { label: "Consultar", path: "/faturamento/romaneiro-carga-entrega/consultar" },
+        ],
+      },
+      {
+        label: "Importação XML NFe/NFCe/CTe",
+        path: "/faturamento/importacao-xml-nfe-nfce-cte",
+        children: [
+          { label: "Importar NFe/NFCe's Emitidas", path: "/faturamento/importacao-xml-nfe-nfce-cte/importar-nfe-nfce-emitidas" },
+          { label: "Importar CTe's Emitidos", path: "/faturamento/importacao-xml-nfe-nfce-cte/importar-ctes-emitidos" },
+        ],
+      },
     ],
   },
   {

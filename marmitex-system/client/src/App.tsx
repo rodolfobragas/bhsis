@@ -114,6 +114,23 @@ import FaturamentoCondicionalProdutos from "./pages/FaturamentoCondicionalProdut
 import FaturamentoOrdemServicoCadastrar from "./pages/FaturamentoOrdemServicoCadastrar";
 import FaturamentoOrdemServicoConsultar from "./pages/FaturamentoOrdemServicoConsultar";
 import FaturamentoOrdemServicoProdutosReservados from "./pages/FaturamentoOrdemServicoProdutosReservados";
+import FaturamentoPedidoVendaCadastrar from "./pages/FaturamentoPedidoVendaCadastrar";
+import FaturamentoPedidoVendaConsultar from "./pages/FaturamentoPedidoVendaConsultar";
+import FaturamentoPedidoVendaTipo from "./pages/FaturamentoPedidoVendaTipo";
+import FaturamentoVendaFuturaCadastrar from "./pages/FaturamentoVendaFuturaCadastrar";
+import FaturamentoVendaFuturaConsultar from "./pages/FaturamentoVendaFuturaConsultar";
+import FaturamentoVendaFuturaProdutosRetirar from "./pages/FaturamentoVendaFuturaProdutosRetirar";
+import FaturamentoVendaExternaCadastrar from "./pages/FaturamentoVendaExternaCadastrar";
+import FaturamentoVendaExternaConsultar from "./pages/FaturamentoVendaExternaConsultar";
+import FaturamentoGeracaoReajusteCadastrar from "./pages/FaturamentoGeracaoReajusteCadastrar";
+import FaturamentoGeracaoReajusteConsultar from "./pages/FaturamentoGeracaoReajusteConsultar";
+import FaturamentoGeracaoReajusteFaturamento from "./pages/FaturamentoGeracaoReajusteFaturamento";
+import FaturamentoGeracaoReajusteModeloContrato from "./pages/FaturamentoGeracaoReajusteModeloContrato";
+import FaturamentoGeracaoReajusteTabelaGeral from "./pages/FaturamentoGeracaoReajusteTabelaGeral";
+import FaturamentoRomaneioCadastrar from "./pages/FaturamentoRomaneioCadastrar";
+import FaturamentoRomaneioConsultar from "./pages/FaturamentoRomaneioConsultar";
+import FaturamentoImportacaoXmlNfeNfceEmitidas from "./pages/FaturamentoImportacaoXmlNfeNfceEmitidas";
+import FaturamentoImportacaoXmlCteEmitidos from "./pages/FaturamentoImportacaoXmlCteEmitidos";
 import PdvCaixa from "./pages/PdvCaixa";
 import PdvVendas from "./pages/PdvVendas";
 import PdvConfiguracao from "./pages/PdvConfiguracao";
@@ -857,6 +874,27 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/faturamento/pedido-venda/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoPedidoVendaCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/pedido-venda/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoPedidoVendaConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/pedido-venda/tipo-pedido-venda">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoPedidoVendaTipo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/faturamento/ordem-servico">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
@@ -892,10 +930,45 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/faturamento/venda-futura-retiradas/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoVendaFuturaCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/venda-futura-retiradas/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoVendaFuturaConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/venda-futura-retiradas/produtos-retirar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoVendaFuturaProdutosRetirar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/faturamento/venda-externa-retorno">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <FaturamentoVendaExternaRetorno />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/venda-externa-retorno/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoVendaExternaCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/venda-externa-retorno/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoVendaExternaConsultar />
           </AdminLayout>
         </ProtectedRoute>
       </Route>
@@ -906,6 +979,41 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/faturamento/geracao-reajuste-contrato/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoGeracaoReajusteCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/geracao-reajuste-contrato/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoGeracaoReajusteConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/geracao-reajuste-contrato/faturamento">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoGeracaoReajusteFaturamento />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/geracao-reajuste-contrato/modelo-contrato">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoGeracaoReajusteModeloContrato />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/geracao-reajuste-contrato/tabela-geral-reajuste">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoGeracaoReajusteTabelaGeral />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/faturamento/romaneiro-carga-entrega">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
@@ -913,10 +1021,38 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/faturamento/romaneiro-carga-entrega/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoRomaneioCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/romaneiro-carga-entrega/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoRomaneioConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/faturamento/importacao-xml-nfe-nfce-cte">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <FaturamentoImportacaoXmlNfeNfceCte />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/importacao-xml-nfe-nfce-cte/importar-nfe-nfce-emitidas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoImportacaoXmlNfeNfceEmitidas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/importacao-xml-nfe-nfce-cte/importar-ctes-emitidos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoImportacaoXmlCteEmitidos />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

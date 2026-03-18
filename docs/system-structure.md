@@ -104,6 +104,29 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
   - Cadastrar
   - Consultar
   - Produtos Reservados
+- Faturamento → Pedido de Venda
+  - Cadastrar
+  - Consultar
+  - Tipo Pedido Venda
+- Faturamento → Venda Futura/Retiradas
+  - Cadastrar
+  - Consultar
+  - Produtos a Retirar
+- Faturamento → Venda Externa/Retornos
+  - Cadastrar
+  - Consultar
+- Faturamento → Geração/Reajuste Contrato
+  - Cadastrar
+  - Consultar
+  - Faturamento
+  - Modelo de Contrato
+  - Tabela Geral de Reajuste
+- Faturamento → Romaneio de Carga/Entrega
+  - Cadastrar
+  - Consultar
+- Faturamento → Importação XML NFe/NFCe/CTe
+  - Importar NFe/NFCe's Emitidas
+  - Importar CTe's Emitidos
 - PDV
 - Entrada de Nota
 - Documentos Recebidos
