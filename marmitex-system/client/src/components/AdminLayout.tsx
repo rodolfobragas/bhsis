@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   ShoppingCart,
+  CreditCard,
   Folder,
   FileSpreadsheet,
   FileText,
