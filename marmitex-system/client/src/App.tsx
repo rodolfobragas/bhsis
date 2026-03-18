@@ -23,6 +23,10 @@ import Tables from "./pages/Tables";
 import Payments from "./pages/Payments";
 import AdminLayout from "./components/AdminLayout";
 import CadastroProduto from "./pages/CadastroProduto";
+import CadastroProdutoCadastrar from "./pages/CadastroProdutoCadastrar";
+import CadastroProdutoConsultar from "./pages/CadastroProdutoConsultar";
+import CadastroProdutoBuscaPreco from "./pages/CadastroProdutoBuscaPreco";
+import CadastroProdutoConsultaRapida from "./pages/CadastroProdutoConsultaRapida";
 import CadastroParticipante from "./pages/CadastroParticipante";
 import CadastroFiscal from "./pages/CadastroFiscal";
 import CadastroFinanceiro from "./pages/CadastroFinanceiro";
@@ -210,6 +214,34 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <CadastroProduto />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/produto/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroProdutoCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/produto/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroProdutoConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/produto/busca-preco">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroProdutoBuscaPreco />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/produto/consulta-rapida">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroProdutoConsultaRapida />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

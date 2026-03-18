@@ -35,7 +35,16 @@ const adminMenuItems: DashboardMenuEntry[] = [
     label: "Cadastro",
     path: "/cadastro",
     children: [
-      { label: "Produto", path: "/cadastro/produto" },
+      {
+        label: "Produto",
+        path: "/cadastro/produto",
+        children: [
+          { label: "Cadastrar", path: "/cadastro/produto/cadastrar" },
+          { label: "Consultar", path: "/cadastro/produto/consultar" },
+          { label: "Busca Preço", path: "/cadastro/produto/busca-preco" },
+          { label: "Consulta Rápida", path: "/cadastro/produto/consulta-rapida" },
+        ],
+      },
       { label: "Participante", path: "/cadastro/participante" },
       { label: "Fiscal", path: "/cadastro/fiscal" },
       { label: "Financeiro", path: "/cadastro/financeiro" },

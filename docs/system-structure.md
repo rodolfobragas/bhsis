@@ -17,6 +17,11 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
 
 ## Módulos em Desenvolvimento
 - Cadastro
+- Cadastro → Produto
+  - Cadastrar
+  - Consultar
+  - Busca Preço
+  - Consulta Rápida
 - Faturamento
 - PDV
 - Entrada de Nota

@@ -91,10 +91,17 @@ const findActiveMenuItem = (
   for (const item of menuItems) {
     if (item.type === "section") continue;
     if (item.path === location) return item;
-    const child = item.children?.find(childItem => childItem.path === location);
+    if (!item.children?.length) continue;
+    const child = findActiveMenuItem(item.children, location);
     if (child) return child;
   }
   return undefined;
+};
+
+const isItemActive = (item: DashboardMenuItem, location: string): boolean => {
+  if (item.path === location) return true;
+  if (!item.children?.length) return false;
+  return item.children.some(child => isItemActive(child, location));
 };
 
 export default function DashboardLayout({
@@ -295,31 +302,24 @@ function DashboardLayoutContent({
                 <SidebarGroupContent>
                   <SidebarMenu className="px-2 py-1">
                     {group.items.map(item => {
-                      const isActive = location === item.path;
-                      const hasChildren = (item.children?.length ?? 0) > 0;
-                      const hasActiveChild = item.children?.some(child => child.path === location) ?? false;
-                      const menuKey = item.path || item.label;
-                      const isOpen = expandedMenus[menuKey] ?? hasActiveChild;
-                      return (
-                        <SidebarMenuItem key={item.path}>
-                          <SidebarMenuButton
-                            isActive={isActive || hasActiveChild}
-                            onClick={() => {
-                              if (hasChildren) {
-                                toggleMenu(menuKey);
-                                return;
-                              }
-                              setLocation(item.path);
-                            }}
-                            tooltip={item.label}
-                            className="h-10 transition-all font-normal"
-                          >
-                            {item.icon ? (
-                              <item.icon
-                                className={`h-4 w-4 ${isActive || hasActiveChild ? "text-primary" : ""}`}
+                      const renderMenuItem = (
+                        menuItem: DashboardMenuItem,
+                        level: number
+                      ): React.ReactNode => {
+                        const isActive = isItemActive(menuItem, location);
+                        const hasChildren = (menuItem.children?.length ?? 0) > 0;
+                        const menuKey = `${level}-${menuItem.path || menuItem.label}`;
+                        const isOpen =
+                          expandedMenus[menuKey] ?? (hasChildren && isActive);
+
+                        const content = (
+                          <>
+                            {menuItem.icon ? (
+                              <menuItem.icon
+                                className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
                               />
                             ) : null}
-                            <span>{item.label}</span>
+                            <span>{menuItem.label}</span>
                             {hasChildren ? (
                               isOpen ? (
                                 <ChevronDown className="ml-auto h-4 w-4 text-muted-foreground" />
@@ -327,37 +327,65 @@ function DashboardLayoutContent({
                                 <ChevronRight className="ml-auto h-4 w-4 text-muted-foreground" />
                               )
                             ) : null}
-                          </SidebarMenuButton>
-                          {hasChildren && isOpen ? (
-                            <SidebarMenuSub>
-                              {item.children?.map(child => {
-                                const isChildActive = location === child.path;
-                                return (
-                                  <SidebarMenuSubItem key={child.path}>
-                                    <SidebarMenuSubButton
-                                      asChild
-                                      isActive={isChildActive}
-                                    >
-                                      <button
-                                        type="button"
-                                        onClick={() => setLocation(child.path)}
-                                        className="w-full text-left"
-                                      >
-                                        {child.icon ? (
-                                          <child.icon
-                                            className={`h-4 w-4 ${isChildActive ? "text-primary" : ""}`}
-                                          />
-                                        ) : null}
-                                        <span>{child.label}</span>
-                                      </button>
-                                    </SidebarMenuSubButton>
-                                  </SidebarMenuSubItem>
-                                );
-                              })}
-                            </SidebarMenuSub>
-                          ) : null}
-                        </SidebarMenuItem>
-                      );
+                          </>
+                        );
+
+                        const handleClick = () => {
+                          if (hasChildren) {
+                            toggleMenu(menuKey);
+                            return;
+                          }
+                          setLocation(menuItem.path);
+                        };
+
+                        if (level === 0) {
+                          return (
+                            <SidebarMenuItem key={menuItem.path}>
+                              <SidebarMenuButton
+                                isActive={isActive}
+                                onClick={handleClick}
+                                tooltip={menuItem.label}
+                                className="h-10 transition-all font-normal"
+                              >
+                                {content}
+                              </SidebarMenuButton>
+                              {hasChildren && isOpen ? (
+                                <SidebarMenuSub>
+                                  {menuItem.children?.map(child =>
+                                    renderMenuItem(child, level + 1)
+                                  )}
+                                </SidebarMenuSub>
+                              ) : null}
+                            </SidebarMenuItem>
+                          );
+                        }
+
+                        return (
+                          <SidebarMenuSubItem key={menuItem.path}>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={isActive}
+                            >
+                              <button
+                                type="button"
+                                onClick={handleClick}
+                                className="w-full text-left"
+                              >
+                                {content}
+                              </button>
+                            </SidebarMenuSubButton>
+                            {hasChildren && isOpen ? (
+                              <SidebarMenuSub>
+                                {menuItem.children?.map(child =>
+                                  renderMenuItem(child, level + 1)
+                                )}
+                              </SidebarMenuSub>
+                            ) : null}
+                          </SidebarMenuSubItem>
+                        );
+                      };
+
+                      return renderMenuItem(item, 0);
                     })}
                   </SidebarMenu>
                 </SidebarGroupContent>
