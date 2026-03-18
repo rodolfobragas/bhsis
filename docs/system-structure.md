@@ -87,6 +87,11 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
   - Consultar Faturas DOCCOB
   - Consultar Insucessos na Entrega
   - Recibo de Pagamento a Autônomo
+- Faturamento → Conhecimento de Transporte - OS
+  - Emissão de CTe OS
+  - Consultar CTe's OS
+  - Carta Correção Eletrônica
+  - Consulta Situação de CTe OS
 - PDV
 - Entrada de Nota
 - Documentos Recebidos

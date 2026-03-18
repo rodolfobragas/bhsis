@@ -177,7 +177,16 @@ const adminMenuItems: DashboardMenuEntry[] = [
           { label: "Recibo de Pagamento a Autônomo", path: "/faturamento/conhecimento-transporte/recibo-pagamento-autonomo" },
         ],
       },
-      { label: "Conhecimento de Transporte - OS", path: "/faturamento/conhecimento-transporte-os" },
+      {
+        label: "Conhecimento de Transporte - OS",
+        path: "/faturamento/conhecimento-transporte-os",
+        children: [
+          { label: "Emissão de CTe OS", path: "/faturamento/conhecimento-transporte-os/emissao-cte-os" },
+          { label: "Consultar CTe's OS", path: "/faturamento/conhecimento-transporte-os/consultar-ctes-os" },
+          { label: "Carta Correção Eletrônica", path: "/faturamento/conhecimento-transporte-os/carta-correcao-eletronica" },
+          { label: "Consulta Situação de CTe OS", path: "/faturamento/conhecimento-transporte-os/consulta-situacao-cte-os" },
+        ],
+      },
       { label: "Orçamento", path: "/faturamento/orcamento" },
       { label: "Condicional", path: "/faturamento/condicional" },
       { label: "Pedido de Venda", path: "/faturamento/pedido-venda" },

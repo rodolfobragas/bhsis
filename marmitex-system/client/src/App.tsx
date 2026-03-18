@@ -101,6 +101,10 @@ import FaturamentoCteCartaCorrecao from "./pages/FaturamentoCteCartaCorrecao";
 import FaturamentoCteFaturasDoccob from "./pages/FaturamentoCteFaturasDoccob";
 import FaturamentoCteInsucessosEntrega from "./pages/FaturamentoCteInsucessosEntrega";
 import FaturamentoCteReciboPagamentoAutonomo from "./pages/FaturamentoCteReciboPagamentoAutonomo";
+import FaturamentoCteOsEmissao from "./pages/FaturamentoCteOsEmissao";
+import FaturamentoCteOsConsultar from "./pages/FaturamentoCteOsConsultar";
+import FaturamentoCteOsCartaCorrecao from "./pages/FaturamentoCteOsCartaCorrecao";
+import FaturamentoCteOsConsultarSituacao from "./pages/FaturamentoCteOsConsultarSituacao";
 import PdvCaixa from "./pages/PdvCaixa";
 import PdvVendas from "./pages/PdvVendas";
 import PdvConfiguracao from "./pages/PdvConfiguracao";
@@ -750,6 +754,34 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <FaturamentoConhecimentoTransporteOS />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte-os/emissao-cte-os">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteOsEmissao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte-os/consultar-ctes-os">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteOsConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte-os/carta-correcao-eletronica">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteOsCartaCorrecao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte-os/consulta-situacao-cte-os">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteOsConsultarSituacao />
           </AdminLayout>
         </ProtectedRoute>
       </Route>
