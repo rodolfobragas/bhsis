@@ -32,6 +32,7 @@ import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
+import { Input } from "@/components/ui/input";
 import { useTheme } from "@/contexts/ThemeContext";
 import { wsClient } from "@/services/websocketClient";
 import { toast } from "sonner";
@@ -477,21 +478,51 @@ function DashboardLayoutContent({
                 </span>
               </div>
             </div>
-            {switchable ? (
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-10 w-10"
-                onClick={toggleTheme}
-                aria-label="Alternar tema"
-              >
-                {theme === "dark" ? (
-                  <i className="fa-solid fa-sun text-sm" aria-hidden="true" />
-                ) : (
-                  <i className="fa-solid fa-moon text-sm" aria-hidden="true" />
-                )}
-              </Button>
-            ) : null}
+            <div className="flex items-center gap-3">
+              <div className="relative hidden md:block">
+                <i
+                  className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground"
+                  aria-hidden="true"
+                />
+                <Input
+                  placeholder="Buscar no painel"
+                  className="h-9 w-56 pl-9"
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-9 w-9"
+                  aria-label="Notificações"
+                >
+                  <i className="fa-solid fa-bell text-sm" aria-hidden="true" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-9 w-9"
+                  aria-label="Configurações"
+                >
+                  <i className="fa-solid fa-gear text-sm" aria-hidden="true" />
+                </Button>
+                {switchable ? (
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-9 w-9"
+                    onClick={toggleTheme}
+                    aria-label="Alternar tema"
+                  >
+                    {theme === "dark" ? (
+                      <i className="fa-solid fa-sun text-sm" aria-hidden="true" />
+                    ) : (
+                      <i className="fa-solid fa-moon text-sm" aria-hidden="true" />
+                    )}
+                  </Button>
+                ) : null}
+              </div>
+            </div>
           </div>
         )}
         {isMobile && (

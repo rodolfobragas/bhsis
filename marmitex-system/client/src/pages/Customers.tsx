@@ -126,9 +126,9 @@ export default function Customers() {
 
         {/* Error Alert */}
         {error && (
-          <Alert className="mb-6 border-red-500 bg-red-50" role="alert">
-          <i className="fa-solid fa-circle-exclamation text-sm text-red-600" aria-hidden="true" />
-            <AlertDescription className="text-red-800">{error}</AlertDescription>
+          <Alert className="mb-6" variant="destructive" role="alert">
+            <i className="fa-solid fa-circle-exclamation text-sm" aria-hidden="true" />
+            <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
 

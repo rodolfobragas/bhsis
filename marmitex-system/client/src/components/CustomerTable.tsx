@@ -67,10 +67,10 @@ export default function CustomerTable({
         </Button>
       </div>
 
-      <div className="border rounded-lg overflow-hidden overflow-x-auto">
+      <div className="overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow className="bg-gray-50">
+            <TableRow>
               <TableHead>Nome</TableHead>
               <TableHead>E-mail</TableHead>
               <TableHead>Telefone</TableHead>
@@ -80,9 +80,9 @@ export default function CustomerTable({
           </TableHeader>
           <TableBody>
             {customers.map((customer) => (
-              <TableRow key={customer.id} className="hover:bg-gray-50">
+              <TableRow key={customer.id}>
                 <TableCell className="font-medium">{customer.name}</TableCell>
-                <TableCell className="text-sm text-gray-600">{customer.email}</TableCell>
+                <TableCell className="text-sm text-muted-foreground">{customer.email}</TableCell>
                 <TableCell className="text-sm">{customer.phone}</TableCell>
                 <TableCell>
                   <Badge variant="outline">{customer.city}</Badge>

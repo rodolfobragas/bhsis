@@ -301,9 +301,9 @@ export default function Orders() {
 
         {/* Error Alert */}
         {error && (
-          <Alert className="mb-6 border-red-500 bg-red-50" role="alert">
-          <i className="fa-solid fa-circle-exclamation text-sm text-red-600" aria-hidden="true" />
-            <AlertDescription className="text-red-800">{error}</AlertDescription>
+          <Alert className="mb-6" variant="destructive" role="alert">
+            <i className="fa-solid fa-circle-exclamation text-sm" aria-hidden="true" />
+            <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
 
@@ -352,17 +352,17 @@ export default function Orders() {
           <CardContent className="pt-6">
             {isLoading ? (
               <div className="text-center py-8">
-                <p className="text-gray-600">Carregando pedidos...</p>
+                <p className="text-muted-foreground">Carregando pedidos...</p>
               </div>
             ) : filteredOrders.length === 0 ? (
               <div className="text-center py-8">
-                <p className="text-gray-600">Nenhum pedido encontrado</p>
+                <p className="text-muted-foreground">Nenhum pedido encontrado</p>
               </div>
             ) : (
-              <div className="border rounded-lg overflow-hidden overflow-x-auto">
+              <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="bg-gray-50">
+                    <TableRow>
                       <TableHead>ID do Pedido</TableHead>
                       <TableHead>Cliente</TableHead>
                       <TableHead>Status</TableHead>
@@ -374,7 +374,7 @@ export default function Orders() {
                   </TableHeader>
                   <TableBody>
                     {filteredOrders.map((order) => (
-                      <TableRow key={order.id} className="hover:bg-gray-50">
+                      <TableRow key={order.id}>
                         <TableCell className="font-medium">{order.orderNumber}</TableCell>
                         <TableCell>{order.customerName}</TableCell>
                         <TableCell>
@@ -398,7 +398,7 @@ export default function Orders() {
                           </Badge>
                         </TableCell>
                         <TableCell>R$ {order.total.toFixed(2)}</TableCell>
-                        <TableCell className="text-sm text-gray-600">
+                        <TableCell className="text-sm text-muted-foreground">
                           {new Date(order.createdAt).toLocaleString("pt-BR")}
                         </TableCell>
                         <TableCell className="text-right">

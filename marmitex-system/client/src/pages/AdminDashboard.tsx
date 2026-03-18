@@ -547,9 +547,9 @@ export default function AdminDashboard() {
 
         {/* Stock Alert */}
         {summary.totals.lowStockItems > 0 && (
-          <Alert className="mb-6 border-yellow-500 bg-yellow-50">
-            <i className="fa-solid fa-circle-exclamation text-sm text-yellow-600" aria-hidden="true" />
-            <AlertDescription className="text-yellow-800">
+          <Alert className="mb-6" variant="warning">
+            <i className="fa-solid fa-triangle-exclamation text-sm" aria-hidden="true" />
+            <AlertDescription>
               Você tem {summary.totals.lowStockItems} produtos com estoque baixo. Verifique o gerenciamento de inventário.
             </AlertDescription>
           </Alert>

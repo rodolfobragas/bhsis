@@ -96,9 +96,9 @@ export default function Login() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Error Alert */}
               {error && (
-                <Alert className="border-red-500 bg-red-50">
-                  <i className="fa-solid fa-circle-exclamation text-sm text-red-600" aria-hidden="true" />
-                  <AlertDescription className="text-red-800">{error}</AlertDescription>
+                <Alert variant="destructive">
+                  <i className="fa-solid fa-circle-exclamation text-sm" aria-hidden="true" />
+                  <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
 

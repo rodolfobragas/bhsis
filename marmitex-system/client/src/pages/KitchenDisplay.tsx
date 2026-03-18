@@ -160,9 +160,9 @@ export default function KitchenDisplay() {
 
         {/* Alerts */}
         {pendingOrders.length > 0 && (
-          <Alert className="mb-6 border-red-500 bg-red-50">
-            <i className="fa-solid fa-circle-exclamation text-sm text-red-600" aria-hidden="true" />
-            <AlertDescription className="text-red-800">
+          <Alert className="mb-6" variant="warning">
+            <i className="fa-solid fa-triangle-exclamation text-sm" aria-hidden="true" />
+            <AlertDescription>
               {pendingOrders.length} pedido(s) aguardando confirmação!
             </AlertDescription>
           </Alert>
