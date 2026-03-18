@@ -8,7 +8,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Edit2, Trash2, Plus, AlertCircle } from "lucide-react";
 
 interface Customer {
   id: string;
@@ -38,7 +37,7 @@ export default function CustomerTable({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <Loader2 className="h-6 w-6 animate-spin text-blue-600 mr-2" />
+        <i className="fa-solid fa-spinner animate-spin text-blue-600 mr-2" aria-hidden="true" />
         <span className="text-gray-600">Carregando clientes...</span>
       </div>
     );
@@ -48,11 +47,11 @@ export default function CustomerTable({
     return (
       <div className="text-center py-8">
         <div className="flex flex-col items-center gap-2 mb-4 text-gray-600">
-          <AlertCircle className="h-5 w-5" />
+          <i className="fa-solid fa-circle-exclamation text-sm" aria-hidden="true" />
           <p>Nenhum cliente encontrado</p>
         </div>
         <Button onClick={onAdd}>
-          <Plus className="h-4 w-4 mr-2" />
+          <i className="fa-solid fa-plus mr-2 text-sm" aria-hidden="true" />
           Novo Cliente
         </Button>
       </div>
@@ -63,7 +62,7 @@ export default function CustomerTable({
     <div className="space-y-4">
       <div className="flex justify-end">
         <Button onClick={onAdd} className="w-full md:w-auto">
-          <Plus className="h-4 w-4 mr-2" />
+          <i className="fa-solid fa-plus mr-2 text-sm" aria-hidden="true" />
           Novo Cliente
         </Button>
       </div>
@@ -96,7 +95,7 @@ export default function CustomerTable({
                       onClick={() => onEdit(customer)}
                       title="Editar cliente"
                     >
-                      <Edit2 className="h-4 w-4" />
+                      <i className="fa-solid fa-pen text-sm" aria-hidden="true" />
                     </Button>
                     <Button
                       size="sm"
@@ -109,7 +108,7 @@ export default function CustomerTable({
                       }}
                       title="Deletar cliente"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <i className="fa-solid fa-trash text-sm" aria-hidden="true" />
                     </Button>
                   </div>
                 </TableCell>

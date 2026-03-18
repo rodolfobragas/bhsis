@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { AlertCircle, CheckCircle, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import apiService from "@/services/api";
 
@@ -140,7 +139,7 @@ export default function StockAlerts() {
             <div className="text-center py-8 text-gray-500">Carregando alertas...</div>
           ) : activeAlerts.length === 0 ? (
             <div className="text-center py-8">
-              <CheckCircle className="w-12 h-12 mx-auto text-green-600 mb-2" />
+              <i className="fa-solid fa-circle-check text-3xl mx-auto text-green-600 mb-2" aria-hidden="true" />
               <p className="text-gray-600">Nenhum alerta ativo. Estoque normalizado!</p>
             </div>
           ) : (
@@ -164,7 +163,7 @@ export default function StockAlerts() {
                       <TableRow key={alert.id} className={alert.status === "critical" ? "bg-red-50" : "bg-yellow-50"}>
                         <TableCell className="font-medium">
                           <div className="flex items-center gap-2">
-                            <AlertCircle className={`w-4 h-4 ${getStatusColor(alert.status)}`} />
+                            <i className={`fa-solid fa-circle-exclamation text-sm ${getStatusColor(alert.status)}`} aria-hidden="true" />
                             {alert.productName}
                           </div>
                         </TableCell>
@@ -189,7 +188,7 @@ export default function StockAlerts() {
                               onClick={() => handleResolve(alert.id)}
                               title="Marcar como resolvido"
                             >
-                              <CheckCircle className="w-4 h-4" />
+                              <i className="fa-solid fa-circle-check text-sm" aria-hidden="true" />
                             </Button>
                             <Button
                               size="sm"
@@ -197,7 +196,7 @@ export default function StockAlerts() {
                               onClick={() => handleDismiss(alert.id)}
                               title="Descartar alerta"
                             >
-                              <Trash2 className="w-4 h-4" />
+                              <i className="fa-solid fa-trash text-sm" aria-hidden="true" />
                             </Button>
                           </div>
                         </TableCell>

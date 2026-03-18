@@ -14,7 +14,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { toast } from "sonner";
-import { AlertCircle, Search, AlertTriangle } from "lucide-react";
 import apiService from "@/services/api";
 
 interface InventoryItem {
@@ -130,7 +129,7 @@ export default function Inventory() {
         {/* Low Stock Alert */}
         {lowStockItems.length > 0 && (
           <Alert className="mb-6 border-orange-500 bg-orange-50">
-            <AlertTriangle className="h-4 w-4 text-orange-600" />
+            <i className="fa-solid fa-triangle-exclamation text-sm text-orange-600" aria-hidden="true" />
             <AlertDescription className="text-orange-800">
               {lowStockItems.length} produto(s) com estoque baixo! Reposição necessária.
             </AlertDescription>
@@ -140,7 +139,7 @@ export default function Inventory() {
         {/* Error Alert */}
         {error && (
           <Alert className="mb-6 border-red-500 bg-red-50" role="alert">
-            <AlertCircle className="h-4 w-4 text-red-600" />
+            <i className="fa-solid fa-circle-exclamation text-sm text-red-600" aria-hidden="true" />
             <AlertDescription className="text-red-800">{error}</AlertDescription>
           </Alert>
         )}
@@ -156,7 +155,7 @@ export default function Inventory() {
                 <label htmlFor="inventory-search" className="sr-only">
                   Pesquisar inventário
                 </label>
-                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <i className="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-muted-foreground" aria-hidden="true" />
                 <Input
                   id="inventory-search"
                   placeholder="Pesquise por nome ou SKU..."

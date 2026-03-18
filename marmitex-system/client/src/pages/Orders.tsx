@@ -21,7 +21,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { toast } from "sonner";
-import { AlertCircle, Search, Printer, CreditCard, History } from "lucide-react";
 import apiService from "@/services/api";
 
 interface OrderItem {
@@ -303,7 +302,7 @@ export default function Orders() {
         {/* Error Alert */}
         {error && (
           <Alert className="mb-6 border-red-500 bg-red-50" role="alert">
-            <AlertCircle className="h-4 w-4 text-red-600" />
+          <i className="fa-solid fa-circle-exclamation text-sm text-red-600" aria-hidden="true" />
             <AlertDescription className="text-red-800">{error}</AlertDescription>
           </Alert>
         )}
@@ -319,7 +318,7 @@ export default function Orders() {
                 <label htmlFor="order-search" className="sr-only">
                   Pesquisar pedidos
                 </label>
-                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <i className="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-muted-foreground" aria-hidden="true" />
                 <Input
                   id="order-search"
                   placeholder="Pesquise por cliente ou ID do pedido..."
@@ -409,7 +408,7 @@ export default function Orders() {
                               onClick={() => handleOpenPayments(order)}
                               title="Ver histórico de pagamentos"
                             >
-                              <History className="h-4 w-4" />
+                              <i className="fa-solid fa-clock-rotate-left text-sm" aria-hidden="true" />
                             </Button>
                             <Button
                               size="sm"
@@ -418,7 +417,7 @@ export default function Orders() {
                               disabled={paymentLoading[order.id] || order.paymentStatus === "PAID"}
                               title="Gerar link de pagamento"
                             >
-                              <CreditCard className="h-4 w-4" />
+                              <i className="fa-solid fa-credit-card text-sm" aria-hidden="true" />
                             </Button>
                             <Button
                               size="sm"
@@ -426,7 +425,7 @@ export default function Orders() {
                               onClick={() => handlePrint(order)}
                               title="Imprimir pedido"
                             >
-                              <Printer className="h-4 w-4" />
+                              <i className="fa-solid fa-print text-sm" aria-hidden="true" />
                             </Button>
                           </div>
                         </TableCell>

@@ -3,7 +3,6 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, CheckCircle, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import apiService from "@/services/api";
 import { wsClient } from "@/services/websocketClient";
@@ -162,7 +161,7 @@ export default function KitchenDisplay() {
         {/* Alerts */}
         {pendingOrders.length > 0 && (
           <Alert className="mb-6 border-red-500 bg-red-50">
-            <AlertCircle className="h-4 w-4 text-red-600" />
+            <i className="fa-solid fa-circle-exclamation text-sm text-red-600" aria-hidden="true" />
             <AlertDescription className="text-red-800">
               {pendingOrders.length} pedido(s) aguardando confirmação!
             </AlertDescription>
@@ -174,7 +173,7 @@ export default function KitchenDisplay() {
           {/* Pending Orders */}
           <div>
             <div className="mb-4 flex items-center gap-2">
-              <AlertCircle className="h-5 w-5 text-red-600" />
+              <i className="fa-solid fa-circle-exclamation text-sm text-red-600" aria-hidden="true" />
               <h2 className="text-2xl font-bold text-foreground">Pendentes</h2>
               <Badge variant="destructive" className="ml-auto">
                 {pendingOrders.length}
@@ -200,7 +199,7 @@ export default function KitchenDisplay() {
                         <div>
                           <CardTitle className="text-lg">{order.orderNumber}</CardTitle>
                           <CardDescription>
-                            <Clock className="h-3 w-3 inline mr-1" />
+                            <i className="fa-solid fa-clock text-[10px] inline mr-1" aria-hidden="true" />
                             {order.timeInPrep} min atrás
                           </CardDescription>
                         </div>
@@ -239,7 +238,7 @@ export default function KitchenDisplay() {
           {/* Preparing Orders */}
           <div>
             <div className="mb-4 flex items-center gap-2">
-              <Clock className="h-5 w-5 text-blue-600" />
+              <i className="fa-solid fa-clock text-sm text-blue-600" aria-hidden="true" />
               <h2 className="text-2xl font-bold text-foreground">Preparando</h2>
               <Badge variant="secondary" className="ml-auto">
                 {preparingOrders.length}
@@ -265,7 +264,7 @@ export default function KitchenDisplay() {
                         <div>
                           <CardTitle className="text-lg">{order.orderNumber}</CardTitle>
                           <CardDescription>
-                            <Clock className="h-3 w-3 inline mr-1" />
+                            <i className="fa-solid fa-clock text-[10px] inline mr-1" aria-hidden="true" />
                             {order.timeInPrep} min
                           </CardDescription>
                         </div>
@@ -304,7 +303,7 @@ export default function KitchenDisplay() {
           {/* Ready Orders */}
           <div>
             <div className="mb-4 flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-green-600" />
+              <i className="fa-solid fa-circle-check text-sm text-green-600" aria-hidden="true" />
               <h2 className="text-2xl font-bold text-foreground">Pronto</h2>
               <Badge variant="outline" className="ml-auto bg-green-100 text-green-800">
                 {readyOrders.length}
@@ -330,7 +329,7 @@ export default function KitchenDisplay() {
                         <div>
                           <CardTitle className="text-lg">{order.orderNumber}</CardTitle>
                           <CardDescription>
-                            <CheckCircle className="h-3 w-3 inline mr-1" />
+                            <i className="fa-solid fa-circle-check text-[10px] inline mr-1" aria-hidden="true" />
                             Pronto para entrega
                           </CardDescription>
                         </div>

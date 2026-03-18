@@ -1,23 +1,9 @@
-import {
-  LayoutDashboard,
-  ShoppingCart,
-  CreditCard,
-  Folder,
-  FileSpreadsheet,
-  FileText,
-  Landmark,
-  Warehouse,
-  ChefHat,
-  Truck,
-  FileBarChart,
-  Utensils,
-} from "lucide-react";
 import DashboardLayout, { DashboardMenuEntry } from "@/components/DashboardLayout";
 
 const adminMenuItems: DashboardMenuEntry[] = [
   { type: "section", label: "OPERAÇÃO" },
   {
-    icon: Utensils,
+    icon: "fa-solid fa-utensils",
     label: "Food",
     path: "/food",
     children: [
@@ -31,7 +17,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: Folder,
+    icon: "fa-solid fa-folder",
     label: "Cadastro",
     path: "/cadastro",
     children: [
@@ -122,7 +108,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: FileSpreadsheet,
+    icon: "fa-solid fa-file-excel",
     label: "Faturamento",
     path: "/faturamento",
     children: [
@@ -270,7 +256,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: CreditCard,
+    icon: "fa-solid fa-credit-card",
     label: "PDV",
     path: "/pdv",
     children: [
@@ -312,7 +298,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: FileText,
+    icon: "fa-solid fa-file-lines",
     label: "Entrada de Nota",
     path: "/entrada-nota",
     children: [
@@ -330,7 +316,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: FileText,
+    icon: "fa-solid fa-file-lines",
     label: "Documentos Recebidos",
     path: "/documentos-recebidos",
     children: [
@@ -343,7 +329,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: FileText,
+    icon: "fa-solid fa-cart-shopping",
     label: "Pedido de Compra",
     path: "/pedido-compra",
     children: [
@@ -360,7 +346,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: FileText,
+    icon: "fa-solid fa-file-signature",
     label: "Assinador",
     path: "/assinador",
     children: [
@@ -368,7 +354,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: Landmark,
+    icon: "fa-solid fa-landmark",
     label: "Financeiro",
     path: "/financeiro",
     children: [
@@ -429,7 +415,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: FileText,
+    icon: "fa-solid fa-file-lines",
     label: "Fiscal",
     path: "/fiscal",
     children: [
@@ -456,7 +442,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: Warehouse,
+    icon: "fa-solid fa-warehouse",
     label: "Estoque",
     path: "/estoque",
     children: [
@@ -480,7 +466,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: ChefHat,
+    icon: "fa-solid fa-kitchen-set",
     label: "Produção",
     path: "/producao",
     children: [
@@ -499,7 +485,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: Truck,
+    icon: "fa-solid fa-truck",
     label: "Delivery",
     path: "/delivery",
     children: [
@@ -509,7 +495,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: FileBarChart,
+    icon: "fa-solid fa-chart-bar",
     label: "Relatórios",
     path: "/relatorios",
     children: [

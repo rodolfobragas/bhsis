@@ -9,7 +9,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
-import { AlertCircle, UserPlus } from "lucide-react";
 
 const registerSchema = z.object({
   name: z.string().min(3, "Nome deve ter no mínimo 3 caracteres"),
@@ -74,7 +73,7 @@ export default function Register() {
         {/* Logo/Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-lg mb-4">
-            <UserPlus className="w-8 h-8 text-white" />
+            <i className="fa-solid fa-user-plus text-2xl text-white" aria-hidden="true" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900">Marmitex System</h1>
           <p className="text-gray-600 mt-2">Criar Nova Conta</p>
@@ -91,7 +90,7 @@ export default function Register() {
               {/* Error Alert */}
               {error && (
                 <Alert className="border-red-500 bg-red-50">
-                  <AlertCircle className="h-4 w-4 text-red-600" />
+                  <i className="fa-solid fa-circle-exclamation text-sm text-red-600" aria-hidden="true" />
                   <AlertDescription className="text-red-800">{error}</AlertDescription>
                 </Alert>
               )}

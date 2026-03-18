@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from "recharts";
-import { AlertCircle, TrendingUp, Users, ShoppingCart, Package, Timer, Receipt, Percent, Activity, Flame } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
@@ -549,7 +548,7 @@ export default function AdminDashboard() {
         {/* Stock Alert */}
         {summary.totals.lowStockItems > 0 && (
           <Alert className="mb-6 border-yellow-500 bg-yellow-50">
-            <AlertCircle className="h-4 w-4 text-yellow-600" />
+            <i className="fa-solid fa-circle-exclamation text-sm text-yellow-600" aria-hidden="true" />
             <AlertDescription className="text-yellow-800">
               Você tem {summary.totals.lowStockItems} produtos com estoque baixo. Verifique o gerenciamento de inventário.
             </AlertDescription>
@@ -561,7 +560,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total de Pedidos</CardTitle>
-              <ShoppingCart className="h-4 w-4 text-muted-foreground" />
+              <i className="fa-solid fa-cart-shopping text-sm text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{summary.totals.totalOrders}</div>
@@ -572,7 +571,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Receita Total</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <i className="fa-solid fa-arrow-trend-up text-sm text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{formatCurrency(summary.totals.totalRevenue)}</div>
@@ -583,7 +582,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Clientes</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <i className="fa-solid fa-users text-sm text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{summary.totals.totalCustomers}</div>
@@ -594,7 +593,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Produtos</CardTitle>
-              <Package className="h-4 w-4 text-muted-foreground" />
+              <i className="fa-solid fa-box text-sm text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{summary.totals.totalProducts}</div>
@@ -605,7 +604,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Tempo médio</CardTitle>
-              <Timer className="h-4 w-4 text-muted-foreground" />
+              <i className="fa-solid fa-clock text-sm text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -618,7 +617,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Ticket médio</CardTitle>
-              <Receipt className="h-4 w-4 text-muted-foreground" />
+              <i className="fa-solid fa-receipt text-sm text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{formatCurrency(summary.totals.ticketAverage)}</div>
@@ -629,7 +628,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Conversão</CardTitle>
-              <Percent className="h-4 w-4 text-muted-foreground" />
+              <i className="fa-solid fa-percent text-sm text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -775,7 +774,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Pedidos em processamento</CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
+              <i className="fa-solid fa-chart-line text-sm text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{summary.analytics.inProgressOrders}</div>
@@ -786,7 +785,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Ocupação da cozinha</CardTitle>
-              <Flame className="h-4 w-4 text-muted-foreground" />
+              <i className="fa-solid fa-fire text-sm text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -799,7 +798,7 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Produtos em falta</CardTitle>
-              <AlertCircle className="h-4 w-4 text-muted-foreground" />
+              <i className="fa-solid fa-circle-exclamation text-sm text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{summary.analytics.outOfStockItems}</div>

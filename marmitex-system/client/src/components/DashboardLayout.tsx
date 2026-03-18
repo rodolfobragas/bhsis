@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/sidebar";
 import { getLoginUrl } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LogOut, PanelLeft, Moon, Sun, ChevronDown, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
@@ -43,7 +43,7 @@ const MAX_WIDTH = 480;
 
 export type DashboardMenuItem = {
   type?: "item";
-  icon?: React.ComponentType<{ className?: string }>;
+  icon?: string;
   label: string;
   path: string;
   children?: DashboardMenuItem[];
@@ -281,7 +281,7 @@ function DashboardLayoutContent({
                 className="h-8 w-8 flex items-center justify-center hover:bg-accent rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0"
                 aria-label="Toggle navigation"
               >
-                <PanelLeft className="h-4 w-4 text-muted-foreground" />
+                <i className="fa-solid fa-bars text-sm text-muted-foreground" aria-hidden="true" />
               </button>
               {!isCollapsed ? (
                 <div className="flex items-center gap-2 min-w-0">
@@ -315,16 +315,21 @@ function DashboardLayoutContent({
                         const content = (
                           <>
                             {menuItem.icon ? (
-                              <menuItem.icon
-                                className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
+                              <i
+                                className={cn(
+                                  menuItem.icon,
+                                  "text-sm",
+                                  isActive ? "text-primary" : "text-muted-foreground"
+                                )}
+                                aria-hidden="true"
                               />
                             ) : null}
                             <span>{menuItem.label}</span>
                             {hasChildren ? (
                               isOpen ? (
-                                <ChevronDown className="ml-auto h-4 w-4 text-muted-foreground" />
+                                <i className="fa-solid fa-chevron-down ml-auto text-xs text-muted-foreground" aria-hidden="true" />
                               ) : (
-                                <ChevronRight className="ml-auto h-4 w-4 text-muted-foreground" />
+                                <i className="fa-solid fa-chevron-right ml-auto text-xs text-muted-foreground" aria-hidden="true" />
                               )
                             ) : null}
                           </>
@@ -400,7 +405,11 @@ function DashboardLayoutContent({
                 className="mb-3 w-full justify-center gap-2 group-data-[collapsible=icon]:hidden"
                 onClick={toggleTheme}
               >
-                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {theme === "dark" ? (
+                  <i className="fa-solid fa-sun text-sm" aria-hidden="true" />
+                ) : (
+                  <i className="fa-solid fa-moon text-sm" aria-hidden="true" />
+                )}
                 <span>{theme === "dark" ? "Modo claro" : "Modo escuro"}</span>
               </Button>
             ) : null}
@@ -426,9 +435,9 @@ function DashboardLayoutContent({
                 {switchable ? (
                   <DropdownMenuItem onClick={toggleTheme} className="cursor-pointer">
                     {theme === "dark" ? (
-                      <Sun className="mr-2 h-4 w-4" />
+                      <i className="fa-solid fa-sun mr-2 text-sm" aria-hidden="true" />
                     ) : (
-                      <Moon className="mr-2 h-4 w-4" />
+                      <i className="fa-solid fa-moon mr-2 text-sm" aria-hidden="true" />
                     )}
                     <span>{theme === "dark" ? "Modo claro" : "Modo escuro"}</span>
                   </DropdownMenuItem>
@@ -437,7 +446,7 @@ function DashboardLayoutContent({
                   onClick={logout}
                   className="cursor-pointer text-destructive focus:text-destructive"
                 >
-                  <LogOut className="mr-2 h-4 w-4" />
+                  <i className="fa-solid fa-right-from-bracket mr-2 text-sm" aria-hidden="true" />
                   <span>Sign out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -455,6 +464,36 @@ function DashboardLayoutContent({
       </div>
 
       <SidebarInset>
+        {!isMobile && (
+          <div className="flex h-16 items-center justify-between border-b bg-background px-6">
+            <div className="flex items-center gap-3">
+              <SidebarTrigger className="h-9 w-9 rounded-[5px] border border-border bg-background" />
+              <div className="flex flex-col">
+                <span className="text-lg font-semibold text-foreground">
+                  {activeMenuItem?.label ?? "Dashboard"}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  Acompanhe as atividades mais recentes
+                </span>
+              </div>
+            </div>
+            {switchable ? (
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-10 w-10"
+                onClick={toggleTheme}
+                aria-label="Alternar tema"
+              >
+                {theme === "dark" ? (
+                  <i className="fa-solid fa-sun text-sm" aria-hidden="true" />
+                ) : (
+                  <i className="fa-solid fa-moon text-sm" aria-hidden="true" />
+                )}
+              </Button>
+            ) : null}
+          </div>
+        )}
         {isMobile && (
           <div className="flex border-b h-14 items-center justify-between bg-background/95 px-2 backdrop-blur supports-[backdrop-filter]:backdrop-blur sticky top-0 z-40">
             <div className="flex items-center gap-2">
@@ -475,12 +514,16 @@ function DashboardLayoutContent({
                 onClick={toggleTheme}
                 aria-label="Alternar tema"
               >
-                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {theme === "dark" ? (
+                  <i className="fa-solid fa-sun text-sm" aria-hidden="true" />
+                ) : (
+                  <i className="fa-solid fa-moon text-sm" aria-hidden="true" />
+                )}
               </Button>
             ) : null}
           </div>
         )}
-        <main className="flex-1 p-4 page-fade-in">{children}</main>
+        <main className="flex-1 p-4 sm:p-6 page-fade-in">{children}</main>
       </SidebarInset>
     </>
   );

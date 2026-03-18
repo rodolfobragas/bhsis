@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Plus, Edit2, Trash2, Search } from "lucide-react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -129,7 +128,7 @@ export default function Recipes() {
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button onClick={() => { form.reset(); setEditingId(null); }}>
-              <Plus className="w-4 h-4 mr-2" />
+              <i className="fa-solid fa-plus text-sm mr-2" aria-hidden="true" />
               Nova Receita
             </Button>
           </DialogTrigger>
@@ -242,7 +241,7 @@ export default function Recipes() {
         <CardContent>
           <div className="mb-4 flex gap-2">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <i className="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-gray-400" aria-hidden="true" />
               <Input
                 placeholder="Buscar receita..."
                 value={searchTerm}
@@ -282,14 +281,14 @@ export default function Recipes() {
                             variant="outline"
                             onClick={() => handleEdit(recipe)}
                           >
-                            <Edit2 className="w-4 h-4" />
+                            <i className="fa-solid fa-pen text-sm" aria-hidden="true" />
                           </Button>
                           <Button
                             size="sm"
                             variant="destructive"
                             onClick={() => handleDelete(recipe.id)}
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <i className="fa-solid fa-trash text-sm" aria-hidden="true" />
                           </Button>
                         </div>
                       </TableCell>

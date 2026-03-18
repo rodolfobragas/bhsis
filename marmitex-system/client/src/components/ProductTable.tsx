@@ -24,7 +24,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { MoreHorizontal, Edit, Trash2, Plus, AlertCircle } from "lucide-react";
 
 interface Product {
   id: string;
@@ -79,7 +78,7 @@ export default function ProductTable({
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <h2 className="text-2xl font-bold">Produtos</h2>
         <Button onClick={onAdd} className="gap-2 w-full md:w-auto">
-          <Plus className="h-4 w-4" />
+          <i className="fa-solid fa-plus text-sm" aria-hidden="true" />
           Novo Produto
         </Button>
       </div>
@@ -107,7 +106,7 @@ export default function ProductTable({
               <TableRow>
                 <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
                   <div className="flex flex-col items-center gap-2">
-                    <AlertCircle className="h-5 w-5" />
+                    <i className="fa-solid fa-circle-exclamation text-sm" aria-hidden="true" />
                     <span>Nenhum produto encontrado</span>
                   </div>
                 </TableCell>
@@ -134,7 +133,7 @@ export default function ProductTable({
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="ghost" size="sm">
-                          <MoreHorizontal className="h-4 w-4" />
+                          <i className="fa-solid fa-ellipsis text-sm" aria-hidden="true" />
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
@@ -142,14 +141,14 @@ export default function ProductTable({
                           onClick={() => onEdit(product)}
                           className="gap-2"
                         >
-                          <Edit className="h-4 w-4" />
+                          <i className="fa-solid fa-pen text-sm" aria-hidden="true" />
                           Editar
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => setDeleteConfirm(product.id)}
                           className="gap-2 text-red-600"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <i className="fa-solid fa-trash text-sm" aria-hidden="true" />
                           Deletar
                         </DropdownMenuItem>
                       </DropdownMenuContent>

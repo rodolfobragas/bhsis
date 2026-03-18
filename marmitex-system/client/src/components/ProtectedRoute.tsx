@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import { useLocation } from "wouter";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -18,7 +17,7 @@ export default function ProtectedRoute({ children, requiredRole }: ProtectedRout
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-blue-600" />
+          <i className="fa-solid fa-spinner animate-spin mx-auto mb-4 text-blue-600" aria-hidden="true" />
           <p className="text-gray-600">Carregando...</p>
         </div>
       </div>

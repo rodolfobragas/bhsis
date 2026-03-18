@@ -8,7 +8,6 @@ import ProductTable from "@/components/ProductTable";
 import ProductDialog from "@/components/ProductDialog";
 import apiService from "@/services/api";
 import { toast } from "sonner";
-import { AlertCircle, Search } from "lucide-react";
 
 interface Product {
   id: string;
@@ -150,7 +149,7 @@ export default function Products() {
         {/* Error Alert */}
         {error && (
           <Alert className="mb-6 border-red-500 bg-red-50" role="alert">
-            <AlertCircle className="h-4 w-4 text-red-600" />
+            <i className="fa-solid fa-circle-exclamation text-sm text-red-600" aria-hidden="true" />
             <AlertDescription className="text-red-800">{error}</AlertDescription>
           </Alert>
         )}
@@ -166,7 +165,7 @@ export default function Products() {
                 <label htmlFor="product-search" className="sr-only">
                   Pesquisar produtos
                 </label>
-                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <i className="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-muted-foreground" aria-hidden="true" />
                 <Input
                   id="product-search"
                   placeholder="Pesquise por nome, SKU ou categoria..."
