@@ -187,7 +187,15 @@ const adminMenuItems: DashboardMenuEntry[] = [
           { label: "Consulta Situação de CTe OS", path: "/faturamento/conhecimento-transporte-os/consulta-situacao-cte-os" },
         ],
       },
-      { label: "Orçamento", path: "/faturamento/orcamento" },
+      {
+        label: "Orçamento",
+        path: "/faturamento/orcamento",
+        children: [
+          { label: "Cadastrar", path: "/faturamento/orcamento/cadastrar" },
+          { label: "Consultar", path: "/faturamento/orcamento/consultar" },
+          { label: "Produtos Reservados", path: "/faturamento/orcamento/produtos-reservados" },
+        ],
+      },
       { label: "Condicional", path: "/faturamento/condicional" },
       { label: "Pedido de Venda", path: "/faturamento/pedido-venda" },
       { label: "Ordem de Serviço", path: "/faturamento/ordem-servico" },

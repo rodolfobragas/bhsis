@@ -88,6 +88,7 @@ Modelos devem atualizar apenas os blocos correspondentes às áreas que tocam, s
 4. Se identificar bloqueio externo (ex.: download lento, serviço offline), adicione novo bloco `## Bloqueios` com descrição e traceback breve.
 
 ## Notas recentes
+- 2026-03-18T03:03:03Z (Codex): Faturamento recebeu submenu de Orçamento com rotas placeholder para cadastro, consulta e produtos reservados.
 - 2026-03-18T03:02:06Z (Codex): Faturamento recebeu submenu de Conhecimento de Transporte - OS com rotas placeholder para emissão, consulta e correção.
 - 2026-03-18T03:00:38Z (Codex): Faturamento recebeu submenus de Manifesto de Documentos (MDFe) e Conhecimento de Transporte (CTe) com rotas placeholder específicas.
 - 2026-03-18T02:56:19Z (Codex): Faturamento recebeu submenus de Notas Fiscais Eletrônicas e Notas Fiscais de Serviço com novas rotas placeholder (NFe/NFSe).

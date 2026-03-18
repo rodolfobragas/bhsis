@@ -92,6 +92,10 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
   - Consultar CTe's OS
   - Carta Correção Eletrônica
   - Consulta Situação de CTe OS
+- Faturamento → Orçamento
+  - Cadastrar
+  - Consultar
+  - Produtos Reservados
 - PDV
 - Entrada de Nota
 - Documentos Recebidos
