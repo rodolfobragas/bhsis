@@ -149,13 +149,13 @@ export default function Payments() {
               type="date"
               value={from}
               onChange={(e) => setFrom(e.target.value)}
-              className="w-full md:w-auto"
+              className="w-full sm:w-auto"
             />
             <Input
               type="date"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              className="w-full md:w-auto"
+              className="w-full sm:w-auto"
             />
             <Button
               variant="outline"
@@ -169,12 +169,12 @@ export default function Payments() {
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <Card className="card-raise">
             <CardHeader>
               <CardTitle>Receita Bruta</CardTitle>
             </CardHeader>
-            <CardContent className="text-2xl font-semibold">
+            <CardContent className="text-xl sm:text-2xl font-semibold">
               {reportLoading || !formattedReport ? "—" : `R$ ${formattedReport.gross.toFixed(2)}`}
             </CardContent>
           </Card>
@@ -182,7 +182,7 @@ export default function Payments() {
             <CardHeader>
               <CardTitle>Reembolsos</CardTitle>
             </CardHeader>
-            <CardContent className="text-2xl font-semibold">
+            <CardContent className="text-xl sm:text-2xl font-semibold">
               {reportLoading || !formattedReport ? "—" : `R$ ${formattedReport.refunded.toFixed(2)}`}
             </CardContent>
           </Card>
@@ -190,7 +190,7 @@ export default function Payments() {
             <CardHeader>
               <CardTitle>Receita Líquida</CardTitle>
             </CardHeader>
-            <CardContent className="text-2xl font-semibold">
+            <CardContent className="text-xl sm:text-2xl font-semibold">
               {reportLoading || !formattedReport ? "—" : `R$ ${formattedReport.net.toFixed(2)}`}
             </CardContent>
           </Card>

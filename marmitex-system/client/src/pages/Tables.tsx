@@ -118,7 +118,7 @@ export default function Tables() {
           <CardTitle>Gerenciamento de mesas</CardTitle>
           <CardDescription>Cadastre mesas e controle a disponibilidade</CardDescription>
         </CardHeader>
-        <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-3">
             <label className="text-xs text-muted-foreground">Nome</label>
             <Input
@@ -160,10 +160,19 @@ export default function Tables() {
               placeholder="Salão principal"
             />
           </div>
-          <div className="lg:col-span-2 flex gap-2">
-            <Button onClick={handleSubmit}>{editingId ? "Salvar alterações" : "Criar mesa"}</Button>
+          <div className="sm:col-span-2 flex flex-col sm:flex-row gap-2">
+            <Button onClick={handleSubmit} className="w-full sm:w-auto">
+              {editingId ? "Salvar alterações" : "Criar mesa"}
+            </Button>
             {editingId && (
-              <Button variant="outline" onClick={() => { setForm(emptyForm); setEditingId(null); }}>
+              <Button
+                variant="outline"
+                className="w-full sm:w-auto"
+                onClick={() => {
+                  setForm(emptyForm);
+                  setEditingId(null);
+                }}
+              >
                 Cancelar
               </Button>
             )}
@@ -176,21 +185,22 @@ export default function Tables() {
           <CardTitle>Mesas cadastradas</CardTitle>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Nome</TableHead>
-                <TableHead>Capacidade</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Local</TableHead>
-              <TableHead>Ocupação atual</TableHead>
-              <TableHead>Ocupação total</TableHead>
-              <TableHead>Turnover</TableHead>
-              <TableHead>Ações</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {tables.map((table) => (
+          <div className="overflow-auto">
+            <Table className="min-w-[820px]">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Nome</TableHead>
+                  <TableHead>Capacidade</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Local</TableHead>
+                  <TableHead>Ocupação atual</TableHead>
+                  <TableHead>Ocupação total</TableHead>
+                  <TableHead>Turnover</TableHead>
+                  <TableHead>Ações</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {tables.map((table) => (
                 <TableRow key={table.id}>
                   <TableCell className="font-medium">{table.name}</TableCell>
                   <TableCell>{table.capacity}</TableCell>
@@ -203,7 +213,7 @@ export default function Tables() {
                   <TableCell>{getOccupiedDuration(table.occupiedSince)}</TableCell>
                   <TableCell>{formatMinutes(table.totalOccupiedMinutes ?? 0)}</TableCell>
                   <TableCell>{table.turnovers ?? 0}</TableCell>
-                  <TableCell className="space-x-2">
+                  <TableCell className="flex flex-wrap gap-2">
                     <Button size="sm" variant="outline" onClick={() => handleEdit(table)}>
                       Editar
                     </Button>
@@ -222,8 +232,9 @@ export default function Tables() {
                   </TableCell>
                 </TableRow>
               )}
-            </TableBody>
-          </Table>
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

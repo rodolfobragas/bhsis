@@ -98,15 +98,15 @@ export default function Loyalty() {
           <CardTitle>Fidelidade</CardTitle>
           <CardDescription>Consulte o saldo e ajuste pontos do cliente</CardDescription>
         </CardHeader>
-        <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="md:col-span-2">
+        <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="sm:col-span-2">
             <Input
               placeholder="ID do cliente"
               value={customerId}
               onChange={(event) => setCustomerId(event.target.value)}
             />
           </div>
-          <Button onClick={fetchAccount} disabled={!customerId}>
+          <Button onClick={fetchAccount} disabled={!customerId} className="w-full sm:w-auto">
             Buscar
           </Button>
         </CardContent>
@@ -115,26 +115,26 @@ export default function Loyalty() {
       {account && (
         <>
           <Card>
-          <CardHeader>
-            <CardTitle>Resumo do cliente</CardTitle>
-            <CardDescription>Saldo atual e histórico de pontos</CardDescription>
-          </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <CardHeader>
+              <CardTitle>Resumo do cliente</CardTitle>
+              <CardDescription>Saldo atual e histórico de pontos</CardDescription>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
               <div>
                 <p className="text-xs text-muted-foreground">Saldo</p>
-                <p className="text-2xl font-semibold">{account.pointsBalance}</p>
+                <p className="text-xl sm:text-2xl font-semibold">{account.pointsBalance}</p>
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">Total ganho</p>
-                <p className="text-2xl font-semibold">{account.totalEarned}</p>
+                <p className="text-xl sm:text-2xl font-semibold">{account.totalEarned}</p>
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">Total resgatado</p>
-                <p className="text-2xl font-semibold">{account.totalRedeemed}</p>
+                <p className="text-xl sm:text-2xl font-semibold">{account.totalRedeemed}</p>
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">Nível atual</p>
-                <p className="text-2xl font-semibold">{account.tier}</p>
+                <p className="text-xl sm:text-2xl font-semibold">{account.tier}</p>
                 {nextTier && (
                   <p className="text-xs text-muted-foreground mt-2">
                     Faltam {pointsToNext} pontos para {nextTier.tier}
@@ -147,9 +147,9 @@ export default function Loyalty() {
           {tierInfo && (
             <Card>
               <CardHeader>
-              <CardTitle>Benefícios do nível {tierInfo.tier}</CardTitle>
-              <CardDescription>Use estes benefícios em campanhas e atendimento</CardDescription>
-            </CardHeader>
+                <CardTitle>Benefícios do nível {tierInfo.tier}</CardTitle>
+                <CardDescription>Use estes benefícios em campanhas e atendimento</CardDescription>
+              </CardHeader>
               <CardContent className="space-y-2">
                 {tierInfo.benefits.map((benefit) => (
                   <div key={benefit} className="text-sm text-muted-foreground">
@@ -162,10 +162,10 @@ export default function Loyalty() {
 
           <Card>
             <CardHeader>
-            <CardTitle>Ajuste de pontos</CardTitle>
-            <CardDescription>Use números negativos para debitar pontos</CardDescription>
+              <CardTitle>Ajuste de pontos</CardTitle>
+              <CardDescription>Use números negativos para debitar pontos</CardDescription>
             </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <Input
                 type="number"
                 value={adjustPoints}
@@ -177,7 +177,9 @@ export default function Loyalty() {
                 onChange={(event) => setAdjustNotes(event.target.value)}
                 placeholder="Motivo"
               />
-              <Button onClick={handleAdjust}>Aplicar ajuste</Button>
+              <Button onClick={handleAdjust} className="w-full sm:w-auto">
+                Aplicar ajuste
+              </Button>
             </CardContent>
           </Card>
 
@@ -186,33 +188,35 @@ export default function Loyalty() {
               <CardTitle>Transações</CardTitle>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Tipo</TableHead>
-                    <TableHead>Pontos</TableHead>
-                    <TableHead>Notas</TableHead>
-                    <TableHead>Data</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {transactions.map((tx) => (
-                    <TableRow key={tx.id}>
-                      <TableCell>{tx.type}</TableCell>
-                      <TableCell>{tx.points}</TableCell>
-                      <TableCell>{tx.notes ?? "-"}</TableCell>
-                      <TableCell>{new Date(tx.createdAt).toLocaleString()}</TableCell>
-                    </TableRow>
-                  ))}
-                  {transactions.length === 0 && (
+              <div className="overflow-auto">
+                <Table className="min-w-[560px]">
+                  <TableHeader>
                     <TableRow>
-                      <TableCell colSpan={4} className="text-center text-muted-foreground">
-                        Nenhuma transação registrada
-                      </TableCell>
+                      <TableHead>Tipo</TableHead>
+                      <TableHead>Pontos</TableHead>
+                      <TableHead>Notas</TableHead>
+                      <TableHead>Data</TableHead>
                     </TableRow>
-                  )}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {transactions.map((tx) => (
+                      <TableRow key={tx.id}>
+                        <TableCell>{tx.type}</TableCell>
+                        <TableCell>{tx.points}</TableCell>
+                        <TableCell>{tx.notes ?? "-"}</TableCell>
+                        <TableCell>{new Date(tx.createdAt).toLocaleString()}</TableCell>
+                      </TableRow>
+                    ))}
+                    {transactions.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={4} className="text-center text-muted-foreground">
+                          Nenhuma transação registrada
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
             </CardContent>
           </Card>
         </>

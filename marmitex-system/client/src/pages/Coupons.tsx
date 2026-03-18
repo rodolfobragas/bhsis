@@ -126,7 +126,7 @@ export default function Coupons() {
           <CardTitle>Cupons e descontos</CardTitle>
           <CardDescription>Crie cupons promocionais e controle limites de uso</CardDescription>
         </CardHeader>
-        <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="space-y-3">
             <label className="text-xs text-muted-foreground">Código</label>
             <Input
@@ -206,10 +206,19 @@ export default function Coupons() {
               onChange={(event) => setForm((prev) => ({ ...prev, endsAt: event.target.value }))}
             />
           </div>
-          <div className="lg:col-span-2 flex gap-2">
-            <Button onClick={handleSubmit}>{editingId ? "Salvar alterações" : "Criar cupom"}</Button>
+          <div className="sm:col-span-2 lg:col-span-3 flex flex-col sm:flex-row gap-2">
+            <Button onClick={handleSubmit} className="w-full sm:w-auto">
+              {editingId ? "Salvar alterações" : "Criar cupom"}
+            </Button>
             {editingId && (
-              <Button variant="outline" onClick={() => { setForm(emptyForm); setEditingId(null); }}>
+              <Button
+                variant="outline"
+                className="w-full sm:w-auto"
+                onClick={() => {
+                  setForm(emptyForm);
+                  setEditingId(null);
+                }}
+              >
                 Cancelar
               </Button>
             )}
@@ -226,53 +235,55 @@ export default function Coupons() {
           {isLoading ? (
             <p className="text-sm text-muted-foreground">Carregando...</p>
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Código</TableHead>
-                  <TableHead>Tipo</TableHead>
-                  <TableHead>Valor</TableHead>
-                  <TableHead>Usos</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Ações</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {coupons.map((coupon) => (
-                  <TableRow key={coupon.id}>
-                    <TableCell className="font-medium">{coupon.code}</TableCell>
-                    <TableCell>{coupon.type === "PERCENT" ? "%" : "R$"}</TableCell>
-                    <TableCell>{coupon.value}</TableCell>
-                    <TableCell>
-                      {coupon.usesCount}
-                      {coupon.maxUses ? ` / ${coupon.maxUses}` : ""}
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={coupon.active ? "default" : "secondary"}>
-                        {coupon.active ? "Ativo" : "Inativo"}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="space-x-2">
-                      <Button size="sm" variant="outline" onClick={() => handleEdit(coupon)}>
-                        Editar
-                      </Button>
-                      {coupon.active && (
-                        <Button size="sm" variant="destructive" onClick={() => handleDeactivate(coupon.id)}>
-                          Desativar
-                        </Button>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
-                {coupons.length === 0 && (
+            <div className="overflow-auto">
+              <Table className="min-w-[720px]">
+                <TableHeader>
                   <TableRow>
-                    <TableCell colSpan={6} className="text-center text-muted-foreground">
-                      Nenhum cupom cadastrado
-                    </TableCell>
+                    <TableHead>Código</TableHead>
+                    <TableHead>Tipo</TableHead>
+                    <TableHead>Valor</TableHead>
+                    <TableHead>Usos</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Ações</TableHead>
                   </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {coupons.map((coupon) => (
+                    <TableRow key={coupon.id}>
+                      <TableCell className="font-medium">{coupon.code}</TableCell>
+                      <TableCell>{coupon.type === "PERCENT" ? "%" : "R$"}</TableCell>
+                      <TableCell>{coupon.value}</TableCell>
+                      <TableCell>
+                        {coupon.usesCount}
+                        {coupon.maxUses ? ` / ${coupon.maxUses}` : ""}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={coupon.active ? "default" : "secondary"}>
+                          {coupon.active ? "Ativo" : "Inativo"}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="flex flex-wrap gap-2">
+                        <Button size="sm" variant="outline" onClick={() => handleEdit(coupon)}>
+                          Editar
+                        </Button>
+                        {coupon.active && (
+                          <Button size="sm" variant="destructive" onClick={() => handleDeactivate(coupon.id)}>
+                            Desativar
+                          </Button>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  {coupons.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={6} className="text-center text-muted-foreground">
+                        Nenhum cupom cadastrado
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           )}
         </CardContent>
       </Card>
