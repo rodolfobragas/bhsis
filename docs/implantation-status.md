@@ -88,6 +88,7 @@ Modelos devem atualizar apenas os blocos correspondentes às áreas que tocam, s
 4. Se identificar bloqueio externo (ex.: download lento, serviço offline), adicione novo bloco `## Bloqueios` com descrição e traceback breve.
 
 ## Notas recentes
+- 2026-03-18T01:36:37Z (Codex): Atualizado cache do service worker do Marmitex para evitar assets antigos (menu completo não aparecia).
 - 2026-03-18T01:27:46Z (Codex): Reorganizado o menu do Marmitex com módulo FOOD agrupando Dashboard, Pedidos, Pagamentos, Alertas, Fidelidade, Cupons e Mesas.
 - 2026-03-17T23:23:19Z (Codex): Novos módulos no Marmitex (PDV, Entrada de Nota, Documentos Recebidos, Pedido de Compra, Assinador, Financeiro, Fiscal, Estoque, Produção, Delivery e Relatórios) com submenus e rotas placeholder adicionados.
 - 2026-03-17T22:54:25Z (Codex): Módulo FATURAMENTO adicionado ao menu lateral do Marmitex com submenus fiscais/operacionais e rotas placeholder dedicadas.

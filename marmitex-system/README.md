@@ -26,6 +26,7 @@ Um sistema completo de gerenciamento de restaurante com painel administrativo, p
 - **Módulo Relatórios (expansível)**: Gerenciais, fiscais, financeiros e operacionais
 - **Módulo Food (expansível)**: Dashboard, pedidos, pagamentos, alertas, fidelidade, cupons e mesas em um único agrupamento
 - **WebSocket em Tempo Real**: Atualizações instantâneas entre sistemas
+- **Service Worker**: Cache versionado; se menus não aparecerem, force atualização do cache (hard refresh).
 - **Cache com Redis**: Otimização de performance
 
 ## 🏗️ Arquitetura
