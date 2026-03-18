@@ -24,6 +24,7 @@ Um sistema completo de gerenciamento de restaurante com painel administrativo, p
 - **Módulo Produção (expansível)**: Ordens de produção, geração e matérias-primas
 - **Módulo Delivery (expansível)**: Painel, entregadores e QR Code
 - **Módulo Relatórios (expansível)**: Gerenciais, fiscais, financeiros e operacionais
+- **Módulo Food (expansível)**: Dashboard, pedidos, pagamentos, alertas, fidelidade, cupons e mesas em um único agrupamento
 - **WebSocket em Tempo Real**: Atualizações instantâneas entre sistemas
 - **Cache com Redis**: Otimização de performance
 

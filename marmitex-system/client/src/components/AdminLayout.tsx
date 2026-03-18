@@ -1,11 +1,6 @@
 import {
   LayoutDashboard,
   ShoppingCart,
-  AlertTriangle,
-  TicketPercent,
-  Sparkles,
-  Table,
-  CreditCard,
   Folder,
   FileSpreadsheet,
   FileText,
@@ -14,18 +9,26 @@ import {
   ChefHat,
   Truck,
   FileBarChart,
+  Utensils,
 } from "lucide-react";
 import DashboardLayout, { DashboardMenuEntry } from "@/components/DashboardLayout";
 
 const adminMenuItems: DashboardMenuEntry[] = [
   { type: "section", label: "OPERAÇÃO" },
-  { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
-  { icon: ShoppingCart, label: "Pedidos", path: "/orders" },
-  { icon: CreditCard, label: "Pagamentos", path: "/payments" },
-  { icon: AlertTriangle, label: "Alertas", path: "/stock-alerts" },
-  { icon: Sparkles, label: "Fidelidade", path: "/loyalty" },
-  { icon: TicketPercent, label: "Cupons", path: "/coupons" },
-  { icon: Table, label: "Mesas", path: "/tables" },
+  {
+    icon: Utensils,
+    label: "Food",
+    path: "/food",
+    children: [
+      { label: "Dashboard", path: "/admin" },
+      { label: "Pedidos", path: "/orders" },
+      { label: "Pagamentos", path: "/payments" },
+      { label: "Alertas", path: "/stock-alerts" },
+      { label: "Fidelidade", path: "/loyalty" },
+      { label: "Cupons", path: "/coupons" },
+      { label: "Mesas", path: "/tables" },
+    ],
+  },
   {
     icon: Folder,
     label: "Cadastro",
