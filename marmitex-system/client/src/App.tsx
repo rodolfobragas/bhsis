@@ -37,11 +37,35 @@ import CadastroParticipanteRelatorioCredito from "./pages/CadastroParticipanteRe
 import CadastroParticipanteRelatorioAniversariantes from "./pages/CadastroParticipanteRelatorioAniversariantes";
 import CadastroParticipanteManutencao from "./pages/CadastroParticipanteManutencao";
 import CadastroFiscal from "./pages/CadastroFiscal";
+import CadastroFiscalCfop from "./pages/CadastroFiscalCfop";
+import CadastroFiscalCstIcms from "./pages/CadastroFiscalCstIcms";
+import CadastroFiscalRegraFiscal from "./pages/CadastroFiscalRegraFiscal";
+import CadastroFiscalNaturezaOperacao from "./pages/CadastroFiscalNaturezaOperacao";
+import CadastroFiscalInfoComplementares from "./pages/CadastroFiscalInfoComplementares";
+import CadastroFiscalIntegracaoImendes from "./pages/CadastroFiscalIntegracaoImendes";
 import CadastroFinanceiro from "./pages/CadastroFinanceiro";
+import CadastroFinanceiroBandeira from "./pages/CadastroFinanceiroBandeira";
+import CadastroFinanceiroContaBancaria from "./pages/CadastroFinanceiroContaBancaria";
+import CadastroFinanceiroHistoricoPadrao from "./pages/CadastroFinanceiroHistoricoPadrao";
+import CadastroFinanceiroCentroCusto from "./pages/CadastroFinanceiroCentroCusto";
+import CadastroFinanceiroFormaPagamento from "./pages/CadastroFinanceiroFormaPagamento";
+import CadastroFinanceiroPlanoContasGerencial from "./pages/CadastroFinanceiroPlanoContasGerencial";
+import CadastroFinanceiroParametrosConvenioBoleto from "./pages/CadastroFinanceiroParametrosConvenioBoleto";
 import CadastroCaixaVenda from "./pages/CadastroCaixaVenda";
+import CadastroCaixaVendaCadastrar from "./pages/CadastroCaixaVendaCadastrar";
+import CadastroCaixaVendaConsultar from "./pages/CadastroCaixaVendaConsultar";
 import CadastroUsuario from "./pages/CadastroUsuario";
+import CadastroUsuarioCadastrar from "./pages/CadastroUsuarioCadastrar";
+import CadastroUsuarioConsultar from "./pages/CadastroUsuarioConsultar";
+import CadastroUsuarioGrupoPermissoes from "./pages/CadastroUsuarioGrupoPermissoes";
 import CadastroVeiculo from "./pages/CadastroVeiculo";
+import CadastroVeiculoCadastrar from "./pages/CadastroVeiculoCadastrar";
+import CadastroVeiculoConsultar from "./pages/CadastroVeiculoConsultar";
+import CadastroVeiculoVeiculosClientes from "./pages/CadastroVeiculoVeiculosClientes";
+import CadastroVeiculoCadastrarConsultarCores from "./pages/CadastroVeiculoCadastrarConsultarCores";
 import CadastroSetor from "./pages/CadastroSetor";
+import CadastroSetorCadastrar from "./pages/CadastroSetorCadastrar";
+import CadastroSetorConsultar from "./pages/CadastroSetorConsultar";
 import FaturamentoNotasFiscaisEletronicas from "./pages/FaturamentoNotasFiscaisEletronicas";
 import FaturamentoNotasFiscaisServico from "./pages/FaturamentoNotasFiscaisServico";
 import FaturamentoManifestoDocumentos from "./pages/FaturamentoManifestoDocumentos";
@@ -323,10 +347,101 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/cadastro/fiscal/cfop">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFiscalCfop />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/fiscal/cst-icms">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFiscalCstIcms />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/fiscal/regra-fiscal">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFiscalRegraFiscal />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/fiscal/natureza-operacao">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFiscalNaturezaOperacao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/fiscal/info-complementares">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFiscalInfoComplementares />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/fiscal/integracao-imendes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFiscalIntegracaoImendes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/cadastro/financeiro">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <CadastroFinanceiro />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/financeiro/bandeira">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFinanceiroBandeira />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/financeiro/conta-bancaria">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFinanceiroContaBancaria />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/financeiro/historico-padrao">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFinanceiroHistoricoPadrao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/financeiro/centro-custo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFinanceiroCentroCusto />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/financeiro/forma-pagamento">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFinanceiroFormaPagamento />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/financeiro/plano-contas-gerencial">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFinanceiroPlanoContasGerencial />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/financeiro/parametros-convenio-boleto">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroFinanceiroParametrosConvenioBoleto />
           </AdminLayout>
         </ProtectedRoute>
       </Route>
@@ -337,10 +452,45 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/cadastro/caixa-venda/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroCaixaVendaCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/caixa-venda/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroCaixaVendaConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/cadastro/usuario">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <CadastroUsuario />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/usuario/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroUsuarioCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/usuario/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroUsuarioConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/usuario/grupo-permissoes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroUsuarioGrupoPermissoes />
           </AdminLayout>
         </ProtectedRoute>
       </Route>
@@ -351,10 +501,52 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/cadastro/veiculo/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroVeiculoCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/veiculo/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroVeiculoConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/veiculo/veiculos-clientes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroVeiculoVeiculosClientes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/veiculo/cadastrar-consultar-cores">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroVeiculoCadastrarConsultarCores />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/cadastro/setor">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <CadastroSetor />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/setor/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroSetorCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/setor/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroSetorConsultar />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

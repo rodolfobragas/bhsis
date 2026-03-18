@@ -88,6 +88,7 @@ Modelos devem atualizar apenas os blocos correspondentes às áreas que tocam, s
 4. Se identificar bloqueio externo (ex.: download lento, serviço offline), adicione novo bloco `## Bloqueios` com descrição e traceback breve.
 
 ## Notas recentes
+- 2026-03-18T02:36:17Z (Codex): Cadastro ganhou novos submenus e rotas placeholder para Fiscal, Financeiro, Caixa Venda, Usuário, Veículos e Setor, incluindo páginas dedicadas para cada opção.
 - 2026-03-18T02:26:48Z (Codex): Cadastro → Participante ganhou submenu com Cadastras, Consultar, Cargo, Grupo, Vendedor x Cliente, Relatório de Crédito, Relatório de Aniversariantes e Manutenção de Participantes (rotas placeholder).
 - 2026-03-18T02:16:56Z (Codex): Cadastro → Produto ganhou submenu com Cadastrar, Consultar, Busca Preço e Consulta Rápida (rotas placeholder).
 - 2026-03-18T02:04:18Z (Codex): Estrutura do sistema consolidada: módulo Food marcado como funcional e demais módulos como em desenvolvimento (placeholders).

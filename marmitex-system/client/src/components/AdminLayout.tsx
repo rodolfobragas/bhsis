@@ -59,12 +59,66 @@ const adminMenuItems: DashboardMenuEntry[] = [
           { label: "Manutenção de Participantes", path: "/cadastro/participante/manutencao" },
         ],
       },
-      { label: "Fiscal", path: "/cadastro/fiscal" },
-      { label: "Financeiro", path: "/cadastro/financeiro" },
-      { label: "Caixa Venda", path: "/cadastro/caixa-venda" },
-      { label: "Usuário", path: "/cadastro/usuario" },
-      { label: "Veículo", path: "/cadastro/veiculo" },
-      { label: "Setor", path: "/cadastro/setor" },
+      {
+        label: "Fiscal",
+        path: "/cadastro/fiscal",
+        children: [
+          { label: "CFOP", path: "/cadastro/fiscal/cfop" },
+          { label: "CST ICMS", path: "/cadastro/fiscal/cst-icms" },
+          { label: "Regra Fiscal", path: "/cadastro/fiscal/regra-fiscal" },
+          { label: "Natureza de Operação", path: "/cadastro/fiscal/natureza-operacao" },
+          { label: "Info. Complementares", path: "/cadastro/fiscal/info-complementares" },
+          { label: "Integração iMendes", path: "/cadastro/fiscal/integracao-imendes" },
+        ],
+      },
+      {
+        label: "Financeiro",
+        path: "/cadastro/financeiro",
+        children: [
+          { label: "Bandeira", path: "/cadastro/financeiro/bandeira" },
+          { label: "Conta Bancária", path: "/cadastro/financeiro/conta-bancaria" },
+          { label: "Histórico Padrão", path: "/cadastro/financeiro/historico-padrao" },
+          { label: "Centro de Custo", path: "/cadastro/financeiro/centro-custo" },
+          { label: "Forma de Pagamento", path: "/cadastro/financeiro/forma-pagamento" },
+          { label: "Plano de Contas Gerencial", path: "/cadastro/financeiro/plano-contas-gerencial" },
+          { label: "Parâmetros/ConvÊnio Boleto", path: "/cadastro/financeiro/parametros-convenio-boleto" },
+        ],
+      },
+      {
+        label: "Caixa Venda",
+        path: "/cadastro/caixa-venda",
+        children: [
+          { label: "Cadastrar", path: "/cadastro/caixa-venda/cadastrar" },
+          { label: "Consultar", path: "/cadastro/caixa-venda/consultar" },
+        ],
+      },
+      {
+        label: "Usuário",
+        path: "/cadastro/usuario",
+        children: [
+          { label: "Cadastrar", path: "/cadastro/usuario/cadastrar" },
+          { label: "Consultar", path: "/cadastro/usuario/consultar" },
+          { label: "Grupo/Permissões", path: "/cadastro/usuario/grupo-permissoes" },
+        ],
+      },
+      {
+        label: "Veículos",
+        path: "/cadastro/veiculo",
+        children: [
+          { label: "Cadastrar", path: "/cadastro/veiculo/cadastrar" },
+          { label: "Consultar", path: "/cadastro/veiculo/consultar" },
+          { label: "Veículos x Clientes", path: "/cadastro/veiculo/veiculos-clientes" },
+          { label: "Cadastrar/Consultar Cores", path: "/cadastro/veiculo/cadastrar-consultar-cores" },
+        ],
+      },
+      {
+        label: "Setor",
+        path: "/cadastro/setor",
+        children: [
+          { label: "Cadastrar", path: "/cadastro/setor/cadastrar" },
+          { label: "Consultar", path: "/cadastro/setor/consultar" },
+        ],
+      },
     ],
   },
   {
