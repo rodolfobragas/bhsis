@@ -230,6 +230,8 @@ import ProducaoCadastrar from "./pages/ProducaoCadastrar";
 import ProducaoConsultar from "./pages/ProducaoConsultar";
 import ProducaoGerarProducao from "./pages/ProducaoGerarProducao";
 import ProducaoTipoMateriaPrima from "./pages/ProducaoTipoMateriaPrima";
+import ProducaoTipoMateriaPrimaCadastrar from "./pages/ProducaoTipoMateriaPrimaCadastrar";
+import ProducaoTipoMateriaPrimaConsultar from "./pages/ProducaoTipoMateriaPrimaConsultar";
 import ProducaoConsultarGeradas from "./pages/ProducaoConsultarGeradas";
 import DeliveryPainel from "./pages/DeliveryPainel";
 import DeliveryEntregador from "./pages/DeliveryEntregador";
@@ -238,12 +240,30 @@ import RelatoriosLogSistema from "./pages/RelatoriosLogSistema";
 import RelatoriosGerenciais from "./pages/RelatoriosGerenciais";
 import RelatoriosLancasPrevisaoDre from "./pages/RelatoriosLancasPrevisaoDre";
 import RelatoriosGerador from "./pages/RelatoriosGerador";
+import RelatoriosGeradorCadastrar from "./pages/RelatoriosGeradorCadastrar";
+import RelatoriosGeradorConsultar from "./pages/RelatoriosGeradorConsultar";
+import RelatoriosGeradorGerarRelatorio from "./pages/RelatoriosGeradorGerarRelatorio";
 import RelatoriosEnvioWhatsapp from "./pages/RelatoriosEnvioWhatsapp";
 import RelatoriosNotasFiscaisSaida from "./pages/RelatoriosNotasFiscaisSaida";
+import RelatoriosNotasFiscaisSaidaResumo from "./pages/RelatoriosNotasFiscaisSaidaResumo";
+import RelatoriosNotasFiscaisSaidaEletronicas from "./pages/RelatoriosNotasFiscaisSaidaEletronicas";
+import RelatoriosNotasFiscaisSaidaEletronicasDetalhado from "./pages/RelatoriosNotasFiscaisSaidaEletronicasDetalhado";
 import RelatoriosNotasFiscaisEntrada from "./pages/RelatoriosNotasFiscaisEntrada";
+import RelatoriosNotasFiscaisEntradaResumo from "./pages/RelatoriosNotasFiscaisEntradaResumo";
+import RelatoriosNotasFiscaisEntradaEletronicas from "./pages/RelatoriosNotasFiscaisEntradaEletronicas";
+import RelatoriosNotasFiscaisEntradaEletronicasDetalhado from "./pages/RelatoriosNotasFiscaisEntradaEletronicasDetalhado";
+import RelatoriosNotasFiscaisEntradaDetalhadoRateioItem from "./pages/RelatoriosNotasFiscaisEntradaDetalhadoRateioItem";
+import RelatoriosNotasFiscaisEntradaDetalhadoRateioFinanceiro from "./pages/RelatoriosNotasFiscaisEntradaDetalhadoRateioFinanceiro";
 import RelatoriosNotasFiscaisServico from "./pages/RelatoriosNotasFiscaisServico";
+import RelatoriosNotasFiscaisServicoResumo from "./pages/RelatoriosNotasFiscaisServicoResumo";
+import RelatoriosNotasFiscaisServicoEletronicas from "./pages/RelatoriosNotasFiscaisServicoEletronicas";
+import RelatoriosNotasFiscaisServicoEletronicasDetalhado from "./pages/RelatoriosNotasFiscaisServicoEletronicasDetalhado";
 import RelatoriosConhecimentosEletronicos from "./pages/RelatoriosConhecimentosEletronicos";
+import RelatoriosConhecimentosEletronicosResumo from "./pages/RelatoriosConhecimentosEletronicosResumo";
+import RelatoriosConhecimentosEletronicosDetalhados from "./pages/RelatoriosConhecimentosEletronicosDetalhados";
 import RelatoriosManifestoDocumentos from "./pages/RelatoriosManifestoDocumentos";
+import RelatoriosManifestoDocumentosResumo from "./pages/RelatoriosManifestoDocumentosResumo";
+import RelatoriosManifestoDocumentosEletronicos from "./pages/RelatoriosManifestoDocumentosEletronicos";
 import RelatoriosNotasFiscaisConsumidor from "./pages/RelatoriosNotasFiscaisConsumidor";
 import RelatoriosProdutos from "./pages/RelatoriosProdutos";
 import RelatoriosFinanceiro from "./pages/RelatoriosFinanceiro";
@@ -1793,6 +1813,20 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/producao/tipo-materia-prima/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <ProducaoTipoMateriaPrimaCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/producao/tipo-materia-prima/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <ProducaoTipoMateriaPrimaConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/producao/consultar-producoes-geradas">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
@@ -1849,6 +1883,48 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/relatorios/gerador-relatorios/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosGeradorCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/gerador-relatorios/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosGeradorConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/gerador-relatorios/gerar-relatorio">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosGeradorGerarRelatorio />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-saida/resumo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisSaidaResumo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-saida/eletronicas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisSaidaEletronicas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-saida/eletronicas-detalhado">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisSaidaEletronicasDetalhado />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/relatorios/envio-whatsapp">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
@@ -1870,10 +1946,66 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/relatorios/notas-fiscais-entrada/resumo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisEntradaResumo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-entrada/eletronicas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisEntradaEletronicas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-entrada/eletronicas-detalhado">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisEntradaEletronicasDetalhado />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-entrada/detalhado-rateio-item">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisEntradaDetalhadoRateioItem />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-entrada/detalhado-rateio-financeiro">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisEntradaDetalhadoRateioFinanceiro />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/relatorios/notas-fiscais-servico">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <RelatoriosNotasFiscaisServico />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-servico/resumo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisServicoResumo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-servico/eletronicas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisServicoEletronicas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/notas-fiscais-servico/eletronicas-detalhado">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosNotasFiscaisServicoEletronicasDetalhado />
           </AdminLayout>
         </ProtectedRoute>
       </Route>
@@ -1884,10 +2016,45 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/relatorios/conhecimentos-eletronicos/resumo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosConhecimentosEletronicosResumo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/conhecimentos-eletronicos/eletronicos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosConhecimentosEletronicos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/conhecimentos-eletronicos/detalhados">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosConhecimentosEletronicosDetalhados />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/relatorios/manifesto-documentos">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <RelatoriosManifestoDocumentos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/manifesto-documentos/resumo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosManifestoDocumentosResumo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/relatorios/manifesto-documentos/eletronicos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <RelatoriosManifestoDocumentosEletronicos />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

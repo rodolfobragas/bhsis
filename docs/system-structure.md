@@ -192,6 +192,24 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
 - Produção
 - Delivery
 - Relatórios
+  - Log do Sistema
+  - Relatórios Gerenciais
+  - Lanças Previsão DRE
+  - Gerador de Relatórios
+    - Cadastrar
+    - Consultar
+    - Gerar Relatório
+  - Relatório envio WhatsApp
+  - Notas Fiscais de Saída
+    - Resumo de Notas Fiscais
+    - Notas Fiscais Eletrônicas
+    - Notas Fiscais Eletrônicas Detalhado
+  - Notas Fiscais de Entrada
+    - Resumo de Notas Fiscais de Entrada
+    - Notas Fiscais de Entrada
+    - Notas Fiscais de Entrada Detalhado
+    - Detalhado com Rateio no Item
+    - Detalhado com Rateio Financeiro
 
 ## Observações
 - A organização do menu já reflete a estrutura final.

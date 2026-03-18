@@ -487,7 +487,14 @@ const adminMenuItems: DashboardMenuEntry[] = [
       { label: "Cadastrar", path: "/producao/cadastrar" },
       { label: "Consultar", path: "/producao/consultar" },
       { label: "Gerar Produção", path: "/producao/gerar-producao" },
-      { label: "Tipo de Matéria Prima", path: "/producao/tipo-materia-prima" },
+      {
+        label: "Tipo de Matéria Prima",
+        path: "/producao/tipo-materia-prima",
+        children: [
+          { label: "Cadastrar", path: "/producao/tipo-materia-prima/cadastrar" },
+          { label: "Consultar", path: "/producao/tipo-materia-prima/consultar" },
+        ],
+      },
       { label: "Consultar Produções Geradas", path: "/producao/consultar-producoes-geradas" },
     ],
   },
@@ -509,13 +516,77 @@ const adminMenuItems: DashboardMenuEntry[] = [
       { label: "Log do Sistema", path: "/relatorios/log-sistema" },
       { label: "Relatórios Gerenciais", path: "/relatorios/relatorios-gerenciais" },
       { label: "Lanças Previsão DRE", path: "/relatorios/lancas-previsao-dre" },
-      { label: "Gerador de Relatórios", path: "/relatorios/gerador-relatorios" },
+      {
+        label: "Gerador de Relatórios",
+        path: "/relatorios/gerador-relatorios",
+        children: [
+          { label: "Cadastrar", path: "/relatorios/gerador-relatorios/cadastrar" },
+          { label: "Consultar", path: "/relatorios/gerador-relatorios/consultar" },
+          { label: "Gerar Relatório", path: "/relatorios/gerador-relatorios/gerar-relatorio" },
+        ],
+      },
+      {
+        label: "Notas Fiscais de Saída",
+        path: "/relatorios/notas-fiscais-saida",
+        children: [
+          { label: "Resumo de Notas Fiscais", path: "/relatorios/notas-fiscais-saida/resumo" },
+          { label: "Notas Fiscais Eletrônicas", path: "/relatorios/notas-fiscais-saida/eletronicas" },
+          { label: "Notas Fiscais Eletrônicas Detalhado", path: "/relatorios/notas-fiscais-saida/eletronicas-detalhado" },
+        ],
+      },
       { label: "Relatório envio WhatsApp", path: "/relatorios/envio-whatsapp" },
-      { label: "Notas Fiscais de Saída", path: "/relatorios/notas-fiscais-saida" },
-      { label: "Notas Fiscais De Entrada", path: "/relatorios/notas-fiscais-entrada" },
-      { label: "Notas Fiscais de Serviço", path: "/relatorios/notas-fiscais-servico" },
-      { label: "Conhecimentos Eletrônicos", path: "/relatorios/conhecimentos-eletronicos" },
-      { label: "Manifesto de Documentos", path: "/relatorios/manifesto-documentos" },
+      {
+        label: "Notas Fiscais De Entrada",
+        path: "/relatorios/notas-fiscais-entrada",
+        children: [
+          { label: "Resumo de Notas Fiscais de Entrada", path: "/relatorios/notas-fiscais-entrada/resumo" },
+          { label: "Notas Fiscais de Entrada", path: "/relatorios/notas-fiscais-entrada/eletronicas" },
+          {
+            label: "Notas Fiscais de Entrada Detalhado",
+            path: "/relatorios/notas-fiscais-entrada/eletronicas-detalhado",
+          },
+          {
+            label: "Detalhado com Rateio no Item",
+            path: "/relatorios/notas-fiscais-entrada/detalhado-rateio-item",
+          },
+          {
+            label: "Detalhado com Rateio Financeiro",
+            path: "/relatorios/notas-fiscais-entrada/detalhado-rateio-financeiro",
+          },
+        ],
+      },
+      {
+        label: "Notas Fiscais de Serviço",
+        path: "/relatorios/notas-fiscais-servico",
+        children: [
+          { label: "Resumo de Notas Fiscais de Serviço", path: "/relatorios/notas-fiscais-servico/resumo" },
+          { label: "Notas Fiscais de Serviço", path: "/relatorios/notas-fiscais-servico/eletronicas" },
+          {
+            label: "Notas Fiscais de Serviço Detalhado",
+            path: "/relatorios/notas-fiscais-servico/eletronicas-detalhado",
+          },
+        ],
+      },
+      {
+        label: "Conhecimentos Eletrônicos",
+        path: "/relatorios/conhecimentos-eletronicos",
+        children: [
+          { label: "Resumo de Conhecimentos Eletrônicos", path: "/relatorios/conhecimentos-eletronicos/resumo" },
+          { label: "Conhecimentos Eletrônicos", path: "/relatorios/conhecimentos-eletronicos/eletronicos" },
+          {
+            label: "Conhecimentos Eletrônicos Detalhados",
+            path: "/relatorios/conhecimentos-eletronicos/detalhados",
+          },
+        ],
+      },
+      {
+        label: "Manifesto de Documentos",
+        path: "/relatorios/manifesto-documentos",
+        children: [
+          { label: "Resumo de Manifestos de Documentos Fiscais Eletrônicos", path: "/relatorios/manifesto-documentos/resumo" },
+          { label: "Manifestos de Documentos Fiscais Eletrônicos", path: "/relatorios/manifesto-documentos/eletronicos" },
+        ],
+      },
       { label: "Notas Fiscais do Consumidor", path: "/relatorios/notas-fiscais-consumidor" },
       { label: "Produtos", path: "/relatorios/produtos" },
       { label: "Financeiro", path: "/relatorios/financeiro" },
