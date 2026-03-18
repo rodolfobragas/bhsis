@@ -90,6 +90,17 @@ import FaturamentoNfeGeracaoNotaEntrada from "./pages/FaturamentoNfeGeracaoNotaE
 import FaturamentoNfeDeclaracaoImportacao from "./pages/FaturamentoNfeDeclaracaoImportacao";
 import FaturamentoNfseEmissao from "./pages/FaturamentoNfseEmissao";
 import FaturamentoNfseConsultar from "./pages/FaturamentoNfseConsultar";
+import FaturamentoMdfeEmissao from "./pages/FaturamentoMdfeEmissao";
+import FaturamentoMdfeConsultar from "./pages/FaturamentoMdfeConsultar";
+import FaturamentoMdfeConsultarSituacao from "./pages/FaturamentoMdfeConsultarSituacao";
+import FaturamentoCteEmissao from "./pages/FaturamentoCteEmissao";
+import FaturamentoCteConsultar from "./pages/FaturamentoCteConsultar";
+import FaturamentoCteImportarXmlNfe from "./pages/FaturamentoCteImportarXmlNfe";
+import FaturamentoCteConsultarSituacao from "./pages/FaturamentoCteConsultarSituacao";
+import FaturamentoCteCartaCorrecao from "./pages/FaturamentoCteCartaCorrecao";
+import FaturamentoCteFaturasDoccob from "./pages/FaturamentoCteFaturasDoccob";
+import FaturamentoCteInsucessosEntrega from "./pages/FaturamentoCteInsucessosEntrega";
+import FaturamentoCteReciboPagamentoAutonomo from "./pages/FaturamentoCteReciboPagamentoAutonomo";
 import PdvCaixa from "./pages/PdvCaixa";
 import PdvVendas from "./pages/PdvVendas";
 import PdvConfiguracao from "./pages/PdvConfiguracao";
@@ -651,10 +662,87 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/faturamento/manifesto-documentos/emissao-mdfe">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoMdfeEmissao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/manifesto-documentos/consultar-mdfes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoMdfeConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/manifesto-documentos/consultar-situacao-mdfe">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoMdfeConsultarSituacao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/faturamento/conhecimento-transporte">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <FaturamentoConhecimentoTransporte />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte/emissao-cte">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteEmissao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte/consultar-ctes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte/importar-xml-nfe">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteImportarXmlNfe />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte/consultar-situacao-cte">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteConsultarSituacao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte/carta-correcao-eletronica">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteCartaCorrecao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte/consultar-faturas-doccob">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteFaturasDoccob />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte/consultar-insucessos-entrega">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteInsucessosEntrega />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/conhecimento-transporte/recibo-pagamento-autonomo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCteReciboPagamentoAutonomo />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

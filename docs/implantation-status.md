@@ -88,6 +88,7 @@ Modelos devem atualizar apenas os blocos correspondentes às áreas que tocam, s
 4. Se identificar bloqueio externo (ex.: download lento, serviço offline), adicione novo bloco `## Bloqueios` com descrição e traceback breve.
 
 ## Notas recentes
+- 2026-03-18T03:00:38Z (Codex): Faturamento recebeu submenus de Manifesto de Documentos (MDFe) e Conhecimento de Transporte (CTe) com rotas placeholder específicas.
 - 2026-03-18T02:56:19Z (Codex): Faturamento recebeu submenus de Notas Fiscais Eletrônicas e Notas Fiscais de Serviço com novas rotas placeholder (NFe/NFSe).
 - 2026-03-18T02:36:17Z (Codex): Cadastro ganhou novos submenus e rotas placeholder para Fiscal, Financeiro, Caixa Venda, Usuário, Veículos e Setor, incluindo páginas dedicadas para cada opção.
 - 2026-03-18T02:26:48Z (Codex): Cadastro → Participante ganhou submenu com Cadastras, Consultar, Cargo, Grupo, Vendedor x Cliente, Relatório de Crédito, Relatório de Aniversariantes e Manutenção de Participantes (rotas placeholder).

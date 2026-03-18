@@ -74,6 +74,19 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
 - Faturamento → Notas Fiscais de Serviço
   - Emissão de NFSe
   - Consultar NFSe's
+- Faturamento → Manifesto de Documentos
+  - Emissão de MDFe
+  - Consultar MDFe's
+  - Consultar Situação MDFe
+- Faturamento → Conhecimento de Transporte
+  - Emissão de CTe
+  - Consultar CTe's
+  - Importar XML NFe
+  - Consultar Situação CTe
+  - Carta Correção Eletrônica
+  - Consultar Faturas DOCCOB
+  - Consultar Insucessos na Entrega
+  - Recibo de Pagamento a Autônomo
 - PDV
 - Entrada de Nota
 - Documentos Recebidos
