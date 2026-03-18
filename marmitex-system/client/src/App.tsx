@@ -108,6 +108,9 @@ import FaturamentoCteOsConsultarSituacao from "./pages/FaturamentoCteOsConsultar
 import FaturamentoOrcamentoCadastrar from "./pages/FaturamentoOrcamentoCadastrar";
 import FaturamentoOrcamentoConsultar from "./pages/FaturamentoOrcamentoConsultar";
 import FaturamentoOrcamentoProdutosReservados from "./pages/FaturamentoOrcamentoProdutosReservados";
+import FaturamentoCondicionalCadastrar from "./pages/FaturamentoCondicionalCadastrar";
+import FaturamentoCondicionalConsultar from "./pages/FaturamentoCondicionalConsultar";
+import FaturamentoCondicionalProdutos from "./pages/FaturamentoCondicionalProdutos";
 import PdvCaixa from "./pages/PdvCaixa";
 import PdvVendas from "./pages/PdvVendas";
 import PdvConfiguracao from "./pages/PdvConfiguracao";
@@ -820,6 +823,27 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <FaturamentoCondicional />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/condicional/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCondicionalCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/condicional/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCondicionalConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/faturamento/condicional/produtos-condicional">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FaturamentoCondicionalProdutos />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

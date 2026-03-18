@@ -196,7 +196,15 @@ const adminMenuItems: DashboardMenuEntry[] = [
           { label: "Produtos Reservados", path: "/faturamento/orcamento/produtos-reservados" },
         ],
       },
-      { label: "Condicional", path: "/faturamento/condicional" },
+      {
+        label: "Condicional",
+        path: "/faturamento/condicional",
+        children: [
+          { label: "Cadastrar", path: "/faturamento/condicional/cadastrar" },
+          { label: "Consultar", path: "/faturamento/condicional/consultar" },
+          { label: "Produtos em Condicional", path: "/faturamento/condicional/produtos-condicional" },
+        ],
+      },
       { label: "Pedido de Venda", path: "/faturamento/pedido-venda" },
       { label: "Ordem de Serviço", path: "/faturamento/ordem-servico" },
       { label: "Venda Futura/Retiradas", path: "/faturamento/venda-futura-retiradas" },
