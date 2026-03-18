@@ -88,6 +88,9 @@ Modelos devem atualizar apenas os blocos correspondentes às áreas que tocam, s
 4. Se identificar bloqueio externo (ex.: download lento, serviço offline), adicione novo bloco `## Bloqueios` com descrição e traceback breve.
 
 ## Notas recentes
+- 2026-03-18T12:05:58Z (Codex): Pedido de Compra recebeu submenu de Cotação com opções de cadastrar e consultar.
+- 2026-03-18T12:05:13Z (Codex): Entrada de Nota recebeu submenu de Tributação NFe Entrada com opções de cadastrar e consultar.
+- 2026-03-18T12:04:25Z (Codex): PDV recebeu submenus de Vendas e Configuração com rotas placeholder dedicadas.
 - 2026-03-18T12:00:02Z (Codex): PDV recebeu submenu de Caixa com opções de abertura, fechamento, suprimentos/sangrias e relatórios.
 - 2026-03-18T11:48:04Z (Codex): Faturamento recebeu submenus de Pedido de Venda, Venda Futura/Retiradas, Venda Externa/Retornos, Geração/Reajuste Contrato, Romaneio de Carga/Entrega e Importação XML.
 - 2026-03-18T11:42:18Z (Codex): Faturamento recebeu submenu de Ordem de Serviço com rotas placeholder para cadastro, consulta e produtos reservados.

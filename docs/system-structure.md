@@ -136,6 +136,23 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
   - Alterar Valor Inicial Caixa
   - Consultar Suprimentos/Sangrias
   - Relatório Vendas por Data/Horário
+- PDV → Vendas
+  - Realizar Venda
+  - Força de Venda
+  - Venda Rápida
+  - Consultar Vendas
+  - Vendas Caixa Logado
+  - Envio de Contingências
+  - Consultar Situação NFCe
+  - Inutilização de Vendas/NFCe
+- PDV → Configuração
+  - Exportar Produtos de Balança
+- Entrada de Nota → Tributação NFe Entrada
+  - Cadastrar
+  - Consultar
+- Pedido de Compra → Cotação
+  - Cadastrar
+  - Consultar
 - PDV
 - Entrada de Nota
 - Documentos Recebidos

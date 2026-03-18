@@ -139,6 +139,19 @@ import PdvCaixaConsultarFechamentos from "./pages/PdvCaixaConsultarFechamentos";
 import PdvCaixaAlterarValorInicial from "./pages/PdvCaixaAlterarValorInicial";
 import PdvCaixaConsultarSuprimentosSangrias from "./pages/PdvCaixaConsultarSuprimentosSangrias";
 import PdvCaixaRelatorioVendasDataHorario from "./pages/PdvCaixaRelatorioVendasDataHorario";
+import PdvVendasRealizar from "./pages/PdvVendasRealizar";
+import PdvVendasForca from "./pages/PdvVendasForca";
+import PdvVendasRapida from "./pages/PdvVendasRapida";
+import PdvVendasConsultar from "./pages/PdvVendasConsultar";
+import PdvVendasCaixaLogado from "./pages/PdvVendasCaixaLogado";
+import PdvVendasEnvioContingencias from "./pages/PdvVendasEnvioContingencias";
+import PdvVendasConsultarSituacaoNfce from "./pages/PdvVendasConsultarSituacaoNfce";
+import PdvVendasInutilizacaoNfce from "./pages/PdvVendasInutilizacaoNfce";
+import PdvConfiguracaoExportarBalanca from "./pages/PdvConfiguracaoExportarBalanca";
+import EntradaNotaTributacaoCadastrar from "./pages/EntradaNotaTributacaoCadastrar";
+import EntradaNotaTributacaoConsultar from "./pages/EntradaNotaTributacaoConsultar";
+import PedidoCompraCotacaoCadastrar from "./pages/PedidoCompraCotacaoCadastrar";
+import PedidoCompraCotacaoConsultar from "./pages/PedidoCompraCotacaoConsultar";
 import PdvCaixa from "./pages/PdvCaixa";
 import PdvVendas from "./pages/PdvVendas";
 import PdvConfiguracao from "./pages/PdvConfiguracao";
@@ -1134,10 +1147,73 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/pdv/vendas/realizar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvVendasRealizar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/vendas/forca-venda">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvVendasForca />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/vendas/venda-rapida">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvVendasRapida />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/vendas/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvVendasConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/vendas/caixa-logado">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvVendasCaixaLogado />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/vendas/envio-contingencias">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvVendasEnvioContingencias />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/vendas/consultar-situacao-nfce">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvVendasConsultarSituacaoNfce />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/vendas/inutilizacao-vendas-nfce">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvVendasInutilizacaoNfce />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/pdv/configuracao">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <PdvConfiguracao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/configuracao/exportar-produtos-balanca">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvConfiguracaoExportarBalanca />
           </AdminLayout>
         </ProtectedRoute>
       </Route>
@@ -1166,6 +1242,20 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <EntradaNotaTributacaoNfeEntrada />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/entrada-nota/tributacao-nfe-entrada/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EntradaNotaTributacaoCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/entrada-nota/tributacao-nfe-entrada/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <EntradaNotaTributacaoConsultar />
           </AdminLayout>
         </ProtectedRoute>
       </Route>
@@ -1229,6 +1319,20 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <PedidoCompraCotacao />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pedido-compra/cotacao/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PedidoCompraCotacaoCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pedido-compra/cotacao/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PedidoCompraCotacaoConsultar />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

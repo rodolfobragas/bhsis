@@ -288,8 +288,27 @@ const adminMenuItems: DashboardMenuEntry[] = [
           { label: "Relatório Vendas por Data/Horário", path: "/pdv/caixa/relatorio-vendas-data-horario" },
         ],
       },
-      { label: "Vendas", path: "/pdv/vendas" },
-      { label: "Configuração", path: "/pdv/configuracao" },
+      {
+        label: "Vendas",
+        path: "/pdv/vendas",
+        children: [
+          { label: "Realizar Venda", path: "/pdv/vendas/realizar" },
+          { label: "Força de Venda", path: "/pdv/vendas/forca-venda" },
+          { label: "Venda Rápida", path: "/pdv/vendas/venda-rapida" },
+          { label: "Consultar Vendas", path: "/pdv/vendas/consultar" },
+          { label: "Vendas Caixa Logado", path: "/pdv/vendas/caixa-logado" },
+          { label: "Envio de Contingências", path: "/pdv/vendas/envio-contingencias" },
+          { label: "Consultar Situação NFCe", path: "/pdv/vendas/consultar-situacao-nfce" },
+          { label: "Inutilização de Vendas/NFCe", path: "/pdv/vendas/inutilizacao-vendas-nfce" },
+        ],
+      },
+      {
+        label: "Configuração",
+        path: "/pdv/configuracao",
+        children: [
+          { label: "Exportar Produtos de Balança", path: "/pdv/configuracao/exportar-produtos-balanca" },
+        ],
+      },
     ],
   },
   {
@@ -300,7 +319,14 @@ const adminMenuItems: DashboardMenuEntry[] = [
       { label: "Cadastrar", path: "/entrada-nota/cadastrar" },
       { label: "Consultar", path: "/entrada-nota/consultar" },
       { label: "Importação XML", path: "/entrada-nota/importacao-xml" },
-      { label: "Tributação NFe Entrada", path: "/entrada-nota/tributacao-nfe-entrada" },
+      {
+        label: "Tributação NFe Entrada",
+        path: "/entrada-nota/tributacao-nfe-entrada",
+        children: [
+          { label: "Cadastrar", path: "/entrada-nota/tributacao-nfe-entrada/cadastrar" },
+          { label: "Consultar", path: "/entrada-nota/tributacao-nfe-entrada/consultar" },
+        ],
+      },
     ],
   },
   {
@@ -323,7 +349,14 @@ const adminMenuItems: DashboardMenuEntry[] = [
     children: [
       { label: "Cadastrar", path: "/pedido-compra/cadastrar" },
       { label: "Consultar", path: "/pedido-compra/consultar" },
-      { label: "Cotação", path: "/pedido-compra/cotacao" },
+      {
+        label: "Cotação",
+        path: "/pedido-compra/cotacao",
+        children: [
+          { label: "Cadastrar", path: "/pedido-compra/cotacao/cadastrar" },
+          { label: "Consultar", path: "/pedido-compra/cotacao/consultar" },
+        ],
+      },
     ],
   },
   {
