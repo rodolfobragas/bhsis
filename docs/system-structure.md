@@ -1,7 +1,7 @@
 # Estrutura do Sistema (Visão Atual)
 
 ## Visão Geral
-O sistema está organizado por módulos no menu lateral do Marmitex.  
+O sistema está organizado por módulos no menu lateral do BHSIS.  
 No momento, **apenas o módulo Food** está funcional.  
 Os demais módulos estão **em desenvolvimento** (telas placeholder).
 

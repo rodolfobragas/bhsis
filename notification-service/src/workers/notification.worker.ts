@@ -3,7 +3,7 @@ import { getRedisOptions } from '../config/queues';
 import { sendWhatsApp } from '../channels/whatsapp';
 import { sendSms } from '../channels/sms';
 import { sendPush } from '../channels/push';
-import { getDelivery } from '../services/marmitex.client';
+import { getDelivery } from '../services/bhsis.client';
 
 const QUEUE_NAME = 'notificacoes.cliente';
 const DEFAULT_MESSAGE = 'Sua entrega será a próxima...';

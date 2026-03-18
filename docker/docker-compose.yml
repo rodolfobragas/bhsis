@@ -108,6 +108,8 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       GRAPHOPPER_VRP_URL: http://graphhopper:8989/vrp
+      BHSIS_API_URL: http://bhsis:3000
+      BHSIS_SERVICE_TOKEN: changeme
     depends_on:
       postgres:
         condition: service_healthy
@@ -136,6 +138,8 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       TRACCAR_WEBHOOK_SECRET: changeme
+      BHSIS_API_URL: http://bhsis:3000
+      BHSIS_SERVICE_TOKEN: changeme
     depends_on:
       postgres:
         condition: service_healthy
@@ -190,22 +194,23 @@ services:
       tracking-service:
         condition: service_healthy
 
-  marmitex-system:
-    image: rodolfobragas/bhsis:marmitex-system-v1.0.35
+  bhsis:
+    image: rodolfobragas/bhsis:bhsis-v1.0.35
     build:
-      context: ../marmitex-system
-    container_name: delivery-marmitex-system
+      context: ../bhsis
+    container_name: delivery-bhsis
     ports:
       - 3000:3000
     environment:
       PORT: 3000
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/delivery?options=-c%20search_path%3Dmarmitex%2Cpublic
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/delivery?options=-c%20search_path%3Dbhsis%2Cpublic
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ''
+      BHSIS_SERVICE_TOKEN: changeme
       SERVICE_TOKEN: changeme
       NODE_ENV: production
-      VITE_APP_ID: delivery
+      VITE_APP_ID: bhsis
       JWT_SECRET: changeme
       OAUTH_SERVER_URL: https://oauth.example.com
       OWNER_OPEN_ID: owner123
