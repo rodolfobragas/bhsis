@@ -122,8 +122,8 @@ export default function Recipes() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Gerenciamento de Receitas</h1>
-          <p className="text-gray-600">Gerencie as receitas e ingredientes do seu restaurante</p>
+          <h1 className="text-2xl sm:text-3xl font-bold">Gerenciamento de Receitas</h1>
+          <p className="text-gray-600 text-sm sm:text-base">Gerencie as receitas e ingredientes do seu restaurante</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
@@ -236,7 +236,7 @@ export default function Recipes() {
       <Card>
         <CardHeader>
           <CardTitle>Receitas</CardTitle>
-          <CardDescription>Lista de todas as receitas cadastradas</CardDescription>
+          <CardDescription>Lista de receitas cadastradas</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="mb-4 flex gap-2">

@@ -122,8 +122,8 @@ export default function Inventory() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground">Gerenciamento de Inventário</h1>
-          <p className="text-muted-foreground mt-2">Acompanhe o estoque de produtos</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-foreground">Gerenciamento de Inventário</h1>
+          <p className="text-muted-foreground mt-2 text-sm sm:text-base">Monitore o estoque e os alertas</p>
         </div>
 
         {/* Low Stock Alert */}
@@ -147,25 +147,25 @@ export default function Inventory() {
         {/* Search Bar */}
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle>Pesquisar Produtos</CardTitle>
+            <CardTitle>Buscar produtos</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
               <div className="relative flex-1">
                 <label htmlFor="inventory-search" className="sr-only">
-                  Pesquisar inventário
+                  Buscar inventário
                 </label>
                 <i className="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-muted-foreground" aria-hidden="true" />
                 <Input
                   id="inventory-search"
-                  placeholder="Pesquise por nome ou SKU..."
+                  placeholder="Buscar por nome ou SKU"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
                 />
               </div>
               <Button variant="outline" onClick={fetchInventory} className="w-full md:w-auto">
-                Atualizar
+                Atualizar lista
               </Button>
             </div>
           </CardContent>

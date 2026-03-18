@@ -72,7 +72,7 @@ export default function CustomerTable({
           <TableHeader>
             <TableRow className="bg-gray-50">
               <TableHead>Nome</TableHead>
-              <TableHead>Email</TableHead>
+              <TableHead>E-mail</TableHead>
               <TableHead>Telefone</TableHead>
               <TableHead>Cidade</TableHead>
               <TableHead className="text-right">Ações</TableHead>
@@ -93,6 +93,7 @@ export default function CustomerTable({
                       size="sm"
                       variant="outline"
                       onClick={() => onEdit(customer)}
+                      aria-label="Editar cliente"
                       title="Editar cliente"
                     >
                       <i className="fa-solid fa-pen text-sm" aria-hidden="true" />
@@ -106,6 +107,7 @@ export default function CustomerTable({
                           onDelete(customer.id);
                         }
                       }}
+                      aria-label="Deletar cliente"
                       title="Deletar cliente"
                     >
                       <i className="fa-solid fa-trash text-sm" aria-hidden="true" />

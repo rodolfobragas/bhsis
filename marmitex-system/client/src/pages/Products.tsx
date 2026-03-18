@@ -142,8 +142,8 @@ export default function Products() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground">Gerenciamento de Produtos</h1>
-          <p className="text-muted-foreground mt-2">Gerencie o catálogo de produtos do seu restaurante</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-foreground">Gerenciamento de Produtos</h1>
+          <p className="text-muted-foreground mt-2 text-sm sm:text-base">Organize o catálogo do seu restaurante</p>
         </div>
 
         {/* Error Alert */}
@@ -157,25 +157,25 @@ export default function Products() {
         {/* Search Bar */}
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle>Pesquisar Produtos</CardTitle>
+          <CardTitle>Buscar produtos</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
               <div className="relative flex-1">
                 <label htmlFor="product-search" className="sr-only">
-                  Pesquisar produtos
+                  Buscar produtos
                 </label>
                 <i className="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-muted-foreground" aria-hidden="true" />
                 <Input
                   id="product-search"
-                  placeholder="Pesquise por nome, SKU ou categoria..."
+                  placeholder="Busque por nome, SKU ou categoria"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
                 />
               </div>
               <Button variant="outline" onClick={fetchProducts} className="w-full md:w-auto">
-                Atualizar
+                Atualizar lista
               </Button>
             </div>
           </CardContent>

@@ -120,8 +120,8 @@ export default function Customers() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground">Gerenciamento de Clientes</h1>
-          <p className="text-muted-foreground mt-2">Gerencie os clientes do seu restaurante</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-foreground">Gerenciamento de Clientes</h1>
+          <p className="text-muted-foreground mt-2 text-sm sm:text-base">Gerencie os clientes do seu restaurante</p>
         </div>
 
         {/* Error Alert */}
@@ -135,25 +135,25 @@ export default function Customers() {
         {/* Search Bar */}
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle>Pesquisar Clientes</CardTitle>
+            <CardTitle>Buscar clientes</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
               <div className="relative flex-1">
                 <label htmlFor="customer-search" className="sr-only">
-                  Pesquisar clientes
+                  Buscar clientes
                 </label>
             <i className="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-muted-foreground" aria-hidden="true" />
                 <Input
                   id="customer-search"
-                  placeholder="Pesquise por nome, email ou telefone..."
+                  placeholder="Buscar por nome, e-mail ou telefone"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
                 />
               </div>
               <Button variant="outline" onClick={fetchCustomers} className="w-full md:w-auto">
-                Atualizar
+                Atualizar lista
               </Button>
             </div>
           </CardContent>

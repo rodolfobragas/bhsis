@@ -115,8 +115,8 @@ export default function Tables() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Gerenciamento de Mesas</CardTitle>
-          <CardDescription>Cadastre mesas e controle a disponibilidade.</CardDescription>
+          <CardTitle>Gerenciamento de mesas</CardTitle>
+          <CardDescription>Cadastre mesas e controle a disponibilidade</CardDescription>
         </CardHeader>
         <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="space-y-3">

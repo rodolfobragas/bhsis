@@ -82,15 +82,15 @@ export default function Login() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-lg mb-4">
             <i className="fa-solid fa-right-to-bracket text-2xl text-white" aria-hidden="true" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Marmitex System</h1>
-          <p className="text-gray-600 mt-2">Gerenciamento de Restaurante</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Marmitex System</h1>
+          <p className="text-gray-600 mt-2 text-sm sm:text-base">Gerenciamento de Restaurante</p>
         </div>
 
         {/* Login Card */}
         <Card className="shadow-lg">
           <CardHeader>
-            <CardTitle>Fazer Login</CardTitle>
-            <CardDescription>Entre com suas credenciais para acessar o sistema</CardDescription>
+            <CardTitle>Entrar</CardTitle>
+            <CardDescription>Use suas credenciais para acessar o sistema</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -104,11 +104,11 @@ export default function Login() {
 
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">E-mail</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="seu@email.com"
+                  placeholder="voce@email.com"
                   {...register("email")}
                   disabled={isLoading}
                 />
@@ -150,7 +150,7 @@ export default function Login() {
 
               {/* Demo Credentials */}
               <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <p className="text-sm font-semibold text-gray-900 mb-2">Credenciais de Demonstração:</p>
+                <p className="text-sm font-semibold text-gray-900 mb-2">Credenciais de demonstração</p>
                 <div className="space-y-1 text-sm text-gray-700">
                   <p>
                     <strong>Admin:</strong> admin@marmitex.com / admin123

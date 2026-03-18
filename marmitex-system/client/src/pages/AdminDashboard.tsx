@@ -397,8 +397,8 @@ export default function AdminDashboard() {
         {/* Header */}
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-foreground">Painel Administrativo</h1>
-            <p className="text-muted-foreground mt-2">Bem-vindo, {user?.name}</p>
+            <h1 className="text-2xl sm:text-4xl font-bold text-foreground">Painel Administrativo</h1>
+            <p className="text-muted-foreground mt-2 text-sm sm:text-base">Bem-vindo, {user?.name}</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Button

@@ -132,7 +132,7 @@ export default function ProductTable({
                   <TableCell className="text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" aria-label="Abrir ações do produto">
                           <i className="fa-solid fa-ellipsis text-sm" aria-hidden="true" />
                         </Button>
                       </DropdownMenuTrigger>

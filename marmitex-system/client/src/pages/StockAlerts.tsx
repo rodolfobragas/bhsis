@@ -91,8 +91,8 @@ export default function StockAlerts() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Alertas de Estoque</h1>
-        <p className="text-gray-600">Monitore produtos com estoque baixo</p>
+        <h1 className="text-2xl sm:text-3xl font-bold">Alertas de Estoque</h1>
+        <p className="text-gray-600 text-sm sm:text-base">Monitore produtos com estoque baixo</p>
       </div>
 
       {/* Summary Cards */}
@@ -186,6 +186,7 @@ export default function StockAlerts() {
                               size="sm"
                               variant="outline"
                               onClick={() => handleResolve(alert.id)}
+                              aria-label="Marcar alerta como resolvido"
                               title="Marcar como resolvido"
                             >
                               <i className="fa-solid fa-circle-check text-sm" aria-hidden="true" />
@@ -194,6 +195,7 @@ export default function StockAlerts() {
                               size="sm"
                               variant="ghost"
                               onClick={() => handleDismiss(alert.id)}
+                              aria-label="Descartar alerta"
                               title="Descartar alerta"
                             >
                               <i className="fa-solid fa-trash text-sm" aria-hidden="true" />

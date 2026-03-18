@@ -75,15 +75,15 @@ export default function Register() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-lg mb-4">
             <i className="fa-solid fa-user-plus text-2xl text-white" aria-hidden="true" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Marmitex System</h1>
-          <p className="text-gray-600 mt-2">Criar Nova Conta</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Marmitex System</h1>
+          <p className="text-gray-600 mt-2 text-sm sm:text-base">Crie sua conta</p>
         </div>
 
         {/* Register Card */}
         <Card className="shadow-lg">
           <CardHeader>
-            <CardTitle>Registrar-se</CardTitle>
-            <CardDescription>Crie uma nova conta para acessar o sistema</CardDescription>
+            <CardTitle>Criar conta</CardTitle>
+            <CardDescription>Preencha os dados para acessar o sistema</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -97,7 +97,7 @@ export default function Register() {
 
               {/* Name */}
               <div className="space-y-2">
-                <Label htmlFor="name">Nome Completo</Label>
+                <Label htmlFor="name">Nome completo</Label>
                 <Input
                   id="name"
                   placeholder="Seu nome"
@@ -109,7 +109,7 @@ export default function Register() {
 
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">E-mail</Label>
                 <Input
                   id="email"
                   type="email"
@@ -137,7 +137,7 @@ export default function Register() {
 
               {/* Confirm Password */}
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirmar Senha</Label>
+                <Label htmlFor="confirmPassword">Confirmar senha</Label>
                 <Input
                   id="confirmPassword"
                   type="password"
@@ -152,7 +152,7 @@ export default function Register() {
 
               {/* Submit Button */}
               <Button type="submit" className="w-full" disabled={isLoading} size="lg">
-                {isLoading ? "Criando conta..." : "Criar Conta"}
+                {isLoading ? "Criando conta..." : "Criar conta"}
               </Button>
 
               {/* Login Link */}
@@ -160,7 +160,7 @@ export default function Register() {
                 <p className="text-gray-600">
                   Já tem uma conta?{" "}
                   <a href="/login" className="text-blue-600 hover:text-blue-700 font-semibold">
-                    Faça login
+                    Entrar
                   </a>
                 </p>
               </div>

@@ -123,8 +123,8 @@ export default function Coupons() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Cupons e Descontos</CardTitle>
-          <CardDescription>Crie cupons promocionais e controle limites de uso.</CardDescription>
+          <CardTitle>Cupons e descontos</CardTitle>
+          <CardDescription>Crie cupons promocionais e controle limites de uso</CardDescription>
         </CardHeader>
         <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="space-y-3">
@@ -220,7 +220,7 @@ export default function Coupons() {
       <Card>
         <CardHeader>
           <CardTitle>Cupons cadastrados</CardTitle>
-          <CardDescription>Lista atual de cupons ativos e inativos.</CardDescription>
+          <CardDescription>Lista atual de cupons ativos e inativos</CardDescription>
         </CardHeader>
         <CardContent>
           {isLoading ? (

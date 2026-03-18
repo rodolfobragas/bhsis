@@ -139,8 +139,8 @@ export default function Payments() {
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground">Pagamentos</h1>
-            <p className="text-muted-foreground mt-2">
+            <h1 className="text-2xl sm:text-4xl font-bold text-foreground">Pagamentos</h1>
+            <p className="text-muted-foreground mt-2 text-sm sm:text-base">
               Histórico, reembolsos e receita consolidada
             </p>
           </div>
@@ -164,7 +164,7 @@ export default function Payments() {
                 loadReport();
               }}
             >
-              Atualizar
+              Atualizar lista
             </Button>
           </div>
         </div>

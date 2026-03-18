@@ -150,10 +150,10 @@ export default function KitchenDisplay() {
         {/* Header */}
         <div className="mb-6 flex justify-between items-center">
           <div>
-            <h1 className="text-4xl font-bold text-foreground">Kitchen Display System</h1>
-            <p className="text-muted-foreground mt-2">Gerenciamento de pedidos em tempo real</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-foreground">Painel da Cozinha (KDS)</h1>
+            <p className="text-muted-foreground mt-2 text-sm sm:text-base">Gerenciamento de pedidos em tempo real</p>
           </div>
-          <div className="text-3xl font-mono font-bold text-foreground">
+          <div className="text-2xl sm:text-3xl font-mono font-bold text-foreground">
             {time.toLocaleTimeString("pt-BR")}
           </div>
         </div>

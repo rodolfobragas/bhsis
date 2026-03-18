@@ -295,8 +295,8 @@ export default function Orders() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground">Gerenciamento de Pedidos</h1>
-          <p className="text-muted-foreground mt-2">Acompanhe e gerencie todos os pedidos</p>
+          <h1 className="text-2xl sm:text-4xl font-bold text-foreground">Gerenciamento de Pedidos</h1>
+          <p className="text-muted-foreground mt-2 text-sm sm:text-base">Acompanhe e gerencie pedidos em tempo real</p>
         </div>
 
         {/* Error Alert */}
@@ -316,12 +316,12 @@ export default function Orders() {
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
               <div className="relative flex-1">
                 <label htmlFor="order-search" className="sr-only">
-                  Pesquisar pedidos
+                  Buscar pedidos
                 </label>
                 <i className="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-muted-foreground" aria-hidden="true" />
                 <Input
                   id="order-search"
-                  placeholder="Pesquise por cliente ou ID do pedido..."
+                  placeholder="Buscar por cliente ou ID"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
@@ -332,7 +332,7 @@ export default function Orders() {
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="px-4 py-2 border rounded-md w-full md:w-auto"
               >
-                <option value="all">Todos os Status</option>
+                <option value="all">Todos os status</option>
                 <option value="PENDING">Pendente</option>
                 <option value="CONFIRMED">Confirmado</option>
                 <option value="PREPARING">Preparando</option>
@@ -341,7 +341,7 @@ export default function Orders() {
                 <option value="CANCELLED">Cancelado</option>
               </select>
               <Button variant="outline" onClick={fetchOrders} className="w-full md:w-auto">
-                Atualizar
+                Atualizar lista
               </Button>
             </div>
           </CardContent>
@@ -381,6 +381,7 @@ export default function Orders() {
                           <select
                             value={order.status}
                             onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                            aria-label="Alterar status do pedido"
                             className={`px-2 py-1 rounded text-sm font-medium ${statusColors[order.status]}`}
                           >
                             <option value="PENDING">Pendente</option>
@@ -406,6 +407,7 @@ export default function Orders() {
                               size="sm"
                               variant="outline"
                               onClick={() => handleOpenPayments(order)}
+                              aria-label="Ver histórico de pagamentos"
                               title="Ver histórico de pagamentos"
                             >
                               <i className="fa-solid fa-clock-rotate-left text-sm" aria-hidden="true" />
@@ -415,6 +417,7 @@ export default function Orders() {
                               variant="outline"
                               onClick={() => handleCreatePayment(order)}
                               disabled={paymentLoading[order.id] || order.paymentStatus === "PAID"}
+                              aria-label="Gerar link de pagamento"
                               title="Gerar link de pagamento"
                             >
                               <i className="fa-solid fa-credit-card text-sm" aria-hidden="true" />
@@ -423,6 +426,7 @@ export default function Orders() {
                               size="sm"
                               variant="outline"
                               onClick={() => handlePrint(order)}
+                              aria-label="Imprimir pedido"
                               title="Imprimir pedido"
                             >
                               <i className="fa-solid fa-print text-sm" aria-hidden="true" />

@@ -96,7 +96,7 @@ export default function Loyalty() {
       <Card>
         <CardHeader>
           <CardTitle>Fidelidade</CardTitle>
-          <CardDescription>Consulte o saldo e ajuste pontos do cliente.</CardDescription>
+          <CardDescription>Consulte o saldo e ajuste pontos do cliente</CardDescription>
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="md:col-span-2">
@@ -115,10 +115,10 @@ export default function Loyalty() {
       {account && (
         <>
           <Card>
-            <CardHeader>
-              <CardTitle>Resumo do cliente</CardTitle>
-              <CardDescription>Saldo atual e histórico de pontos.</CardDescription>
-            </CardHeader>
+          <CardHeader>
+            <CardTitle>Resumo do cliente</CardTitle>
+            <CardDescription>Saldo atual e histórico de pontos</CardDescription>
+          </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <p className="text-xs text-muted-foreground">Saldo</p>
@@ -147,9 +147,9 @@ export default function Loyalty() {
           {tierInfo && (
             <Card>
               <CardHeader>
-                <CardTitle>Benefícios do nível {tierInfo.tier}</CardTitle>
-                <CardDescription>Use estes benefícios para campanhas e atendimento.</CardDescription>
-              </CardHeader>
+              <CardTitle>Benefícios do nível {tierInfo.tier}</CardTitle>
+              <CardDescription>Use estes benefícios em campanhas e atendimento</CardDescription>
+            </CardHeader>
               <CardContent className="space-y-2">
                 {tierInfo.benefits.map((benefit) => (
                   <div key={benefit} className="text-sm text-muted-foreground">
@@ -162,8 +162,8 @@ export default function Loyalty() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Ajuste de pontos</CardTitle>
-              <CardDescription>Use números negativos para debitar pontos.</CardDescription>
+            <CardTitle>Ajuste de pontos</CardTitle>
+            <CardDescription>Use números negativos para debitar pontos</CardDescription>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Input
