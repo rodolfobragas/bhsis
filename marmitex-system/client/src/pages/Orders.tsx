@@ -183,7 +183,7 @@ export default function Orders() {
           <head>
             <title>Pedido ${order.id}</title>
             <style>
-              body { font-family: Arial, sans-serif; margin: 20px; }
+              body { font-family: "Roboto", "Helvetica Neue", sans-serif; margin: 20px; }
               .header { text-align: center; margin-bottom: 20px; }
               .order-info { margin-bottom: 20px; }
               table { width: 100%; border-collapse: collapse; }

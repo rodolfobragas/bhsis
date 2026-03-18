@@ -37,8 +37,8 @@ export default function CustomerTable({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <i className="fa-solid fa-spinner animate-spin text-blue-600 mr-2" aria-hidden="true" />
-        <span className="text-gray-600">Carregando clientes...</span>
+        <i className="fa-solid fa-spinner animate-spin text-primary mr-2" aria-hidden="true" />
+        <span className="text-muted-foreground">Carregando clientes...</span>
       </div>
     );
   }
@@ -46,7 +46,7 @@ export default function CustomerTable({
   if (customers.length === 0) {
     return (
       <div className="text-center py-8">
-        <div className="flex flex-col items-center gap-2 mb-4 text-gray-600">
+        <div className="flex flex-col items-center gap-2 mb-4 text-muted-foreground">
           <i className="fa-solid fa-circle-exclamation text-sm" aria-hidden="true" />
           <p>Nenhum cliente encontrado</p>
         </div>
@@ -101,7 +101,7 @@ export default function CustomerTable({
                     <Button
                       size="sm"
                       variant="outline"
-                      className="text-red-600 hover:text-red-700"
+                      className="text-destructive hover:text-destructive/80"
                       onClick={() => {
                         if (confirm(`Tem certeza que deseja deletar ${customer.name}?`)) {
                           onDelete(customer.id);

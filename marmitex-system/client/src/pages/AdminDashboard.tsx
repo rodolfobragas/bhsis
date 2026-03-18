@@ -139,7 +139,7 @@ const buildPrintableReport = (summary: DashboardSummary) => `
     <head>
       <title>Relatorio do Dashboard</title>
       <style>
-        body { font-family: Arial, sans-serif; padding: 24px; color: #111827; }
+        body { font-family: "Roboto", "Helvetica Neue", sans-serif; padding: 24px; color: #111827; }
         h1 { font-size: 20px; margin-bottom: 8px; }
         h2 { font-size: 16px; margin: 24px 0 8px; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }

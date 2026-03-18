@@ -146,7 +146,7 @@ export default function ProductTable({
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => setDeleteConfirm(product.id)}
-                          className="gap-2 text-red-600"
+                          className="gap-2 text-destructive focus:text-destructive"
                         >
                           <i className="fa-solid fa-trash text-sm" aria-hidden="true" />
                           Deletar
@@ -175,7 +175,7 @@ export default function ProductTable({
             <AlertDialogAction
               onClick={() => deleteConfirm && handleDeleteConfirm(deleteConfirm)}
               disabled={isDeleting}
-              className="bg-red-600 hover:bg-red-700"
+              className="bg-destructive hover:bg-destructive/90 text-white"
             >
               {isDeleting ? "Deletando..." : "Deletar"}
             </AlertDialogAction>

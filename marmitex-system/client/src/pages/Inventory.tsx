@@ -176,17 +176,17 @@ export default function Inventory() {
           <CardContent className="pt-6">
             {isLoading ? (
               <div className="text-center py-8">
-                <p className="text-gray-600">Carregando inventário...</p>
+                <p className="text-muted-foreground">Carregando inventário...</p>
               </div>
             ) : filteredInventory.length === 0 ? (
               <div className="text-center py-8">
-                <p className="text-gray-600">Nenhum produto encontrado</p>
+                <p className="text-muted-foreground">Nenhum produto encontrado</p>
               </div>
             ) : (
-              <div className="border rounded-lg overflow-hidden overflow-x-auto">
+              <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="bg-gray-50">
+                    <TableRow>
                       <TableHead>Produto</TableHead>
                       <TableHead>SKU</TableHead>
                       <TableHead>Estoque Atual</TableHead>
@@ -198,9 +198,9 @@ export default function Inventory() {
                   </TableHeader>
                   <TableBody>
                     {filteredInventory.map((item) => (
-                      <TableRow key={item.id} className="hover:bg-gray-50">
+                      <TableRow key={item.id}>
                         <TableCell className="font-medium">{item.productName}</TableCell>
-                        <TableCell className="text-sm text-gray-600">{item.sku}</TableCell>
+                        <TableCell className="text-sm text-muted-foreground">{item.sku}</TableCell>
                         <TableCell>
                           {editingId === item.id ? (
                             <Input
@@ -218,9 +218,9 @@ export default function Inventory() {
                         <TableCell className="text-sm">{item.unit}</TableCell>
                         <TableCell>
                           {getStockStatus(item) === "low" ? (
-                            <Badge className="bg-red-100 text-red-800">Baixo</Badge>
+                            <Badge variant="destructive">Baixo</Badge>
                           ) : (
-                            <Badge className="bg-green-100 text-green-800">OK</Badge>
+                            <Badge variant="secondary">OK</Badge>
                           )}
                         </TableCell>
                         <TableCell className="text-right">

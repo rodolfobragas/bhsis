@@ -123,7 +123,7 @@ export default function Recipes() {
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold">Gerenciamento de Receitas</h1>
-          <p className="text-gray-600 text-sm sm:text-base">Gerencie as receitas e ingredientes do seu restaurante</p>
+          <p className="text-muted-foreground text-sm sm:text-base">Gerencie as receitas e ingredientes do seu restaurante</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
@@ -241,7 +241,7 @@ export default function Recipes() {
         <CardContent>
           <div className="mb-4 flex gap-2">
             <div className="flex-1 relative">
-              <i className="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-gray-400" aria-hidden="true" />
+              <i className="fa-solid fa-magnifying-glass absolute left-3 top-3 text-xs text-muted-foreground" aria-hidden="true" />
               <Input
                 placeholder="Buscar receita..."
                 value={searchTerm}
@@ -252,9 +252,9 @@ export default function Recipes() {
           </div>
 
           {isLoading ? (
-            <div className="text-center py-8 text-gray-500">Carregando receitas...</div>
+            <div className="text-center py-8 text-muted-foreground">Carregando receitas...</div>
           ) : filteredRecipes.length === 0 ? (
-            <div className="text-center py-8 text-gray-500">Nenhuma receita encontrada</div>
+            <div className="text-center py-8 text-muted-foreground">Nenhuma receita encontrada</div>
           ) : (
             <div className="overflow-x-auto">
               <Table>

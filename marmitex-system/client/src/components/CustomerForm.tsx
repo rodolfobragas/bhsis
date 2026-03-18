@@ -67,7 +67,7 @@ export default function CustomerForm({
           {...register("name")}
           disabled={isLoading}
         />
-        {errors.name && <p className="text-sm text-red-500">{errors.name?.message}</p>}
+        {errors.name && <p className="text-sm text-destructive">{errors.name?.message}</p>}
       </div>
 
       {/* Email */}
@@ -80,7 +80,7 @@ export default function CustomerForm({
           {...register("email")}
           disabled={isLoading}
         />
-        {errors.email && <p className="text-sm text-red-500">{errors.email?.message}</p>}
+        {errors.email && <p className="text-sm text-destructive">{errors.email?.message}</p>}
       </div>
 
       {/* Phone */}
@@ -92,7 +92,7 @@ export default function CustomerForm({
           {...register("phone")}
           disabled={isLoading}
         />
-        {errors.phone && <p className="text-sm text-red-500">{errors.phone?.message}</p>}
+        {errors.phone && <p className="text-sm text-destructive">{errors.phone?.message}</p>}
       </div>
 
       {/* Address */}
@@ -104,7 +104,7 @@ export default function CustomerForm({
           {...register("address")}
           disabled={isLoading}
         />
-        {errors.address && <p className="text-sm text-red-500">{errors.address?.message}</p>}
+        {errors.address && <p className="text-sm text-destructive">{errors.address?.message}</p>}
       </div>
 
       {/* City and ZipCode */}
@@ -117,7 +117,7 @@ export default function CustomerForm({
             {...register("city")}
             disabled={isLoading}
           />
-          {errors.city && <p className="text-sm text-red-500">{errors.city?.message}</p>}
+          {errors.city && <p className="text-sm text-destructive">{errors.city?.message}</p>}
         </div>
         <div className="space-y-2">
           <Label htmlFor="zipCode">CEP</Label>
@@ -127,7 +127,7 @@ export default function CustomerForm({
             {...register("zipCode")}
             disabled={isLoading}
           />
-          {errors.zipCode && <p className="text-sm text-red-500">{errors.zipCode?.message}</p>}
+          {errors.zipCode && <p className="text-sm text-destructive">{errors.zipCode?.message}</p>}
         </div>
       </div>
 

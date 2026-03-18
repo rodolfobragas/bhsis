@@ -17,8 +17,8 @@ export default function ProtectedRoute({ children, requiredRole }: ProtectedRout
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <i className="fa-solid fa-spinner animate-spin mx-auto mb-4 text-blue-600" aria-hidden="true" />
-          <p className="text-gray-600">Carregando...</p>
+          <i className="fa-solid fa-spinner animate-spin mx-auto mb-4 text-primary" aria-hidden="true" />
+          <p className="text-muted-foreground">Carregando...</p>
         </div>
       </div>
     );
@@ -44,10 +44,10 @@ export default function ProtectedRoute({ children, requiredRole }: ProtectedRout
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               Seu perfil: <strong>{user?.role}</strong>
             </p>
-            <p className="text-sm text-gray-600 mt-2">
+            <p className="text-sm text-muted-foreground mt-2">
               Perfil requerido: <strong>{requiredRole}</strong>
             </p>
           </CardContent>

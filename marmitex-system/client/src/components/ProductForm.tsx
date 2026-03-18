@@ -96,7 +96,7 @@ export default function ProductForm({
           {...register("name")}
           disabled={isSubmitting || isLoading}
         />
-        {errors.name && <p className="text-sm text-red-500">{errors.name?.message as string}</p>}
+        {errors.name && <p className="text-sm text-destructive">{errors.name?.message as string}</p>}
       </div>
 
       {/* SKU */}
@@ -108,7 +108,7 @@ export default function ProductForm({
           {...register("sku")}
           disabled={isSubmitting || isLoading}
         />
-        {errors.sku && <p className="text-sm text-red-500">{errors.sku?.message as string}</p>}
+        {errors.sku && <p className="text-sm text-destructive">{errors.sku?.message as string}</p>}
       </div>
 
       {/* Categoria */}
@@ -126,7 +126,7 @@ export default function ProductForm({
             ))}
           </SelectContent>
         </Select>
-        {errors.category && <p className="text-sm text-red-500">{errors.category?.message as string}</p>}
+        {errors.category && <p className="text-sm text-destructive">{errors.category?.message as string}</p>}
       </div>
 
       {/* Preço */}
@@ -140,7 +140,7 @@ export default function ProductForm({
           {...register("price")}
           disabled={isSubmitting || isLoading}
         />
-        {errors.price && <p className="text-sm text-red-500">{errors.price?.message as string}</p>}
+        {errors.price && <p className="text-sm text-destructive">{errors.price?.message as string}</p>}
       </div>
 
       {/* Descrição */}

@@ -75,15 +75,15 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo/Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-lg mb-4">
-            <i className="fa-solid fa-right-to-bracket text-2xl text-white" aria-hidden="true" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-[5px] mb-4">
+            <i className="fa-solid fa-right-to-bracket text-2xl text-primary-foreground" aria-hidden="true" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Marmitex System</h1>
-          <p className="text-gray-600 mt-2 text-sm sm:text-base">Gerenciamento de Restaurante</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Marmitex System</h1>
+          <p className="text-muted-foreground mt-2 text-sm sm:text-base">Gerenciamento de Restaurante</p>
         </div>
 
         {/* Login Card */}
@@ -112,7 +112,7 @@ export default function Login() {
                   {...register("email")}
                   disabled={isLoading}
                 />
-                {errors.email && <p className="text-sm text-red-500">{errors.email?.message as string}</p>}
+                {errors.email && <p className="text-sm text-destructive">{errors.email?.message as string}</p>}
               </div>
 
               {/* Password */}
@@ -126,7 +126,7 @@ export default function Login() {
                   disabled={isLoading}
                 />
                 {errors.password && (
-                  <p className="text-sm text-red-500">{errors.password?.message as string}</p>
+                  <p className="text-sm text-destructive">{errors.password?.message as string}</p>
                 )}
               </div>
 
@@ -149,9 +149,9 @@ export default function Login() {
               </Button>
 
               {/* Demo Credentials */}
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <p className="text-sm font-semibold text-gray-900 mb-2">Credenciais de demonstração</p>
-                <div className="space-y-1 text-sm text-gray-700">
+              <div className="mt-6 p-4 bg-muted/50 rounded-[5px] border border-border">
+                <p className="text-sm font-semibold text-foreground mb-2">Credenciais de demonstração</p>
+                <div className="space-y-1 text-sm text-muted-foreground">
                   <p>
                     <strong>Admin:</strong> admin@marmitex.com / admin123
                   </p>
@@ -165,7 +165,7 @@ export default function Login() {
         </Card>
 
         {/* Footer */}
-        <div className="text-center mt-6 text-sm text-gray-600">
+        <div className="text-center mt-6 text-sm text-muted-foreground">
           <p>
             Sistema de Gerenciamento de Restaurante v1.0 | © 2026 Marmitex
           </p>

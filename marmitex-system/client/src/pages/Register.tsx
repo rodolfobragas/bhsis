@@ -68,15 +68,15 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo/Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-lg mb-4">
-            <i className="fa-solid fa-user-plus text-2xl text-white" aria-hidden="true" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-[5px] mb-4">
+            <i className="fa-solid fa-user-plus text-2xl text-primary-foreground" aria-hidden="true" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Marmitex System</h1>
-          <p className="text-gray-600 mt-2 text-sm sm:text-base">Crie sua conta</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Marmitex System</h1>
+          <p className="text-muted-foreground mt-2 text-sm sm:text-base">Crie sua conta</p>
         </div>
 
         {/* Register Card */}
@@ -104,7 +104,7 @@ export default function Register() {
                   {...register("name")}
                   disabled={isLoading}
                 />
-                {errors.name && <p className="text-sm text-red-500">{errors.name?.message as string}</p>}
+                {errors.name && <p className="text-sm text-destructive">{errors.name?.message as string}</p>}
               </div>
 
               {/* Email */}
@@ -117,7 +117,7 @@ export default function Register() {
                   {...register("email")}
                   disabled={isLoading}
                 />
-                {errors.email && <p className="text-sm text-red-500">{errors.email?.message as string}</p>}
+                {errors.email && <p className="text-sm text-destructive">{errors.email?.message as string}</p>}
               </div>
 
               {/* Password */}
@@ -131,7 +131,7 @@ export default function Register() {
                   disabled={isLoading}
                 />
                 {errors.password && (
-                  <p className="text-sm text-red-500">{errors.password?.message as string}</p>
+                  <p className="text-sm text-destructive">{errors.password?.message as string}</p>
                 )}
               </div>
 
@@ -146,7 +146,7 @@ export default function Register() {
                   disabled={isLoading}
                 />
                 {errors.confirmPassword && (
-                  <p className="text-sm text-red-500">{errors.confirmPassword?.message as string}</p>
+                  <p className="text-sm text-destructive">{errors.confirmPassword?.message as string}</p>
                 )}
               </div>
 
@@ -157,9 +157,9 @@ export default function Register() {
 
               {/* Login Link */}
               <div className="text-center text-sm">
-                <p className="text-gray-600">
+                <p className="text-muted-foreground">
                   Já tem uma conta?{" "}
-                  <a href="/login" className="text-blue-600 hover:text-blue-700 font-semibold">
+                  <a href="/login" className="text-primary hover:text-primary/80 font-semibold">
                     Entrar
                   </a>
                 </p>
@@ -169,7 +169,7 @@ export default function Register() {
         </Card>
 
         {/* Footer */}
-        <div className="text-center mt-6 text-sm text-gray-600">
+        <div className="text-center mt-6 text-sm text-muted-foreground">
           <p>
             Sistema de Gerenciamento de Restaurante v1.0 | © 2026 Marmitex
           </p>
