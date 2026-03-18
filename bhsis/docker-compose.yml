@@ -37,7 +37,7 @@ services:
       dockerfile: Dockerfile
     container_name: bhsis-backend
     environment:
-      DATABASE_URL: postgresql://bhsis:bhsis_password@postgres:5432/bhsis
+      DATABASE_URL: postgresql://bhsis:bhsis_password@postgres:5432/bhsis_db?options=-c%20search_path%3Dfood_db%2Cweb_db%2Cpublic
       REDIS_URL: redis://redis:6379
       NODE_ENV: production
       PORT: 3001

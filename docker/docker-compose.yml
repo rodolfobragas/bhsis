@@ -203,7 +203,7 @@ services:
       - 3000:3000
     environment:
       PORT: 3000
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/delivery?options=-c%20search_path%3Dbhsis%2Cpublic
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/bhsis_db?options=-c%20search_path%3Dfood_db%2Cweb_db%2Cpublic
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ''
