@@ -147,6 +147,28 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
   - Inutilização de Vendas/NFCe
 - PDV → Configuração
   - Exportar Produtos de Balança
+- Financeiro → Caixa
+  - Abertura de Caixa
+  - Fechamento de Caixa
+  - Fechamento Detalhado
+  - Consultar Fechamentos
+  - Suprimentos / Sangrias
+  - Alterar Valor Inicial Caixa
+  - Consultar Suprimentos/Sangrias
+- Financeiro → Boletos
+  - Boleto Avulso
+  - Consultar Boletos
+  - Consultar Carnês
+  - Ler Arquivo de Retorno
+  - Gerar/Consultar Remessas
+  - Gerar/Consultar Remessas de Baixa
+- Financeiro → Custo Fixo
+  - Cadastrar
+  - Consultar
+- Financeiro → Extrato Bancário
+  - Importar
+  - Conciliar
+  - Excluir Lançamentos não Conciliados
 - Entrada de Nota → Tributação NFe Entrada
   - Cadastrar
   - Consultar

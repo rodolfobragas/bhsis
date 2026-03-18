@@ -152,6 +152,24 @@ import EntradaNotaTributacaoCadastrar from "./pages/EntradaNotaTributacaoCadastr
 import EntradaNotaTributacaoConsultar from "./pages/EntradaNotaTributacaoConsultar";
 import PedidoCompraCotacaoCadastrar from "./pages/PedidoCompraCotacaoCadastrar";
 import PedidoCompraCotacaoConsultar from "./pages/PedidoCompraCotacaoConsultar";
+import FinanceiroCaixaAbertura from "./pages/FinanceiroCaixaAbertura";
+import FinanceiroCaixaFechamento from "./pages/FinanceiroCaixaFechamento";
+import FinanceiroCaixaFechamentoDetalhado from "./pages/FinanceiroCaixaFechamentoDetalhado";
+import FinanceiroCaixaConsultarFechamentos from "./pages/FinanceiroCaixaConsultarFechamentos";
+import FinanceiroCaixaSuprimentosSangrias from "./pages/FinanceiroCaixaSuprimentosSangrias";
+import FinanceiroCaixaAlterarValorInicial from "./pages/FinanceiroCaixaAlterarValorInicial";
+import FinanceiroCaixaConsultarSuprimentosSangrias from "./pages/FinanceiroCaixaConsultarSuprimentosSangrias";
+import FinanceiroBoletosAvulso from "./pages/FinanceiroBoletosAvulso";
+import FinanceiroBoletosConsultar from "./pages/FinanceiroBoletosConsultar";
+import FinanceiroBoletosConsultarCarnes from "./pages/FinanceiroBoletosConsultarCarnes";
+import FinanceiroBoletosLerRetorno from "./pages/FinanceiroBoletosLerRetorno";
+import FinanceiroBoletosRemessas from "./pages/FinanceiroBoletosRemessas";
+import FinanceiroBoletosRemessasBaixa from "./pages/FinanceiroBoletosRemessasBaixa";
+import FinanceiroCustoFixoCadastrar from "./pages/FinanceiroCustoFixoCadastrar";
+import FinanceiroCustoFixoConsultar from "./pages/FinanceiroCustoFixoConsultar";
+import FinanceiroExtratoImportar from "./pages/FinanceiroExtratoImportar";
+import FinanceiroExtratoConciliar from "./pages/FinanceiroExtratoConciliar";
+import FinanceiroExtratoExcluirNaoConciliados from "./pages/FinanceiroExtratoExcluirNaoConciliados";
 import PdvCaixa from "./pages/PdvCaixa";
 import PdvVendas from "./pages/PdvVendas";
 import PdvConfiguracao from "./pages/PdvConfiguracao";
@@ -1350,6 +1368,55 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/financeiro/caixa/abertura">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCaixaAbertura />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/caixa/fechamento">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCaixaFechamento />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/caixa/fechamento-detalhado">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCaixaFechamentoDetalhado />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/caixa/consultar-fechamentos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCaixaConsultarFechamentos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/caixa/suprimentos-sangrias">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCaixaSuprimentosSangrias />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/caixa/alterar-valor-inicial">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCaixaAlterarValorInicial />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/caixa/consultar-suprimentos-sangrias">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCaixaConsultarSuprimentosSangrias />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/financeiro/lancamento-financeiro">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
@@ -1399,6 +1466,48 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/financeiro/boletos/boleto-avulso">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroBoletosAvulso />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/boletos/consultar-boletos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroBoletosConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/boletos/consultar-carnes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroBoletosConsultarCarnes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/boletos/ler-arquivo-retorno">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroBoletosLerRetorno />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/boletos/gerar-consultar-remessas">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroBoletosRemessas />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/boletos/gerar-consultar-remessas-baixa">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroBoletosRemessasBaixa />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/financeiro/custo-fixo">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
@@ -1406,10 +1515,45 @@ function Router() {
           </AdminLayout>
         </ProtectedRoute>
       </Route>
+      <Route path="/financeiro/custo-fixo/cadastrar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCustoFixoCadastrar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/custo-fixo/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroCustoFixoConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/financeiro/extrato-bancario">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <FinanceiroExtratoBancario />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/extrato-bancario/importar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroExtratoImportar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/extrato-bancario/conciliar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroExtratoConciliar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/financeiro/extrato-bancario/excluir-nao-conciliados">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <FinanceiroExtratoExcluirNaoConciliados />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

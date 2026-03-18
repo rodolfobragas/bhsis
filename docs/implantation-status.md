@@ -88,6 +88,7 @@ Modelos devem atualizar apenas os blocos correspondentes às áreas que tocam, s
 4. Se identificar bloqueio externo (ex.: download lento, serviço offline), adicione novo bloco `## Bloqueios` com descrição e traceback breve.
 
 ## Notas recentes
+- 2026-03-18T12:12:08Z (Codex): Financeiro recebeu submenus de Caixa, Boletos, Custo Fixo e Extrato Bancário com novas rotas placeholder.
 - 2026-03-18T12:05:58Z (Codex): Pedido de Compra recebeu submenu de Cotação com opções de cadastrar e consultar.
 - 2026-03-18T12:05:13Z (Codex): Entrada de Nota recebeu submenu de Tributação NFe Entrada com opções de cadastrar e consultar.
 - 2026-03-18T12:04:25Z (Codex): PDV recebeu submenus de Vendas e Configuração com rotas placeholder dedicadas.
