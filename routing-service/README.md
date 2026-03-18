@@ -1,3 +1,9 @@
+
+> **BHSIS CRM**: Este módulo foi reorientado para o CRM **BHSIS**.
+> Documentação atualizada: `docs/bhsis-routing-service.md`.
+>
+> O conteúdo abaixo é legado e serve apenas como referência histórica.
+
 # Routing Service
 
 Serviço responsável por consumir jobs da fila `rotas.otimizar`, consultar o Graphhopper VRP com os pontos e persistir a ordem otimizada no banco Postgres/PostGIS.

@@ -1,3 +1,9 @@
+
+> **BHSIS CRM**: Este módulo foi reorientado para o CRM **BHSIS**.
+> Documentação atualizada: `docs/bhsis-docker.md`.
+>
+> O conteúdo abaixo é legado e serve apenas como referência histórica.
+
 # Infraestrutura Docker
 
 Este diretório agrupa o `docker-compose` que orquestra toda a pilha de microsserviços e dependências.

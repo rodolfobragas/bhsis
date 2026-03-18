@@ -1,3 +1,9 @@
+
+> **BHSIS CRM**: Este módulo foi reorientado para o CRM **BHSIS**.
+> Documentação atualizada: `docs/bhsis-notification-service.md`.
+>
+> O conteúdo abaixo é legado e serve apenas como referência histórica.
+
 # Notification Service
 
 Serviço responsável por processar notificações aos clientes via filas BullMQ.

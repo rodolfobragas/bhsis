@@ -1,3 +1,9 @@
+
+> **BHSIS CRM**: Este módulo foi reorientado para o CRM **BHSIS**.
+> Documentação atualizada: `docs/bhsis-database.md`.
+>
+> O conteúdo abaixo é legado e serve apenas como referência histórica.
+
 # Estrutura do Banco e Scripts
 
 Use os scripts abaixo para preparar o banco PostgreSQL/PostGIS antes de iniciar os microsserviços.

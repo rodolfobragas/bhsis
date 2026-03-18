@@ -1,3 +1,9 @@
+
+> **BHSIS CRM**: Este módulo foi reorientado para o CRM **BHSIS**.
+> Documentação atualizada: `docs/bhsis-api-core.md`.
+>
+> O conteúdo abaixo é legado e serve apenas como referência histórica.
+
 # API Core - Delivery System
 
 A API Core reúne os endpoints REST do sistema: gerenciamento de entregas, roteirizacao, rastreamento em tempo real e dashboard. O serviço e construído com NestJS, TypeORM e expose Swagger em `/docs`.

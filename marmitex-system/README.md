@@ -1,3 +1,9 @@
+
+> **BHSIS CRM**: Este módulo foi reorientado para o CRM **BHSIS**.
+> Documentação atualizada: `docs/bhsis-app.md`.
+>
+> O conteúdo abaixo é legado e serve apenas como referência histórica.
+
 # Marmitex System
 
 Um sistema completo de gerenciamento de restaurante com painel administrativo, pedidos em tempo real e Kitchen Display System (KDS).

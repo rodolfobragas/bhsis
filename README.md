@@ -1,6 +1,22 @@
-# Sistema Delivery para Motoboys
+# BHSIS (CRM)
 
-Projeto modular com microserviços containerizados para gerenciar entregas, roteirização automática e rastreamento em tempo real.
+Este repositório foi reorientado para um **CRM completo** chamado **BHSIS**.  
+A documentação oficial por módulo está em `docs/`.
+
+## Documentação BHSIS
+- Visão geral: `docs/bhsis-overview.md`
+- App principal: `docs/bhsis-app.md`
+- API Core: `docs/bhsis-api-core.md`
+- Dashboard Web: `docs/bhsis-dashboard-web.md`
+- Field App: `docs/bhsis-field-app.md`
+- Notification Service: `docs/bhsis-notification-service.md`
+- Tracking Service: `docs/bhsis-tracking-service.md`
+- Routing Service: `docs/bhsis-routing-service.md`
+- Database: `docs/bhsis-database.md`
+- Docker Stack: `docs/bhsis-docker.md`
+
+## Legado (Delivery)
+O conteúdo abaixo descreve a pilha original de delivery e permanece apenas como referência.
 
 ## Componentes principais
 - `api-core`: NestJS com API REST, TypeORM, Swagger e WebSocket (gateway tracking).

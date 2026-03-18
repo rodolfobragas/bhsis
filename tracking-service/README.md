@@ -1,3 +1,9 @@
+
+> **BHSIS CRM**: Este módulo foi reorientado para o CRM **BHSIS**.
+> Documentação atualizada: `docs/bhsis-tracking-service.md`.
+>
+> O conteúdo abaixo é legado e serve apenas como referência histórica.
+
 # Tracking Service
 
 Microserviço dedicado ao rastreamento em tempo real dos motoboys. Ele consome webhooks do Traccar, grava posições em PostgreSQL/PostGIS, publica eventos via WebSocket e envia jobs de notificação.

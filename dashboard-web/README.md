@@ -1,3 +1,9 @@
+
+> **BHSIS CRM**: Este módulo foi reorientado para o CRM **BHSIS**.
+> Documentação atualizada: `docs/bhsis-dashboard-web.md`.
+>
+> O conteúdo abaixo é legado e serve apenas como referência histórica.
+
 # Dashboard Web
 
 Painel em React + Vite que exibe métricas, lista de entregas e exibe os motoboys em um mapa Leaflet atualizado via Socket.io.
