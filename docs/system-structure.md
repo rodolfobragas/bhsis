@@ -127,6 +127,15 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
 - Faturamento → Importação XML NFe/NFCe/CTe
   - Importar NFe/NFCe's Emitidas
   - Importar CTe's Emitidos
+- PDV → Caixa
+  - Abertura de Caixa
+  - Fechamento de Caixa
+  - Fechamento Detalhado
+  - Suprimentos/Sangrias
+  - Consultar Fechamentos
+  - Alterar Valor Inicial Caixa
+  - Consultar Suprimentos/Sangrias
+  - Relatório Vendas por Data/Horário
 - PDV
 - Entrada de Nota
 - Documentos Recebidos

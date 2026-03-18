@@ -131,6 +131,14 @@ import FaturamentoRomaneioCadastrar from "./pages/FaturamentoRomaneioCadastrar";
 import FaturamentoRomaneioConsultar from "./pages/FaturamentoRomaneioConsultar";
 import FaturamentoImportacaoXmlNfeNfceEmitidas from "./pages/FaturamentoImportacaoXmlNfeNfceEmitidas";
 import FaturamentoImportacaoXmlCteEmitidos from "./pages/FaturamentoImportacaoXmlCteEmitidos";
+import PdvCaixaAbertura from "./pages/PdvCaixaAbertura";
+import PdvCaixaFechamento from "./pages/PdvCaixaFechamento";
+import PdvCaixaFechamentoDetalhado from "./pages/PdvCaixaFechamentoDetalhado";
+import PdvCaixaSuprimentosSangrias from "./pages/PdvCaixaSuprimentosSangrias";
+import PdvCaixaConsultarFechamentos from "./pages/PdvCaixaConsultarFechamentos";
+import PdvCaixaAlterarValorInicial from "./pages/PdvCaixaAlterarValorInicial";
+import PdvCaixaConsultarSuprimentosSangrias from "./pages/PdvCaixaConsultarSuprimentosSangrias";
+import PdvCaixaRelatorioVendasDataHorario from "./pages/PdvCaixaRelatorioVendasDataHorario";
 import PdvCaixa from "./pages/PdvCaixa";
 import PdvVendas from "./pages/PdvVendas";
 import PdvConfiguracao from "./pages/PdvConfiguracao";
@@ -1060,6 +1068,62 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <PdvCaixa />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/caixa/abertura">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvCaixaAbertura />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/caixa/fechamento">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvCaixaFechamento />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/caixa/fechamento-detalhado">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvCaixaFechamentoDetalhado />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/caixa/suprimentos-sangrias">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvCaixaSuprimentosSangrias />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/caixa/consultar-fechamentos">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvCaixaConsultarFechamentos />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/caixa/alterar-valor-inicial">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvCaixaAlterarValorInicial />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/caixa/consultar-suprimentos-sangrias">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvCaixaConsultarSuprimentosSangrias />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/pdv/caixa/relatorio-vendas-data-horario">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <PdvCaixaRelatorioVendasDataHorario />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

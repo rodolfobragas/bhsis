@@ -274,7 +274,20 @@ const adminMenuItems: DashboardMenuEntry[] = [
     label: "PDV",
     path: "/pdv",
     children: [
-      { label: "Caixa", path: "/pdv/caixa" },
+      {
+        label: "Caixa",
+        path: "/pdv/caixa",
+        children: [
+          { label: "Abertura de Caixa", path: "/pdv/caixa/abertura" },
+          { label: "Fechamento de Caixa", path: "/pdv/caixa/fechamento" },
+          { label: "Fechamento Detalhado", path: "/pdv/caixa/fechamento-detalhado" },
+          { label: "Suprimentos/Sangrias", path: "/pdv/caixa/suprimentos-sangrias" },
+          { label: "Consultar Fechamentos", path: "/pdv/caixa/consultar-fechamentos" },
+          { label: "Alterar Valor Inicial Caixa", path: "/pdv/caixa/alterar-valor-inicial" },
+          { label: "Consultar Suprimentos/Sangrias", path: "/pdv/caixa/consultar-suprimentos-sangrias" },
+          { label: "Relatório Vendas por Data/Horário", path: "/pdv/caixa/relatorio-vendas-data-horario" },
+        ],
+      },
       { label: "Vendas", path: "/pdv/vendas" },
       { label: "Configuração", path: "/pdv/configuracao" },
     ],
