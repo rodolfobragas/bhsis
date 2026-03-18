@@ -191,7 +191,7 @@ services:
         condition: service_healthy
 
   marmitex-system:
-    image: rodolfobragas/bhsis:marmitex-system-v1.0.26
+    image: rodolfobragas/bhsis:marmitex-system-v1.0.28
     build:
       context: ../marmitex-system
     container_name: delivery-marmitex-system
