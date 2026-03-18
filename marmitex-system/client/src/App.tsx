@@ -28,6 +28,14 @@ import CadastroProdutoConsultar from "./pages/CadastroProdutoConsultar";
 import CadastroProdutoBuscaPreco from "./pages/CadastroProdutoBuscaPreco";
 import CadastroProdutoConsultaRapida from "./pages/CadastroProdutoConsultaRapida";
 import CadastroParticipante from "./pages/CadastroParticipante";
+import CadastroParticipanteCadastras from "./pages/CadastroParticipanteCadastras";
+import CadastroParticipanteConsultar from "./pages/CadastroParticipanteConsultar";
+import CadastroParticipanteCargo from "./pages/CadastroParticipanteCargo";
+import CadastroParticipanteGrupo from "./pages/CadastroParticipanteGrupo";
+import CadastroParticipanteVendedorCliente from "./pages/CadastroParticipanteVendedorCliente";
+import CadastroParticipanteRelatorioCredito from "./pages/CadastroParticipanteRelatorioCredito";
+import CadastroParticipanteRelatorioAniversariantes from "./pages/CadastroParticipanteRelatorioAniversariantes";
+import CadastroParticipanteManutencao from "./pages/CadastroParticipanteManutencao";
 import CadastroFiscal from "./pages/CadastroFiscal";
 import CadastroFinanceiro from "./pages/CadastroFinanceiro";
 import CadastroCaixaVenda from "./pages/CadastroCaixaVenda";
@@ -249,6 +257,62 @@ function Router() {
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>
             <CadastroParticipante />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/participante/cadastras">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroParticipanteCadastras />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/participante/consultar">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroParticipanteConsultar />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/participante/cargo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroParticipanteCargo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/participante/grupo">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroParticipanteGrupo />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/participante/vendedor-cliente">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroParticipanteVendedorCliente />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/participante/relatorio-credito">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroParticipanteRelatorioCredito />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/participante/relatorio-aniversariantes">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroParticipanteRelatorioAniversariantes />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cadastro/participante/manutencao">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <CadastroParticipanteManutencao />
           </AdminLayout>
         </ProtectedRoute>
       </Route>

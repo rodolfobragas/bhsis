@@ -22,6 +22,15 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
   - Consultar
   - Busca Preço
   - Consulta Rápida
+- Cadastro → Participante
+  - Cadastras
+  - Consultar
+  - Cargo
+  - Grupo
+  - Vendedor x Cliente
+  - Relatório de Crédito
+  - Relatório de Aniversariantes
+  - Manutenção de Participantes
 - Faturamento
 - PDV
 - Entrada de Nota
