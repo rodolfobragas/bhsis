@@ -6,6 +6,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     icon: "fa-solid fa-folder",
     label: "Cadastro",
     path: "/cadastro",
+    moduleKey: "cadastro",
     children: [
       {
         label: "Produto",
@@ -97,6 +98,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     icon: "fa-solid fa-file-excel",
     label: "Faturamento",
     path: "/faturamento",
+    moduleKey: "faturamento",
     children: [
       {
         label: "Notas Fiscais Eletrônicas",
@@ -245,6 +247,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     icon: "fa-solid fa-credit-card",
     label: "PDV",
     path: "/pdv",
+    moduleKey: "pdv",
     children: [
       {
         label: "Caixa",
@@ -343,6 +346,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     icon: "fa-solid fa-landmark",
     label: "Financeiro",
     path: "/financeiro",
+    moduleKey: "financeiro",
     children: [
       {
         label: "Caixa",
@@ -404,6 +408,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     icon: "fa-solid fa-file-lines",
     label: "Fiscal",
     path: "/fiscal",
+    moduleKey: "fiscal",
     children: [
       {
         label: "Lançamentos",
@@ -431,6 +436,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     icon: "fa-solid fa-warehouse",
     label: "Estoque",
     path: "/estoque",
+    moduleKey: "estoque",
     children: [
       { label: "Entradas", path: "/estoque/entradas" },
       { label: "Entradas e Saídas", path: "/estoque/entradas-saidas" },
@@ -455,6 +461,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     icon: "fa-solid fa-kitchen-set",
     label: "Produção",
     path: "/producao",
+    moduleKey: "producao",
     children: [
       { label: "Cadastrar", path: "/producao/cadastrar" },
       { label: "Consultar", path: "/producao/consultar" },
@@ -474,6 +481,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     icon: "fa-solid fa-truck",
     label: "Delivery",
     path: "/delivery",
+    moduleKey: "delivery",
     children: [
       { label: "Delivery", path: "/delivery/delivery" },
       { label: "Entregador", path: "/delivery/entregador" },
@@ -484,6 +492,7 @@ const adminMenuItems: DashboardMenuEntry[] = [
     icon: "fa-solid fa-chart-bar",
     label: "Relatórios",
     path: "/relatorios",
+    moduleKey: "relatorios",
     children: [
       { label: "Log do Sistema", path: "/relatorios/log-sistema" },
       { label: "Relatórios Gerenciais", path: "/relatorios/relatorios-gerenciais" },

@@ -125,7 +125,7 @@ export default function AdminModuleAccess() {
         <CardHeader>
           <CardTitle>Painel de Acesso a Módulos</CardTitle>
           <CardDescription>
-            Configure quais módulos estão disponíveis por perfil e gerencie a assinatura do cliente.
+            Configure quais módulos estão ativos e gerencie a assinatura do cliente.
           </CardDescription>
         </CardHeader>
       </Card>
