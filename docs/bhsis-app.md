@@ -1,6 +1,6 @@
 # BHSIS App (antigo marmitex-system)
 
-## Objetivo (CRM)
+## Objetivo
 Aplicação principal do BHSIS. Reúne autenticação, gestão de clientes, pipeline e operações em um único painel web. Substitui o propósito original de restaurante e passa a representar o núcleo do CRM.
 
 ## Tecnologias
@@ -21,8 +21,18 @@ Aplicação principal do BHSIS. Reúne autenticação, gestão de clientes, pipe
 ## Execução local
 ```bash
 pnpm install
-cp .env.example .env
 pnpm dev
+```
+
+### Variáveis de ambiente (dev)
+Crie `bhsis/.env` com:
+```env
+DATABASE_URL=postgresql://bhsis:bhsis_password@localhost:5432/bhsis?options=-c%20search_path%3Dbhsis%2Cpublic
+REDIS_URL=redis://localhost:6379
+JWT_SECRET=dev-secret-key-change-in-production
+PORT=3000
+FRONTEND_URL=http://localhost:3000
+OAUTH_SERVER_URL=http://localhost:3000
 ```
 
 ## Build
@@ -37,8 +47,9 @@ pnpm start
 - `JWT_SECRET`
 - `PORT`
 
-## Porta
-- Compose: `3000`.
+## Portas
+- Dev (`pnpm dev`): 3000
+- Docker backend: 3001
 
 ## Observações de migração
 Todos os módulos e telas devem ser renomeados semanticamente para CRM (ex.: pedidos -> oportunidades/tickets; clientes -> contatos/contas). O nome do app passa a ser **BHSIS**.

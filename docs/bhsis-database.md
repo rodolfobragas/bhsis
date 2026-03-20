@@ -1,22 +1,24 @@
 # BHSIS Database
 
-## Objetivo (CRM)
-Scripts de migração e seed para o banco PostgreSQL/PostGIS usado pelos serviços do BHSIS.
+## Objetivo
+Banco PostgreSQL usado pelo BHSIS (schema `bhsis`) com migrations Prisma.
 
 ## Estrutura
-- `migrations/`: scripts SQL versionados.
-- `seeds/`: dados de exemplo.
-- `run-migrations.sh`: aplica migrations.
-- `run-seeds.sh`: aplica seeds.
+- `bhsis/prisma/schema.prisma`: schema com `schemas = ["bhsis"]`.
+- `bhsis/prisma/migrations/`: migrations SQL.
 
-## Execução
+## Primeiro setup (local)
+1. Suba o Postgres via Docker (`bhsis/docker-compose.yml`).
+2. Crie o schema:
 ```bash
-cd database
-chmod +x run-migrations.sh run-seeds.sh
-./run-migrations.sh
-./run-seeds.sh
+docker exec bhsis-postgres psql -U bhsis -d bhsis -c "CREATE SCHEMA IF NOT EXISTS bhsis;"
+```
+3. Aplique migrations:
+```bash
+cd bhsis
+DATABASE_URL="postgresql://bhsis:bhsis_password@localhost:5432/bhsis?options=-c%20search_path%3Dbhsis%2Cpublic" pnpm prisma migrate deploy
 ```
 
-## Variáveis necessárias
-Usa as mesmas variáveis do `.env` do API Core:
-- `PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD`, `PGDATABASE`.
+## Observações
+- Se estiver rodando o backend no Docker, o `DATABASE_URL` já aponta para o banco dentro do container.
+- O schema `bhsis` é obrigatório (as migrations não o criam automaticamente).

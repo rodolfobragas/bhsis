@@ -1,5 +1,8 @@
 # Status de Implantação Multi-IA
 
+> **Nota**: Este documento é legado (stack de delivery/motoboy).  
+> Para o BHSIS atual, ver `docs/bhsis-app.md`, `docs/bhsis-docker.md`, `docs/bhsis-database.md` e `docs/containers.md`.
+
 **Progresso estimado: 79% (Dashboard summary validado e imagem Marmitex v1.0.0 empurrada para o hub; Traccar/Graphhopper seguem como bloqueios finais).**
 
 ## Objetivo

@@ -1,5 +1,8 @@
 # Deployment Tracking & Process Guide
 
+> **Nota**: Este documento refere-se à stack legada de delivery/motoboy.  
+> Para o BHSIS atual, use `docs/bhsis-app.md`, `docs/bhsis-docker.md`, `docs/bhsis-database.md` e `docs/containers.md`.
+
 ## Objetivo
 Este documento orienta a implantação do sistema de gestão de entregas modulado para motoboys. Ele deve ser atualizado por qualquer modelo/tecnico que trabalhar no projeto para indicar exatamente em que estágio estamos e quais entregas ainda faltam.
 

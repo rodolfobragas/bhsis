@@ -1,31 +1,27 @@
 # BHSIS Docker Stack
 
-## Objetivo (CRM)
-Orquestrar a pilha completa do BHSIS (API, apps e serviços auxiliares) via Docker Compose.
+## Objetivo
+Orquestrar a pilha do BHSIS (backend + banco + redis) via Docker Compose para desenvolvimento local.
 
 ## Arquivos
-- `docker/docker-compose.yml`: stack local.
-- `docker/docker-compose.hub.yml`: stack consumindo imagens do Docker Hub.
-- `docker/graphhopper/`: dados de roteamento (quando usado).
-- `docker/traccar/`: configuração do Traccar (quando usado).
+- `bhsis/docker-compose.yml`: stack local do BHSIS (backend + postgres + redis).
+- `docker/docker-compose.yml`: stack legada/infra estendida (routing/tracking/etc), use apenas se precisar desses serviços.
 
 ## Subir a stack
 ```bash
-cd docker
-docker compose up -d
+cd bhsis
+docker compose up -d --build
 ```
 
-## Serviços e portas (compose local)
-- `postgres`: 5433
-- `redis`: 6380
-- `api-core`: 4000
-- `routing-service`: 3021
-- `tracking-service`: 3002
-- `notification-service`: 3010
-- `dashboard-web`: 4173
-- `motoboy-app`: 4174
-- `bhsis` (antigo marmitex-system): 3000
+## Serviços e portas (stack BHSIS)
+- `postgres`: 5432 (DB `bhsis`, schema `bhsis`)
+- `redis`: 6379
+- `bhsis-backend`: 3001
+
+## Variáveis importantes (backend)
+- `DATABASE_URL=postgresql://bhsis:bhsis_password@postgres:5432/bhsis?options=-c%20search_path%3Dbhsis%2Cpublic`
+- `REDIS_URL=redis://redis:6379`
+- `JWT_SECRET` (defina para produção)
 
 ## Observações
-- Em ambiente CRM, os serviços de roteamento e tracking podem ser usados como módulos de visitas/field service.
-- Ajustes de CORS e variáveis devem ser feitos nos `.env` de cada módulo.
+- Para ambiente de desenvolvimento fora do Docker, crie `bhsis/.env` usando os mesmos parâmetros de `DATABASE_URL` acima, apontando para `localhost`.

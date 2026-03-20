@@ -4,6 +4,26 @@ Este documento lista as rotas que exigem autenticação e quais roles são neces
 
 ## Autenticação
 - `GET /api/auth/me` — autenticado
+- `POST /api/auth/login` — público
+- `POST /api/auth/register` — público
+
+## Módulos
+- `GET /api/modules` — `ADMIN`
+- `POST /api/modules` — `ADMIN`
+- `PUT /api/modules/:id` — `ADMIN`
+- `PUT /api/modules/:id/access` — `ADMIN`
+- `DELETE /api/modules/:id` — `ADMIN`
+- `GET /api/modules/access` — autenticado
+
+## Dashboard
+- `GET /api/dashboard/summary` — público (observação: filtra por parâmetros)
+
+## Deliveries
+- `GET /api/deliveries` — autenticado
+- `GET /api/deliveries/:id` — autenticado
+- `POST /api/deliveries` — `ADMIN`, `MANAGER`
+- `PATCH /api/deliveries/:id/status` — `ADMIN`, `MANAGER`
+- `POST /api/deliveries/:id/position` — autenticado
 
 ## Orders
 - `POST /api/orders` — `ATTENDANT`, `ADMIN`
@@ -71,8 +91,8 @@ Este documento lista as rotas que exigem autenticação e quais roles são neces
 
 ## Rotas públicas (sem login)
 - `GET /health`
-- `GET /api/dashboard/summary`
-- `POST /api/auth/login`
-- `POST /api/auth/register`
 - `POST /api/payments/webhook`
 - `GET /api/oauth/callback`
+
+## Observações
+- Existe bypass via header `x-service-token` se `BHSIS_SERVICE_TOKEN` estiver configurado no backend.
