@@ -17,6 +17,16 @@ type ModuleItem = {
   accesses: { role: string; enabled: boolean }[];
 };
 
+type ModuleRole = "ADMIN" | "MANAGER" | "KITCHEN" | "ATTENDANT" | "CUSTOMER";
+
+const ROLE_LABELS: { role: ModuleRole; label: string }[] = [
+  { role: "ADMIN", label: "Admin" },
+  { role: "MANAGER", label: "Gerente" },
+  { role: "KITCHEN", label: "Cozinha" },
+  { role: "ATTENDANT", label: "Atendimento" },
+  { role: "CUSTOMER", label: "Cliente" },
+];
+
 export default function AdminModuleAccess() {
   const [modules, setModules] = useState<ModuleItem[]>([]);
   const [pendingModules, setPendingModules] = useState<ModuleItem[]>([]);
@@ -27,12 +37,27 @@ export default function AdminModuleAccess() {
   const [tierFilter, setTierFilter] = useState<"all" | "premium" | "standard">("all");
   const [groupBy, setGroupBy] = useState<"status" | "tier" | "none">("status");
 
+  const normalizeAccesses = (items: ModuleItem[]) =>
+    items.map((module) => {
+      const accessMap = new Map(
+        module.accesses.map((access) => [access.role, access.enabled])
+      );
+      return {
+        ...module,
+        accesses: ROLE_LABELS.map(({ role }) => ({
+          role,
+          enabled: accessMap.get(role) ?? false,
+        })),
+      };
+    });
+
   const loadModules = async () => {
     try {
       setIsLoading(true);
       const data = await apiService.getModules();
-      setModules(data);
-      setPendingModules(data);
+      const normalized = normalizeAccesses(data);
+      setModules(normalized);
+      setPendingModules(normalized);
     } catch (error) {
       toast.error("Falha ao carregar módulos");
       console.error(error);
@@ -49,12 +74,34 @@ export default function AdminModuleAccess() {
     setPendingModules((prev) => prev.map((item) => (item.id === id ? { ...item, active } : item)));
   };
 
+  const handleToggleAccess = (moduleId: string, role: ModuleRole, enabled: boolean) => {
+    setPendingModules((prev) =>
+      prev.map((item) => {
+        if (item.id !== moduleId) return item;
+        return {
+          ...item,
+          accesses: item.accesses.map((access) =>
+            access.role === role ? { ...access, enabled } : access
+          ),
+        };
+      })
+    );
+  };
+
+  const hasAccessChanges = (current: ModuleItem, pending: ModuleItem) => {
+    if (current.accesses.length !== pending.accesses.length) return true;
+    return pending.accesses.some((access) => {
+      const currentAccess = current.accesses.find((item) => item.role === access.role);
+      return (currentAccess?.enabled ?? false) !== access.enabled;
+    });
+  };
+
   const hasPendingChanges = useMemo(() => {
     if (modules.length !== pendingModules.length) return true;
     return pendingModules.some((pending) => {
       const current = modules.find((item) => item.id === pending.id);
       if (!current) return true;
-      return current.active !== pending.active;
+      return current.active !== pending.active || hasAccessChanges(current, pending);
     });
   }, [modules, pendingModules]);
 
@@ -66,16 +113,32 @@ export default function AdminModuleAccess() {
         const current = modules.find((item) => item.id === pending.id);
         return !current || current.active !== pending.active;
       });
+      const accessUpdates = pendingModules.filter((pending) => {
+        const current = modules.find((item) => item.id === pending.id);
+        if (!current) return pending.accesses.length > 0;
+        return hasAccessChanges(current, pending);
+      });
       await Promise.all(
-        updates.map((module) =>
-          apiService.updateModule(module.id, {
-            key: module.key,
-            label: module.label,
-            description: module.description ?? null,
-            premium: module.premium,
-            active: module.active,
-          })
-        )
+        [
+          ...updates.map((module) =>
+            apiService.updateModule(module.id, {
+              key: module.key,
+              label: module.label,
+              description: module.description ?? null,
+              premium: module.premium,
+              active: module.active,
+            })
+          ),
+          ...accessUpdates.map((module) =>
+            apiService.updateModuleAccess(
+              module.id,
+              module.accesses.map((access) => ({
+                role: access.role,
+                enabled: access.enabled,
+              }))
+            )
+          ),
+        ]
       );
       toast.success("Configurações atualizadas");
       loadModules();
@@ -229,7 +292,7 @@ export default function AdminModuleAccess() {
                       key={module.id}
                       className="flex flex-col gap-3 rounded-lg border border-input p-3 md:flex-row md:items-center md:justify-between"
                     >
-                      <div>
+                      <div className="space-y-1">
                         <p className="text-sm font-medium">
                           {module.label}{" "}
                           <span className="text-xs text-muted-foreground">({module.key})</span>
@@ -237,6 +300,26 @@ export default function AdminModuleAccess() {
                         <p className="text-xs text-muted-foreground">
                           {module.premium ? "Premium" : "Padrão"} • {module.active ? "Ativo" : "Inativo"}
                         </p>
+                        <div className="flex flex-wrap gap-2 pt-1">
+                          {ROLE_LABELS.map(({ role, label }) => {
+                            const access = module.accesses.find((item) => item.role === role);
+                            const enabled = access?.enabled ?? false;
+                            return (
+                              <div
+                                key={`${module.id}-${role}`}
+                                className="flex items-center gap-2 rounded-full border border-input px-3 py-1 text-xs"
+                              >
+                                <span className="text-muted-foreground">{label}</span>
+                                <Switch
+                                  checked={enabled}
+                                  onCheckedChange={(checked) =>
+                                    handleToggleAccess(module.id, role, checked)
+                                  }
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                       <div className="flex items-center justify-between gap-3 rounded-lg border border-input px-3 py-2 md:w-56">
                         <div>
