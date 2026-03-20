@@ -133,12 +133,39 @@ class ModuleService {
     }));
   }
 
+  private async ensureAccesses(moduleId: string) {
+    const existing = await prisma.moduleAccess.findMany({
+      where: { moduleId },
+      select: { role: true },
+    });
+    const existingRoles = new Set(existing.map((access) => access.role));
+    const missing = DEFAULT_ACCESS_ROLES.filter((role) => !existingRoles.has(role));
+    if (missing.length === 0) return;
+
+    await prisma.moduleAccess.createMany({
+      data: missing.map((role) => ({
+        moduleId,
+        role,
+        enabled: role === UserRole.ADMIN,
+      })),
+      skipDuplicates: true,
+    });
+  }
+
   private async ensureDefaults() {
-    const count = await prisma.module.count();
-    if (count > 0) return;
+    const existing = await prisma.module.findMany({
+      select: { id: true, key: true },
+    });
+    const byKey = new Map(existing.map((module) => [module.key, module]));
 
     for (const module of DEFAULT_MODULES) {
-      await this.createModule(module);
+      const current = byKey.get(module.key);
+      if (!current) {
+        const created = await this.createModule(module);
+        await this.ensureAccesses(created.id);
+        continue;
+      }
+      await this.ensureAccesses(current.id);
     }
   }
 }
