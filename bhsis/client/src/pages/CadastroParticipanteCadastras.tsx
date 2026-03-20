@@ -1,10 +1,7 @@
-import CadastroPlaceholder from "@/components/CadastroPlaceholder";
+import ParticipanteForm from "@/components/cadastro/ParticipanteForm";
 
 export default function CadastroParticipanteCadastras() {
   return (
-    <CadastroPlaceholder
-      title="Cadastro - Participante - Cadastras"
-      description="Cadastro de participantes."
-    />
+    <ParticipanteForm />
   );
 }
