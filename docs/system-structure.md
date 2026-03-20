@@ -2,11 +2,11 @@
 
 ## Visão Geral
 O sistema está organizado por módulos no menu lateral do BHSIS.  
-No momento, **apenas o módulo Food** está funcional.  
+O módulo **Food** é o mais completo hoje.  
 Os demais módulos estão **em desenvolvimento** (telas placeholder).
 
-## Módulo Funcional
-- **Food (funcional)**
+## Módulo Principal
+- **Food (principal)**
   - Dashboard
   - Pedidos
   - Pagamentos

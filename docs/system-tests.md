@@ -1,53 +1,42 @@
-# Testes de Sistema (Smoke + Integração)
+# Testes de Sistema (BHSIS)
 
 ## Pré-requisitos
 - Docker e Docker Compose instalados.
-- Dados do Graphhopper disponíveis em `docker/graphhopper/data` (veja `docker/README.md`).
+- Stack local ativa (`bhsis/docker-compose.yml`).
 
 ## Subir a stack
 ```bash
-cd docker
+cd bhsis
 docker compose up --build -d
 ```
 
-## Aplicar migrations e seeds
+## Aplicar migrations
 ```bash
-cd ../database
-./run-migrations.sh
-./run-seeds.sh
+cd bhsis
+DATABASE_URL="postgresql://bhsis:bhsis_password@localhost:5432/bhsis?options=-c%20search_path%3Dbhsis%2Cpublic" pnpm prisma migrate deploy
 ```
 
-## Health checks
+## Health check
 ```bash
-curl -s http://localhost:4000/dashboard/resumo
 curl -s http://localhost:3001/health
-curl -s http://localhost:3002/health
-curl -s http://localhost:3010/health
-curl -s http://localhost:3000/api/dashboard/summary
 ```
 
-## Fluxo mínimo de entrega
+## Fluxo mínimo (auth + produtos)
+Requer `jq` instalado para extrair o token.
 ```bash
-# criar entrega
-curl -s -X POST http://localhost:4000/entregas \
+# registrar usuário
+curl -s -X POST http://localhost:3001/api/auth/register \
   -H 'Content-Type: application/json' \
-  -d '{"clienteId":"<uuid>","motoboyId":"<uuid>","latitude":"-20.5200","longitude":"-43.7500","endereco":"Rua Teste"}'
+  -d '{"email":"admin@bhsis.local","password":"123456","name":"Admin"}'
 
-# listar entregas
-curl -s http://localhost:4000/entregas
-
-# enfileirar otimização de rota
-curl -s -X POST http://localhost:4000/rotas/otimizar \
+# login
+TOKEN=$(curl -s -X POST http://localhost:3001/api/auth/login \
   -H 'Content-Type: application/json' \
-  -d '{"motoboyId":"<uuid>","entregaIds":["<uuid>"]}'
+  -d '{"email":"admin@bhsis.local","password":"123456"}' | jq -r .token)
+
+# criar produto
+curl -s -X POST http://localhost:3001/api/products \
+  -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"Produto Teste","sku":"SKU-001","category":"Geral","price":9.9}'
 ```
-
-## Tracking (simulado)
-```bash
-curl -s -X POST http://localhost:3002/motoboy/localizacao \
-  -H 'Content-Type: application/json' \
-  -d '{"motoboyId":"<uuid>","latitude":-20.5200,"longitude":-43.7500,"speed":30,"status":"em_entrega"}'
-```
-
-## Observação
-Se o Traccar estiver habilitado, configure o webhook para `http://tracking-service:3002/tracking/update` e repita o fluxo acima com `deviceId`.

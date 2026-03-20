@@ -1,7 +1,7 @@
-## Documentação da Implantação do Sistema
+## Documentação da Implantação do Sistema (BHSIS)
 
 ### Visão geral
-O BHSIS System está organizado como um painel administrativo único, com o módulo **Food** já funcional (pedidos, mesas, cupons, fidelidade, pagamentos e alertas). Os outros módulos já foram estruturados na sidebar e entregam rotas placeholder; sua implementação completa (UI, lógica e integrações) ainda está em andamento.
+O BHSIS está organizado como um painel administrativo único. O módulo **Food** é o mais completo hoje (pedidos, pagamentos, cupons, fidelidade, mesas e alertas). Os demais módulos estão estruturados no menu e muitos ainda usam telas placeholder; a implementação completa (UI, lógica e integrações) está em evolução.
 
 ### Módulos entregues (interface + placeholder)
 - Food (funcional): Dashboard, Pedidos, Pagamentos, Alertas, Fidelidade, Cupons, Mesas.
@@ -18,19 +18,19 @@ O BHSIS System está organizado como um painel administrativo único, com o mód
 - Documentos Recebidos, Pedido de Compra, Assinador, Estoque, Produção, Delivery e Relatórios (camadas de dados e lógica ainda pendentes).
 
 ### Checklist atual (estado + responsável)
-1. `Food` – Status: Concluído. Deploy em produção; monitorar erros operacionais. Responsável: equipe BHSIS.
-2. `Cadastro` – Status: Em andamento. Interfaces existenciais; falta conectar APIs e validações. Próximo passo: conectar cada submenu às APIs. Responsável: time de UI.
-3. `Faturamento/Financeiro/PDV` – Status: Em andamento. Estrutura de menus pronta; implementar regras fiscais, emissão de documentos e integrações com os serviços financeiros. Próximo passo: conectar com a API típica (NFe, NFCe, boletos). Responsável: engenharia fiscal/financeira.
-4. `Infraestrutura Docker` – Status: Concluído. Compose com imagens atualizadas até `bhsis-system-v1.0.26`; lembrar de versionar imagem a cada release.
-5. `Documentação & Roadmap` – Status: Em andamento. Atualizar roadmap com novas prioridades conforme implementações avança; revisar `docs/system-implementation.md`.
+1. `Food` – Status: Em andamento. Fluxos principais estão ativos; revisar estabilidade e cobertura. Responsável: equipe BHSIS.
+2. `Cadastro` – Status: Em andamento. Interfaces existem; falta integração total com APIs. Próximo passo: conectar cada submenu às APIs. Responsável: time de UI.
+3. `Faturamento/Financeiro/PDV` – Status: Em andamento. Estrutura de menus pronta; implementar regras fiscais/financeiras e integrações. Responsável: engenharia fiscal/financeira.
+4. `Infraestrutura Docker` – Status: Concluído. Stack local em `bhsis/docker-compose.yml`. Responsável: DevOps.
+5. `Documentação & Roadmap` – Status: Em andamento. Atualizar doc conforme releases e mudanças.
 
 ### Roadmap para implantação
-1. **Fase 1 (até +2 semanas)** – Criar integração real de `Cadastro`, `PDV` e `Entrada de Nota` com APIs (autenticação, persistência). Validar fluxos de auth e dados do backend atual. Dependência: APIs existentes do BHSIS.
-2. **Fase 2 (até +4 semanas)** – Implementar regras de emissão fiscal (NFe/NFSe/CTe, boletos). Harmonizar menus de Faturamento/Financeiro com fluxos fiscais reais. Dependência: certificados digitais, Webservices da SEFAZ e bancos.
-3. **Fase 3 (até +6 semanas)** – Completar módulos restantes (Estoques, Produção, Delivery, Relatórios) com dados reais; adicionar monitoramento e testes integrados. Dependência: dados de inventário, infra de tracking.
-4. **Fase 4 (contínuo)** – Entrega incremental de melhorias visuais (experiências mobile), testes automatizados e deploy de novas imagens Docker a cada release.
+1. **Fase 1 (curto prazo)** – Integrar `Cadastro`, `PDV` e `Entrada de Nota` com APIs e validações.
+2. **Fase 2 (médio prazo)** – Implementar regras fiscais (NFe/NFSe/CTe, boletos).
+3. **Fase 3 (médio prazo)** – Completar Estoque, Produção, Delivery, Relatórios com dados reais.
+4. **Fase 4 (contínuo)** – Melhorias de UX, testes automatizados e releases versionadas.
 
 ### Próximos passos recomendados
-- Documentar endpoints críticos (API Core, tracking, PDV) e alinhar com times responsáveis.
-- Criar tickets para conectar cada submenu aos dados reais, priorizando os módulos de maior impacto (PDV/Financeiro/Faturamento).
-- Estabelecer rotina de release (ex.: versão Docker + documentação) para manter o `docs/system-implementation.md` e o `docker-compose` em sincronia.
+- Documentar endpoints críticos e alinhar responsáveis por módulo.
+- Priorizar integração real de `Cadastro`, `PDV`, `Financeiro` e `Faturamento`.
+- Padronizar releases (tag + documentação).
