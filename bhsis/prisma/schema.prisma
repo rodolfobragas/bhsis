@@ -200,6 +200,39 @@ enum DeliveryStatus {
 }
 
 // ============================================
+// MODULE ACCESS CONTROL
+// ============================================
+
+model Module {
+  id          String         @id @default(cuid())
+  key         String         @unique
+  label       String
+  description String?
+  premium     Boolean        @default(false)
+  active      Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  accesses    ModuleAccess[]
+
+  @@schema("bhsis")
+}
+
+model ModuleAccess {
+  id        String   @id @default(cuid())
+  moduleId  String
+  role      UserRole
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  module Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@unique([moduleId, role])
+  @@schema("bhsis")
+}
+
+// ============================================
 // ORDERS
 // ============================================
 

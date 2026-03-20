@@ -273,6 +273,7 @@ import RelatoriosVendaExterna from "./pages/RelatoriosVendaExterna";
 import RelatoriosPedidoVenda from "./pages/RelatoriosPedidoVenda";
 import RelatoriosOrdensServico from "./pages/RelatoriosOrdensServico";
 import RelatoriosLucroVendaComissoesOutros from "./pages/RelatoriosLucroVendaComissoesOutros";
+import AdminModuleAccess from "./pages/AdminModuleAccess";
 
 function Router() {
   return (
@@ -280,6 +281,13 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <Route path="/admin/modules">
+        <ProtectedRoute requiredRole="admin">
+          <AdminLayout>
+            <AdminModuleAccess />
+          </AdminLayout>
+        </ProtectedRoute>
+      </Route>
       <Route path="/admin">
         <ProtectedRoute requiredRole="admin">
           <AdminLayout>

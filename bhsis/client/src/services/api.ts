@@ -323,6 +323,36 @@ class ApiService {
     return response.data;
   }
 
+  // Modules (admin)
+  async getModules() {
+    const response = await this.client.get("/modules");
+    return response.data;
+  }
+
+  async createModule(data: any) {
+    const response = await this.client.post("/modules", data);
+    return response.data;
+  }
+
+  async updateModule(id: string, data: any) {
+    const response = await this.client.put(`/modules/${id}`, data);
+    return response.data;
+  }
+
+  async updateModuleAccess(id: string, accesses: any[]) {
+    const response = await this.client.put(`/modules/${id}/access`, accesses);
+    return response.data;
+  }
+
+  async deleteModule(id: string) {
+    await this.client.delete(`/modules/${id}`);
+  }
+
+  async getModuleAccess() {
+    const response = await this.client.get("/modules/access");
+    return response.data;
+  }
+
   async createTable(data: any) {
     const response = await this.client.post("/tables", data);
     return response.data;

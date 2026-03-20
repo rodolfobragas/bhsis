@@ -22,6 +22,7 @@ import loyaltyRoutes from "../routes/loyalty.routes";
 import tablesRoutes from "../routes/tables.routes";
 import recipesRoutes from "../routes/recipes.routes";
 import { paymentsRoutes, paymentsWebhookRoutes } from "../routes/payments.routes";
+import modulesRoutes from "../routes/modules.routes";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -75,6 +76,7 @@ async function startServer() {
   app.use("/api/tables", tablesRoutes);
   app.use("/api/recipes", recipesRoutes);
   app.use("/api/payments", paymentsRoutes);
+  app.use("/api/modules", modulesRoutes);
 
   // tRPC API
   app.use(

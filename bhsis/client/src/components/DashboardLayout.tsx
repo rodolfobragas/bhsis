@@ -36,6 +36,7 @@ import { Input } from "@/components/ui/input";
 import { useTheme } from "@/contexts/ThemeContext";
 import { wsClient } from "@/services/websocketClient";
 import { toast } from "sonner";
+import apiService from "@/services/api";
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
 const DEFAULT_WIDTH = 280;
@@ -48,6 +49,8 @@ export type DashboardMenuItem = {
   label: string;
   path: string;
   children?: DashboardMenuItem[];
+  moduleKey?: string;
+  adminOnly?: boolean;
 };
 
 type DashboardMenuSection = {
@@ -104,6 +107,15 @@ const isItemActive = (item: DashboardMenuItem, location: string): boolean => {
   if (!item.children?.length) return false;
   return item.children.some(child => isItemActive(child, location));
 };
+
+const PREMIUM_MODULES = new Set([
+  "Food",
+  "Agro",
+  "Salões",
+  "Clínicas",
+  "Shop",
+  "Pet",
+]);
 
 export default function DashboardLayout({
   children,
@@ -189,6 +201,7 @@ function DashboardLayoutContent({
   const isMobile = useIsMobile();
   const { theme, toggleTheme, switchable } = useTheme();
   const menuGroups = buildMenuGroups(menuItems);
+  const [moduleAccess, setModuleAccess] = useState<Record<string, boolean>>({});
   const toggleMenu = (key: string) => {
     setExpandedMenus((prev) => ({
       ...prev,
@@ -230,6 +243,22 @@ function DashboardLayoutContent({
       wsClient.disconnect();
     };
   }, [user, token]);
+
+  useEffect(() => {
+    if (!user) return;
+    apiService
+      .getModuleAccess()
+      .then((data: { key: string; enabled: boolean }[]) => {
+        const map: Record<string, boolean> = {};
+        data.forEach((entry) => {
+          map[entry.key] = entry.enabled;
+        });
+        setModuleAccess(map);
+      })
+      .catch((error) => {
+        console.error("Falha ao carregar acessos de módulo:", error);
+      });
+  }, [user]);
 
   useEffect(() => {
     if (isCollapsed) {
@@ -302,7 +331,12 @@ function DashboardLayoutContent({
                 ) : null}
                 <SidebarGroupContent>
                   <SidebarMenu className="px-2 py-1">
-                    {group.items.map(item => {
+                    {group.items
+                      .filter((item) => {
+                        if (!item.adminOnly) return true;
+                        return user?.role?.toLowerCase() === "admin";
+                      })
+                      .map(item => {
                       const renderMenuItem = (
                         menuItem: DashboardMenuItem,
                         level: number
@@ -312,6 +346,12 @@ function DashboardLayoutContent({
                         const menuKey = `${level}-${menuItem.path || menuItem.label}`;
                         const isOpen =
                           expandedMenus[menuKey] ?? (hasChildren && isActive);
+                        const accessKey = menuItem.moduleKey;
+                        const isPremiumLabel = PREMIUM_MODULES.has(menuItem.label);
+                        const isAccessAllowed =
+                          accessKey ? moduleAccess[accessKey] ?? false : true;
+                        const isLocked =
+                          level === 0 && (!!accessKey || isPremiumLabel) && !isAccessAllowed;
 
                         const content = (
                           <>
@@ -326,7 +366,9 @@ function DashboardLayoutContent({
                               />
                             ) : null}
                             <span>{menuItem.label}</span>
-                            {hasChildren ? (
+                            {isLocked ? (
+                              <i className="fa-solid fa-lock ml-auto text-xs text-muted-foreground" aria-hidden="true" />
+                            ) : hasChildren ? (
                               isOpen ? (
                                 <i className="fa-solid fa-chevron-down ml-auto text-xs text-muted-foreground" aria-hidden="true" />
                               ) : (
@@ -337,6 +379,12 @@ function DashboardLayoutContent({
                         );
 
                         const handleClick = () => {
+                          if (isLocked) {
+                            toast("Módulo premium indisponível", {
+                              description: "Este módulo não está incluído na assinatura atual.",
+                            });
+                            return;
+                          }
                           if (hasChildren) {
                             toggleMenu(menuKey);
                             return;
@@ -351,11 +399,15 @@ function DashboardLayoutContent({
                                 isActive={isActive}
                                 onClick={handleClick}
                                 tooltip={menuItem.label}
-                                className="h-10 transition-all font-normal"
+                                className={cn(
+                                  "h-10 transition-all font-normal",
+                                  isLocked && "opacity-60 cursor-not-allowed"
+                                )}
+                                aria-disabled={isLocked}
                               >
                                 {content}
                               </SidebarMenuButton>
-                              {hasChildren && isOpen ? (
+                              {hasChildren && isOpen && !isLocked ? (
                                 <SidebarMenuSub>
                                   {menuItem.children?.map(child =>
                                     renderMenuItem(child, level + 1)

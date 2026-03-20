@@ -20,6 +20,7 @@ import loyaltyRoutes from "./routes/loyalty.routes";
 import tablesRoutes from "./routes/tables.routes";
 import recipesRoutes from "./routes/recipes.routes";
 import { paymentsRoutes, paymentsWebhookRoutes } from "./routes/payments.routes";
+import modulesRoutes from "./routes/modules.routes";
 
 const app = express();
 const httpServer = createServer(app);
@@ -52,6 +53,7 @@ app.use("/api/loyalty", loyaltyRoutes);
 app.use("/api/tables", tablesRoutes);
 app.use("/api/recipes", recipesRoutes);
 app.use("/api/payments", paymentsRoutes);
+app.use("/api/modules", modulesRoutes);
 
 // WebSocket events
 setupWebSocketEvents(io);

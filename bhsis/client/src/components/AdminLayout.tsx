@@ -3,20 +3,6 @@ import DashboardLayout, { DashboardMenuEntry } from "@/components/DashboardLayou
 const adminMenuItems: DashboardMenuEntry[] = [
   { type: "section", label: "OPERAÇÃO" },
   {
-    icon: "fa-solid fa-utensils",
-    label: "Food",
-    path: "/food",
-    children: [
-      { label: "Dashboard", path: "/admin" },
-      { label: "Pedidos", path: "/orders" },
-      { label: "Pagamentos", path: "/payments" },
-      { label: "Alertas", path: "/stock-alerts" },
-      { label: "Fidelidade", path: "/loyalty" },
-      { label: "Cupons", path: "/coupons" },
-      { label: "Mesas", path: "/tables" },
-    ],
-  },
-  {
     icon: "fa-solid fa-folder",
     label: "Cadastro",
     path: "/cadastro",
@@ -582,6 +568,85 @@ const adminMenuItems: DashboardMenuEntry[] = [
       { label: "Pedido de Venda", path: "/relatorios/pedido-venda" },
       { label: "Ordens de Serviço", path: "/relatorios/ordens-servico" },
       { label: "Lucro de Venda/Comissões/Outros", path: "/relatorios/lucro-venda-comissoes-outros" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-utensils",
+    label: "Food",
+    path: "/food",
+    moduleKey: "food",
+    children: [
+      { label: "Dashboard", path: "/admin" },
+      { label: "Pedidos", path: "/orders" },
+      { label: "Pagamentos", path: "/payments" },
+      { label: "Alertas", path: "/stock-alerts" },
+      { label: "Fidelidade", path: "/loyalty" },
+      { label: "Cupons", path: "/coupons" },
+      { label: "Mesas", path: "/tables" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-gear",
+    label: "Configurações",
+    path: "/admin/configuracoes",
+    adminOnly: true,
+    children: [
+      { label: "Acesso a Módulos", path: "/admin/modules" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-tractor",
+    label: "Agro",
+    path: "/agro",
+    moduleKey: "agro",
+    children: [
+      { label: "Dashboard", path: "/agro/dashboard" },
+      { label: "Cadastros", path: "/agro/cadastros" },
+      { label: "Operações", path: "/agro/operacoes" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-chair",
+    label: "Salões",
+    path: "/saloes",
+    moduleKey: "saloes",
+    children: [
+      { label: "Dashboard", path: "/saloes/dashboard" },
+      { label: "Agenda", path: "/saloes/agenda" },
+      { label: "Serviços", path: "/saloes/servicos" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-stethoscope",
+    label: "Clínicas",
+    path: "/clinicas",
+    moduleKey: "clinicas",
+    children: [
+      { label: "Dashboard", path: "/clinicas/dashboard" },
+      { label: "Pacientes", path: "/clinicas/pacientes" },
+      { label: "Atendimentos", path: "/clinicas/atendimentos" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-bag-shopping",
+    label: "Shop",
+    path: "/shop",
+    moduleKey: "shop",
+    children: [
+      { label: "Dashboard", path: "/shop/dashboard" },
+      { label: "Produtos", path: "/shop/produtos" },
+      { label: "Pedidos", path: "/shop/pedidos" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-paw",
+    label: "Pet",
+    path: "/pet",
+    moduleKey: "pet",
+    children: [
+      { label: "Dashboard", path: "/pet/dashboard" },
+      { label: "Clientes", path: "/pet/clientes" },
+      { label: "Serviços", path: "/pet/servicos" },
     ],
   },
 ];
