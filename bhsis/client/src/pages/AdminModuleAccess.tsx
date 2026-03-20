@@ -71,7 +71,17 @@ export default function AdminModuleAccess() {
   }, []);
 
   const handleToggleModule = (id: string, active: boolean) => {
-    setPendingModules((prev) => prev.map((item) => (item.id === id ? { ...item, active } : item)));
+    setPendingModules((prev) =>
+      prev.map((item) => {
+        if (item.id !== id) return item;
+        if (!active) return { ...item, active };
+        return {
+          ...item,
+          active,
+          accesses: item.accesses.map((access) => ({ ...access, enabled: true })),
+        };
+      })
+    );
   };
 
   const handleToggleAccess = (moduleId: string, role: ModuleRole, enabled: boolean) => {
