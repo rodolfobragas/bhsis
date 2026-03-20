@@ -5,7 +5,6 @@ Orquestrar a pilha do BHSIS (backend + banco + redis) via Docker Compose para de
 
 ## Arquivos
 - `bhsis/docker-compose.yml`: stack local do BHSIS (backend + postgres + redis).
-- `docker/docker-compose.yml`: stack legada/infra estendida (routing/tracking/etc), use apenas se precisar desses serviços.
 
 ## Subir a stack
 ```bash

@@ -53,10 +53,6 @@ JWT_SECRET=dev-secret-key-change-in-production
 FRONTEND_URL=http://localhost:3000
 ```
 
-## Stack estendida/legada — `docker/docker-compose.yml`
-Use apenas se precisar de `routing-service`, `tracking-service`, `notification-service`, Graphhopper, etc.  
-Essa stack não é necessária para o BHSIS básico.
-
 ## Dica de uso
 - Para desenvolvimento rápido: `pnpm dev` (porta 3000).
 - Para validar produção: `docker compose up -d --build` (porta 3001).
