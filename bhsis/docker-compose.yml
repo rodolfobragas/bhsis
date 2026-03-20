@@ -39,6 +39,9 @@ services:
     environment:
       DATABASE_URL: postgresql://bhsis:bhsis_password@postgres:5432/bhsis_db?options=-c%20search_path%3Dfood_db%2Cweb_db%2Cpublic
       REDIS_URL: redis://redis:6379
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      OAUTH_SERVER_URL: http://host.docker.internal:3000
       NODE_ENV: production
       PORT: 3001
       JWT_SECRET: dev-secret-key-change-in-production
@@ -50,6 +53,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: pnpm start
 
 volumes:
