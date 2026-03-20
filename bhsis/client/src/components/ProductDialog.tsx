@@ -36,6 +36,9 @@ export default function ProductDialog({
   onSubmit,
   isLoading = false,
 }: ProductDialogProps) {
+  const productForForm = product
+    ? { ...product, recipeId: product.recipeId ?? undefined }
+    : undefined;
   const handleSubmit = async (data: any) => {
     await onSubmit(data);
     onOpenChange(false);
@@ -53,7 +56,7 @@ export default function ProductDialog({
           </DialogDescription>
         </DialogHeader>
         <ProductForm
-          product={product}
+          product={productForForm}
           categories={categories}
           recipes={recipes}
           onSubmit={handleSubmit}

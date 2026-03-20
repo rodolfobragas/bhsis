@@ -39,7 +39,7 @@ export class DashboardService {
     const buildWhere = (extra: Prisma.Sql[] = []) => {
       const clauses = [...orderFilters, ...extra];
       return clauses.length > 0
-        ? Prisma.sql`WHERE ${Prisma.join(clauses, Prisma.sql` AND `)}`
+        ? Prisma.sql`WHERE ${Prisma.join(clauses, " AND ")}`
         : Prisma.sql``;
     };
 
@@ -214,7 +214,7 @@ export class DashboardService {
         ${buildWhere([
           Prisma.sql`o."status" IN (${Prisma.join(
             [OrderStatus.CONFIRMED, OrderStatus.PREPARING, OrderStatus.READY],
-            Prisma.sql`, `,
+            ", ",
           )})`,
         ])}
       `,

@@ -14,9 +14,9 @@ interface Customer {
   name: string;
   email: string;
   phone: string;
-  address: string;
+  address?: string;
   city: string;
-  zipCode: string;
+  zipCode?: string;
   notes?: string;
 }
 

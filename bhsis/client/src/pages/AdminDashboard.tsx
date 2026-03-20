@@ -434,7 +434,7 @@ export default function AdminDashboard() {
             <CardDescription>Selecione periodo, datas e categoria para refinar a analise.</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
               <div>
                 <label className="text-xs text-muted-foreground">Data inicial</label>
                 <input
@@ -476,7 +476,7 @@ export default function AdminDashboard() {
                   </SelectContent>
                 </Select>
               </div>
-              <div className="flex items-end gap-2">
+              <div className="flex flex-col gap-2 md:col-span-2 xl:col-span-1 md:items-stretch xl:items-end">
                 <Button
                   className="w-full"
                   onClick={() => {
@@ -487,6 +487,7 @@ export default function AdminDashboard() {
                 </Button>
                 <Button
                   variant="outline"
+                  className="w-full"
                   onClick={() => {
                     const reset = { startDate: "", endDate: "", category: "all" };
                     setFilters(reset);

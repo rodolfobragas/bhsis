@@ -3,7 +3,7 @@ import prisma from "../config/database";
 import logger from "../config/logger";
 import { OrderPaymentStatus, PaymentStatus } from "@prisma/client";
 
-const STRIPE_API_VERSION: Stripe.StripeConfig["apiVersion"] = "2024-06-20";
+const STRIPE_API_VERSION: Stripe.StripeConfig["apiVersion"] = "2025-02-24.acacia";
 
 class PaymentService {
   private stripe: Stripe | null = null;

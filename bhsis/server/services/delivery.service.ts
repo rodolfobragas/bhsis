@@ -1,4 +1,4 @@
-import { DeliveryStatus, OrderStatus } from "@prisma/client";
+import { DeliveryStatus, OrderStatus, Prisma } from "@prisma/client";
 import prisma from "../config/database";
 import logger from "../config/logger";
 import { getSocketServer } from "../websocket/socket";
@@ -155,12 +155,12 @@ class DeliveryService {
     return emitterPayload;
   }
 
-  private async createEvento(id: string, tipo: string, detalhes?: Record<string, unknown>) {
+  private async createEvento(id: string, tipo: string, detalhes?: Prisma.InputJsonValue) {
     await prisma.eventoEntrega.create({
       data: {
         entregaId: id,
         tipo,
-        detalhes,
+        detalhes: detalhes ?? undefined,
       },
     });
   }
