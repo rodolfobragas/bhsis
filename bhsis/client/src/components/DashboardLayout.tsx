@@ -121,6 +121,7 @@ const PREMIUM_MODULES = new Set([
   "Frota",
   "Varejo",
   "Igrejas",
+  "Imobiliárias",
 ]);
 
 export default function DashboardLayout({

@@ -23,6 +23,7 @@ const DEFAULT_MODULES: ModuleInput[] = [
   { key: "frota", label: "Frota", premium: true },
   { key: "varejo", label: "Varejo", premium: true },
   { key: "igrejas", label: "Igrejas", premium: true },
+  { key: "imobiliarias", label: "Imobiliárias", premium: true },
   { key: "cadastro", label: "Cadastro" },
   { key: "faturamento", label: "Faturamento" },
   { key: "pdv", label: "PDV" },

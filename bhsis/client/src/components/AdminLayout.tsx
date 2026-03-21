@@ -1147,6 +1147,17 @@ const adminMenuItems: DashboardMenuEntry[] = [
       { label: "Eventos", path: "/igrejas/eventos" },
     ],
   },
+  {
+    icon: "fa-solid fa-building",
+    label: "Imobiliárias",
+    path: "/imobiliarias",
+    moduleKey: "imobiliarias",
+    children: [
+      { label: "Dashboard", path: "/imobiliarias/dashboard" },
+      { label: "Imóveis", path: "/imobiliarias/imoveis" },
+      { label: "Locações", path: "/imobiliarias/locacoes" },
+    ],
+  },
 ];
 
 export default function AdminLayout({
