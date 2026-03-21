@@ -67,6 +67,11 @@ JWT_SECRET=dev-secret-key-change-in-production
 FRONTEND_URL=http://localhost:3000
 ```
 
+## Imagens publicadas
+- `rodolfobragas/bhsis-backend:v2.0.1`
+- `rodolfobragas/bhsis-postgres:v2.0.1`
+- `rodolfobragas/bhsis-redis:v2.0.1`
+
 ## Dica de uso
 - Para desenvolvimento rápido: `pnpm dev` (porta 3000).
 - Para validar produção: `docker compose up -d --build` (porta 3001).

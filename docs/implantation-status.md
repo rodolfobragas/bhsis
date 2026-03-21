@@ -1,6 +1,11 @@
 # Implantation Status
 
-Última atualização: 2026-03-20
+Última atualização: 2026-03-21
+
+## Estado atual
+- Backend rodando em Docker (`http://localhost:3001`).
+- Auth e Food migrados para bancos separados.
+- Menu lateral com busca e ordenação alfabética.
 
 ## Módulos
 - Web: estrutura criada (menu + DB scaffolding). Funcionalidade em progresso.

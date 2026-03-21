@@ -5,6 +5,10 @@ O sistema está organizado por módulos no menu lateral do BHSIS.
 O módulo **Food** é o mais completo hoje.  
 Os demais módulos estão **em desenvolvimento** (telas placeholder).
 
+## Experiência atual
+- Menu lateral com busca e ordenação alfabética de módulos/sub-módulos.
+- Controle de acesso por perfil no painel de módulos.
+
 ## Arquitetura de dados
 - Cada módulo possui seu próprio banco de dados.
 - Auth é isolado em `auth_db`.
@@ -203,19 +207,3 @@ Os demais módulos estão **em desenvolvimento** (telas placeholder).
   - Gerador de Relatórios
     - Cadastrar
     - Consultar
-    - Gerar Relatório
-  - Relatório envio WhatsApp
-  - Notas Fiscais de Saída
-    - Resumo de Notas Fiscais
-    - Notas Fiscais Eletrônicas
-    - Notas Fiscais Eletrônicas Detalhado
-  - Notas Fiscais de Entrada
-    - Resumo de Notas Fiscais de Entrada
-    - Notas Fiscais de Entrada
-    - Notas Fiscais de Entrada Detalhado
-    - Detalhado com Rateio no Item
-    - Detalhado com Rateio Financeiro
-
-## Observações
-- A organização do menu já reflete a estrutura final.
-- As telas de módulos em desenvolvimento são placeholders e ainda não possuem lógica/integrações.

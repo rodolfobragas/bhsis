@@ -37,6 +37,11 @@ docker compose up -d --build
 - `REDIS_URL=redis://redis:6379`
 - `JWT_SECRET` (defina para produção)
 
+## Imagens publicadas
+- `rodolfobragas/bhsis-backend:v2.0.1`
+- `rodolfobragas/bhsis-postgres:v2.0.1`
+- `rodolfobragas/bhsis-redis:v2.0.1`
+
 ## Observações
 - Para ambiente de desenvolvimento fora do Docker, crie `bhsis/.env` com as mesmas `DATABASE_URL_*`, apontando para `localhost`.
 - Auth e módulos não compartilham banco. Dados entre módulos devem ser acessados via API.
