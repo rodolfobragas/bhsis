@@ -550,14 +550,14 @@ function DashboardLayoutContent({
                 >
                   <i className="fa-solid fa-bell text-sm" aria-hidden="true" />
                 </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="h-9 w-9"
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[5px] text-sm font-semibold transition-all disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border border-primary bg-background text-primary hover:bg-primary hover:text-primary-foreground disabled:border-[#e0e0e0] disabled:text-[#424242] disabled:bg-[#fcfbfb] size-10 h-9 w-9"
                   aria-label="Configurações"
+                  onClick={() => setLocation("/admin/modules")}
                 >
                   <i className="fa-solid fa-gear text-sm" aria-hidden="true" />
-                </Button>
+                </button>
                 {switchable ? (
                   <Button
                     variant="outline"

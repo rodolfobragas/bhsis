@@ -1027,13 +1027,6 @@ const adminMenuItems: DashboardMenuEntry[] = [
     ],
   },
   {
-    icon: "fa-solid fa-gear",
-    label: "Configurações",
-    path: "/admin/configuracoes",
-    adminOnly: true,
-    children: [{ label: "Acesso a Módulos", path: "/admin/modules" }],
-  },
-  {
     icon: "fa-solid fa-tractor",
     label: "Agro",
     path: "/agro",
