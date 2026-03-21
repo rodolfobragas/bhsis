@@ -33,6 +33,7 @@ import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useTheme } from "@/contexts/ThemeContext";
 import { wsClient } from "@/services/websocketClient";
 import { toast } from "sonner";
@@ -86,6 +87,32 @@ const buildMenuGroups = (menuItems: DashboardMenuEntry[]): MenuGroup[] => {
   }
 
   return groups;
+};
+
+const filterMenuItems = (
+  items: DashboardMenuItem[],
+  query: string
+): DashboardMenuItem[] => {
+  if (!query) return items;
+  const normalizedQuery = query.toLowerCase();
+
+  return items.reduce<DashboardMenuItem[]>((acc, item) => {
+    const labelMatches = item.label.toLowerCase().includes(normalizedQuery);
+    const childMatches = item.children
+      ? filterMenuItems(item.children, query)
+      : [];
+
+    if (labelMatches) {
+      acc.push({ ...item });
+      return acc;
+    }
+
+    if (childMatches.length > 0) {
+      acc.push({ ...item, children: childMatches });
+    }
+
+    return acc;
+  }, []);
 };
 
 const findActiveMenuItem = (
@@ -199,7 +226,7 @@ function DashboardLayoutContent({
 }: DashboardLayoutContentProps) {
   const { user, logout, token } = useAuth();
   const [location, setLocation] = useLocation();
-  const { state, toggleSidebar } = useSidebar();
+  const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
   const [isResizing, setIsResizing] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -209,6 +236,7 @@ function DashboardLayoutContent({
   const { theme, toggleTheme, switchable } = useTheme();
   const menuGroups = buildMenuGroups(menuItems);
   const [moduleAccess, setModuleAccess] = useState<Record<string, boolean>>({});
+  const [menuSearch, setMenuSearch] = useState("");
   const toggleMenu = (key: string) => {
     setExpandedMenus((prev) => ({
       ...prev,
@@ -313,37 +341,72 @@ function DashboardLayoutContent({
         >
           <SidebarHeader className="h-16 justify-center">
             <div className="flex items-center gap-3 px-2 transition-all w-full">
-              <button
-                onClick={toggleSidebar}
-                className="h-8 w-8 flex items-center justify-center hover:bg-accent rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0"
-                aria-label="Toggle navigation"
-              >
-                <i className="fa-solid fa-bars text-sm text-muted-foreground" aria-hidden="true" />
-              </button>
-              {!isCollapsed ? (
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="font-semibold tracking-tight truncate">
-                    Navigation
-                  </span>
-                </div>
-              ) : null}
+              <div className="flex items-center gap-2 min-w-0 w-full">
+                {!isCollapsed ? (
+                  <>
+                    <i
+                      className="fa-solid fa-magnifying-glass text-sm text-muted-foreground"
+                      aria-hidden="true"
+                    />
+                    <Input
+                      value={menuSearch}
+                      onChange={(event) => setMenuSearch(event.target.value)}
+                      placeholder="Buscar módulos..."
+                      className="h-8 text-sm"
+                      aria-label="Buscar módulos e sub-módulos"
+                    />
+                  </>
+                ) : (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <button
+                        className="h-8 w-8 flex items-center justify-center hover:bg-accent rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0"
+                        aria-label="Buscar módulos e sub-módulos"
+                      >
+                        <i
+                          className="fa-solid fa-magnifying-glass text-sm text-muted-foreground"
+                          aria-hidden="true"
+                        />
+                      </button>
+                    </PopoverTrigger>
+                    <PopoverContent align="start" className="w-56 p-2">
+                      <Input
+                        value={menuSearch}
+                        onChange={(event) => setMenuSearch(event.target.value)}
+                        placeholder="Buscar módulos..."
+                        className="h-8 text-sm"
+                        aria-label="Buscar módulos e sub-módulos"
+                        autoFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                )}
+              </div>
             </div>
           </SidebarHeader>
 
           <SidebarContent className="gap-0">
-            {menuGroups.map((group, index) => (
-              <SidebarGroup key={`${group.label ?? "default"}-${index}`} className="py-1">
-                {group.label ? (
-                  <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
-                ) : null}
-                <SidebarGroupContent>
-                  <SidebarMenu className="px-2 py-1">
-                    {group.items
-                      .filter((item) => {
-                        if (!item.adminOnly) return true;
-                        return user?.role?.toLowerCase() === "admin";
-                      })
-                      .map(item => {
+            {menuGroups.map((group, index) => {
+              const filteredItems = filterMenuItems(
+                group.items.filter((item) => {
+                  if (!item.adminOnly) return true;
+                  return user?.role?.toLowerCase() === "admin";
+                }),
+                menuSearch.trim()
+              );
+
+              if (menuSearch.trim() && filteredItems.length === 0) {
+                return null;
+              }
+
+              return (
+                <SidebarGroup key={`${group.label ?? "default"}-${index}`} className="py-1">
+                  {group.label ? (
+                    <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+                  ) : null}
+                  <SidebarGroupContent>
+                    <SidebarMenu className="px-2 py-1">
+                      {filteredItems.map(item => {
                       const renderMenuItem = (
                         menuItem: DashboardMenuItem,
                         level: number
@@ -451,11 +514,12 @@ function DashboardLayoutContent({
                       };
 
                       return renderMenuItem(item, 0);
-                    })}
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </SidebarGroup>
-            ))}
+                      })}
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </SidebarGroup>
+              );
+            })}
           </SidebarContent>
 
           <SidebarFooter className="p-3">
