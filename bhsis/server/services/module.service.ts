@@ -1,5 +1,4 @@
-import prisma from "../config/database";
-import { UserRole } from "@prisma/client";
+import prisma, { UserRole } from "../config/authDatabase";
 
 export type ModuleInput = {
   key: string;

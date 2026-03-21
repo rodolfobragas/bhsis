@@ -1,5 +1,5 @@
 import prisma from "../config/database";
-import { OrderStatus, Prisma } from "@prisma/client";
+import { OrderStatus, Prisma } from "../../prisma/generated/food";
 
 type OrdersByDayRow = { label: string; orders: number; revenue: number };
 type OrdersByHourRow = { hour: number; orders: number };

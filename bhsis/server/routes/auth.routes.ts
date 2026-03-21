@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import { z } from "zod";
 import authService from "../services/auth.service";
-import prisma from "../config/database";
+import prisma from "../config/authDatabase";
 import { authMiddleware, AuthRequest } from "../middleware/auth.middleware";
 import logger from "../config/logger";
 

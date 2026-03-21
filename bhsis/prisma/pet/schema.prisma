@@ -1,0 +1,19 @@
+// Prisma schema - pet module (placeholder)
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/pet"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["bhsis"]
+}
+
+model ModuleMeta {
+  id        String   @id @default(cuid())
+  module    String   @default("pet")
+  createdAt DateTime @default(now())
+
+  @@schema("bhsis")
+}

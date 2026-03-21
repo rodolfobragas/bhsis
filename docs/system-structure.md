@@ -5,6 +5,11 @@ O sistema está organizado por módulos no menu lateral do BHSIS.
 O módulo **Food** é o mais completo hoje.  
 Os demais módulos estão **em desenvolvimento** (telas placeholder).
 
+## Arquitetura de dados
+- Cada módulo possui seu próprio banco de dados.
+- Auth é isolado em `auth_db`.
+- Quando um módulo precisa de dados de outro, deve consumir via API.
+
 ## Módulo Principal
 - **Food (principal)**
   - Dashboard

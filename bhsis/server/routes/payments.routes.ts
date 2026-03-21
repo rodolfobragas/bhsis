@@ -2,7 +2,7 @@ import { Router, Response } from "express";
 import { z } from "zod";
 import paymentService from "../services/payment.service";
 import { authMiddleware, AuthRequest, requireRole } from "../middleware/auth.middleware";
-import { UserRole } from "@prisma/client";
+import { UserRole } from "../config/authDatabase";
 
 const router = Router();
 const webhookRouter = Router();

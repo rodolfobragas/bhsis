@@ -1,0 +1,19 @@
+// Prisma schema - web module (placeholder)
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/web"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["bhsis"]
+}
+
+model ModuleMeta {
+  id        String   @id @default(cuid())
+  module    String   @default("web")
+  createdAt DateTime @default(now())
+
+  @@schema("bhsis")
+}

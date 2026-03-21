@@ -1,6 +1,7 @@
 import { Router, Response } from "express";
 import { z } from "zod";
-import { TableStatus, UserRole } from "@prisma/client";
+import { UserRole } from "../config/authDatabase";
+import { TableStatus } from "../../prisma/generated/food";
 import tableService from "../services/table.service";
 import { authMiddleware, AuthRequest, requireRole } from "../middleware/auth.middleware";
 import logger from "../config/logger";

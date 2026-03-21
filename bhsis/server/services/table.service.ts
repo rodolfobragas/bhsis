@@ -1,5 +1,5 @@
 import prisma from "../config/database";
-import { TableStatus } from "@prisma/client";
+import { TableStatus } from "../../prisma/generated/food";
 
 export class TableService {
   async createTable(data: { name: string; capacity?: number; status?: TableStatus; location?: string }) {

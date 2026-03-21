@@ -73,13 +73,15 @@ pnpm install
 cp .env.example .env
 
 # Atualize as credenciais do banco de dados
-# DATABASE_URL="postgresql://user:password@localhost:5432/bhsis"
+# DATABASE_URL_AUTH="postgresql://user:password@localhost:5432/auth_db"
+# DATABASE_URL_FOOD="postgresql://user:password@localhost:5432/food_db"
 ```
 
 ### 4. Execute as migrações
 
 ```bash
-npx prisma migrate deploy
+pnpm prisma:generate
+pnpm prisma:migrate:deploy
 ```
 
 ### 5. Inicie o servidor

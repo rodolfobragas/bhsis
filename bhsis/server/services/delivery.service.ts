@@ -1,4 +1,4 @@
-import { DeliveryStatus, OrderStatus, Prisma } from "@prisma/client";
+import { DeliveryStatus, OrderStatus, Prisma } from "../../prisma/generated/food";
 import prisma from "../config/database";
 import logger from "../config/logger";
 import { getSocketServer } from "../websocket/socket";

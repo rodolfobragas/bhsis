@@ -1,0 +1,19 @@
+// Prisma schema - shop module (placeholder)
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/shop"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["bhsis"]
+}
+
+model ModuleMeta {
+  id        String   @id @default(cuid())
+  module    String   @default("shop")
+  createdAt DateTime @default(now())
+
+  @@schema("bhsis")
+}

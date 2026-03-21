@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import { z } from "zod";
 import { authMiddleware, requireRole, AuthRequest } from "../middleware/auth.middleware";
-import { UserRole } from "@prisma/client";
+import { UserRole } from "../config/authDatabase";
 import moduleService from "../services/module.service";
 import logger from "../config/logger";
 

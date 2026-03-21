@@ -1,0 +1,19 @@
+// Prisma schema - escolas module (placeholder)
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/escolas"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["bhsis"]
+}
+
+model ModuleMeta {
+  id        String   @id @default(cuid())
+  module    String   @default("escolas")
+  createdAt DateTime @default(now())
+
+  @@schema("bhsis")
+}

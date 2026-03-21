@@ -1,0 +1,75 @@
+// Prisma schema - Auth module
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/auth"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["bhsis"]
+}
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      UserRole @default(ATTENDANT)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([role])
+  @@schema("bhsis")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  KITCHEN
+  ATTENDANT
+  CUSTOMER
+  @@schema("bhsis")
+}
+
+model Module {
+  id          String         @id @default(cuid())
+  key         String         @unique
+  label       String
+  description String?
+  premium     Boolean        @default(false)
+  active      Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  accesses    ModuleAccess[]
+
+  @@schema("bhsis")
+}
+
+model ModuleAccess {
+  id        String   @id @default(cuid())
+  moduleId  String
+  role      UserRole
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  module Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@unique([moduleId, role])
+  @@schema("bhsis")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@schema("bhsis")
+}

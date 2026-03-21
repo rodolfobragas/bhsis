@@ -10,7 +10,9 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
-    "db:push": "drizzle-kit generate && drizzle-kit migrate"
+    "db:push": "drizzle-kit generate && drizzle-kit migrate",
+    "prisma:generate": "prisma generate --schema=prisma/auth/schema.prisma --config=prisma/auth/prisma.config.ts && prisma generate --schema=prisma/food/schema.prisma --config=prisma/food/prisma.config.ts && prisma generate --schema=prisma/web/schema.prisma --config=prisma/web/prisma.config.ts && prisma generate --schema=prisma/agro/schema.prisma --config=prisma/agro/prisma.config.ts && prisma generate --schema=prisma/saloes/schema.prisma --config=prisma/saloes/prisma.config.ts && prisma generate --schema=prisma/clinicas/schema.prisma --config=prisma/clinicas/prisma.config.ts && prisma generate --schema=prisma/shop/schema.prisma --config=prisma/shop/prisma.config.ts && prisma generate --schema=prisma/pet/schema.prisma --config=prisma/pet/prisma.config.ts && prisma generate --schema=prisma/wms/schema.prisma --config=prisma/wms/prisma.config.ts && prisma generate --schema=prisma/oficinas/schema.prisma --config=prisma/oficinas/prisma.config.ts && prisma generate --schema=prisma/escolas/schema.prisma --config=prisma/escolas/prisma.config.ts && prisma generate --schema=prisma/frota/schema.prisma --config=prisma/frota/prisma.config.ts && prisma generate --schema=prisma/varejo/schema.prisma --config=prisma/varejo/prisma.config.ts && prisma generate --schema=prisma/igrejas/schema.prisma --config=prisma/igrejas/prisma.config.ts && prisma generate --schema=prisma/imobiliarias/schema.prisma --config=prisma/imobiliarias/prisma.config.ts",
+    "prisma:migrate:deploy": "prisma migrate deploy --schema=prisma/auth/schema.prisma --config=prisma/auth/prisma.config.ts && prisma migrate deploy --schema=prisma/food/schema.prisma --config=prisma/food/prisma.config.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",

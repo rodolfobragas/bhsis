@@ -1,0 +1,19 @@
+// Prisma schema - oficinas module (placeholder)
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/oficinas"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["bhsis"]
+}
+
+model ModuleMeta {
+  id        String   @id @default(cuid())
+  module    String   @default("oficinas")
+  createdAt DateTime @default(now())
+
+  @@schema("bhsis")
+}

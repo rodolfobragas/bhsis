@@ -1,24 +1,40 @@
 # BHSIS Database
 
 ## Objetivo
-Banco PostgreSQL usado pelo BHSIS (schema `bhsis`) com migrations Prisma.
+O BHSIS usa **um banco por módulo**. O Auth é isolado em `auth_db` e os módulos acessam dados de outros módulos via **API**, não via banco.
 
 ## Estrutura
-- `bhsis/prisma/schema.prisma`: schema com `schemas = ["bhsis"]`.
-- `bhsis/prisma/migrations/`: migrations SQL.
+- `bhsis/prisma/auth/schema.prisma`: Auth (users, roles, modules, access).
+- `bhsis/prisma/food/schema.prisma`: domínio Food.
+- `bhsis/prisma/<modulo>/schema.prisma`: scaffolding por módulo.
+- `bhsis/prisma/auth/migrations/`: migrations do Auth.
+- `bhsis/prisma/food/migrations/`: migrations do Food.
 
 ## Primeiro setup (local)
 1. Suba o Postgres via Docker (`bhsis/docker-compose.yml`).
-2. Crie o schema:
-```bash
-docker exec bhsis-postgres psql -U bhsis -d bhsis -c "CREATE SCHEMA IF NOT EXISTS bhsis;"
-```
-3. Aplique migrations:
+2. O script de init cria os bancos e o schema `bhsis` automaticamente.
+3. Gere clients Prisma:
 ```bash
 cd bhsis
-DATABASE_URL="postgresql://bhsis:bhsis_password@localhost:5432/bhsis?options=-c%20search_path%3Dbhsis%2Cpublic" pnpm prisma migrate deploy
+pnpm prisma:generate
+```
+4. Aplique migrations (Auth + Food):
+```bash
+cd bhsis
+pnpm prisma:migrate:deploy
 ```
 
 ## Observações
-- Se estiver rodando o backend no Docker, o `DATABASE_URL` já aponta para o banco dentro do container.
-- O schema `bhsis` é obrigatório (as migrations não o criam automaticamente).
+- Cada módulo tem um `DATABASE_URL_*` (veja `.env.example`).
+- Não acesse tabelas de outro módulo direto no banco. Use API.
+- O schema `bhsis` é obrigatório em todos os bancos.
+
+## Migração do banco antigo
+Se você já tinha o banco monolítico, use o script abaixo para mover os dados:
+```bash
+cd bhsis
+export DATABASE_URL_OLD="postgresql://usuario:senha@localhost:5432/bhsis?options=-c%20search_path%3Dbhsis%2Cpublic"
+export DATABASE_URL_AUTH="postgresql://usuario:senha@localhost:5432/auth_db?options=-c%20search_path%3Dbhsis%2Cpublic"
+export DATABASE_URL_FOOD="postgresql://usuario:senha@localhost:5432/food_db?options=-c%20search_path%3Dbhsis%2Cpublic"
+./scripts/migrate-old-db.sh
+```

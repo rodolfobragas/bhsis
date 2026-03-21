@@ -1,11 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../prisma/generated/food";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 let prisma: PrismaClient;
 
-const databaseUrl = process.env.DATABASE_URL;
+const databaseUrl = process.env.DATABASE_URL_FOOD;
 if (!databaseUrl) {
-  throw new Error("DATABASE_URL precisa estar configurada para o BHSIS");
+  throw new Error("DATABASE_URL_FOOD precisa estar configurada para o BHSIS");
 }
 
 const adapterFactory = new PrismaPg({
@@ -18,12 +18,12 @@ if (process.env.NODE_ENV === "production") {
   prisma = createPrismaClient();
 } else {
   let globalWithPrisma = global as typeof globalThis & {
-    prisma?: PrismaClient;
+    foodPrisma?: PrismaClient;
   };
-  if (!globalWithPrisma.prisma) {
-    globalWithPrisma.prisma = createPrismaClient();
+  if (!globalWithPrisma.foodPrisma) {
+    globalWithPrisma.foodPrisma = createPrismaClient();
   }
-  prisma = globalWithPrisma.prisma;
+  prisma = globalWithPrisma.foodPrisma;
 }
 
 export default prisma;

@@ -1,6 +1,7 @@
 import { Router, Response } from "express";
 import { z } from "zod";
-import { CouponType, UserRole } from "@prisma/client";
+import { UserRole } from "../config/authDatabase";
+import { CouponType } from "../../prisma/generated/food";
 import couponService from "../services/coupon.service";
 import { authMiddleware, AuthRequest, requireRole } from "../middleware/auth.middleware";
 import logger from "../config/logger";

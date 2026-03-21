@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import prisma from "../config/database";
-import { UserRole } from "@prisma/client";
+import prisma, { UserRole } from "../config/authDatabase";
 
 export interface TokenPayload {
   userId: string;

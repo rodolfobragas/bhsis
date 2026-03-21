@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import authService, { TokenPayload } from "../services/auth.service";
 import logger from "../config/logger";
-import { UserRole } from "@prisma/client";
+import { UserRole } from "../config/authDatabase";
 
 export interface AuthRequest extends Request {
   user?: TokenPayload;

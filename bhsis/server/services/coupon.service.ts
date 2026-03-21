@@ -1,5 +1,5 @@
 import prisma from "../config/database";
-import { CouponType } from "@prisma/client";
+import { CouponType } from "../../prisma/generated/food";
 
 export class CouponService {
   async createCoupon(data: {

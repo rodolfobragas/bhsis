@@ -148,7 +148,9 @@ psql -h seu-rds-endpoint.amazonaws.com -U admin -d bhsis
 ```bash
 # Crie .env
 cat > .env << EOF
-DATABASE_URL=postgresql://admin:senha@seu-rds-endpoint.amazonaws.com:5432/bhsis
+DATABASE_URL_AUTH=postgresql://admin:senha@seu-rds-endpoint.amazonaws.com:5432/auth_db?options=-c%20search_path%3Dbhsis%2Cpublic
+DATABASE_URL_FOOD=postgresql://admin:senha@seu-rds-endpoint.amazonaws.com:5432/food_db?options=-c%20search_path%3Dbhsis%2Cpublic
+# demais módulos: ver .env.example
 REDIS_URL=redis://seu-redis-endpoint.amazonaws.com:6379
 JWT_SECRET=$(openssl rand -hex 32)
 NODE_ENV=production
@@ -158,10 +160,11 @@ LOG_LEVEL=info
 EOF
 ```
 
-#### 6. Execute migrações
+#### 6. Gere clients e execute migrações
 
 ```bash
-npx prisma migrate deploy
+pnpm prisma:generate
+pnpm prisma:migrate:deploy
 ```
 
 #### 7. Configure PM2
@@ -266,7 +269,9 @@ sudo -u postgres psql -c "ALTER ROLE bhsis WITH CREATEDB;"
 
 # Configure .env
 cat > .env << EOF
-DATABASE_URL=postgresql://bhsis:senha_segura@localhost:5432/bhsis
+DATABASE_URL_AUTH=postgresql://bhsis:senha_segura@localhost:5432/auth_db?options=-c%20search_path%3Dbhsis%2Cpublic
+DATABASE_URL_FOOD=postgresql://bhsis:senha_segura@localhost:5432/food_db?options=-c%20search_path%3Dbhsis%2Cpublic
+# demais módulos: ver .env.example
 REDIS_URL=redis://localhost:6379
 JWT_SECRET=$(openssl rand -hex 32)
 NODE_ENV=production
@@ -274,8 +279,9 @@ PORT=3001
 FRONTEND_URL=https://seu-dominio.com
 EOF
 
-# Execute migrações
-npx prisma migrate deploy
+# Gere clients e execute migrações
+pnpm prisma:generate
+pnpm prisma:migrate:deploy
 
 # Configure PM2 e Nginx (como no AWS)
 ```
@@ -301,7 +307,9 @@ cd bhsis
 
 # Configure .env para produção
 cat > .env << EOF
-DATABASE_URL=postgresql://bhsis:senha_segura@postgres:5432/bhsis
+DATABASE_URL_AUTH=postgresql://bhsis:senha_segura@postgres:5432/auth_db?options=-c%20search_path%3Dbhsis%2Cpublic
+DATABASE_URL_FOOD=postgresql://bhsis:senha_segura@postgres:5432/food_db?options=-c%20search_path%3Dbhsis%2Cpublic
+# demais módulos: ver .env.example
 REDIS_URL=redis://redis:6379
 JWT_SECRET=$(openssl rand -hex 32)
 NODE_ENV=production
@@ -330,7 +338,7 @@ services:
     environment:
       POSTGRES_USER: bhsis
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: bhsis
+      POSTGRES_DB: auth_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -346,7 +354,9 @@ services:
     ports:
       - "3001:3001"
     environment:
-      DATABASE_URL: postgresql://bhsis:${DB_PASSWORD}@postgres:5432/bhsis
+      DATABASE_URL_AUTH: postgresql://bhsis:${DB_PASSWORD}@postgres:5432/auth_db?options=-c%20search_path%3Dbhsis%2Cpublic
+      DATABASE_URL_FOOD: postgresql://bhsis:${DB_PASSWORD}@postgres:5432/food_db?options=-c%20search_path%3Dbhsis%2Cpublic
+      # demais módulos: ver .env.example
       REDIS_URL: redis://redis:6379
       NODE_ENV: production
       JWT_SECRET: ${JWT_SECRET}
@@ -438,7 +448,7 @@ jobs:
 ## 🔒 Checklist de Segurança
 
 - [ ] JWT_SECRET é uma string aleatória forte
-- [ ] DATABASE_URL usa HTTPS/SSL
+- [ ] DATABASE_URL_* usa HTTPS/SSL
 - [ ] Redis está protegido com senha
 - [ ] Firewall está configurado corretamente
 - [ ] CORS está restrito a domínios conhecidos
@@ -459,7 +469,7 @@ jobs:
 pm2 logs
 
 # Verifique conexão com banco
-psql $DATABASE_URL -c "SELECT 1;"
+psql $DATABASE_URL_AUTH -c "SELECT 1;"
 
 # Verifique conexão com Redis
 redis-cli -u $REDIS_URL ping
@@ -469,7 +479,7 @@ redis-cli -u $REDIS_URL ping
 
 ```bash
 # Verifique índices do banco
-psql $DATABASE_URL -c "\d+ orders"
+psql $DATABASE_URL_FOOD -c "\d+ orders"
 
 # Verifique cache Redis
 redis-cli -u $REDIS_URL INFO stats
@@ -478,4 +488,4 @@ redis-cli -u $REDIS_URL INFO stats
 ---
 
 **Versão**: 1.0.0  
-**Última atualização**: 2026-03-14
+**Última atualização**: 2026-03-20

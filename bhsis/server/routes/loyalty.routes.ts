@@ -1,6 +1,6 @@
 import { Router, Response } from "express";
 import { z } from "zod";
-import { UserRole } from "@prisma/client";
+import { UserRole } from "../config/authDatabase";
 import loyaltyService from "../services/loyalty.service";
 import { authMiddleware, AuthRequest, requireRole } from "../middleware/auth.middleware";
 import logger from "../config/logger";

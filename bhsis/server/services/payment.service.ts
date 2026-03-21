@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import prisma from "../config/database";
 import logger from "../config/logger";
-import { OrderPaymentStatus, PaymentStatus } from "@prisma/client";
+import { OrderPaymentStatus, PaymentStatus } from "../../prisma/generated/food";
 
 const STRIPE_API_VERSION: Stripe.StripeConfig["apiVersion"] = "2025-02-24.acacia";
 

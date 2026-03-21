@@ -10,10 +10,16 @@ cd bhsis
 docker compose up --build -d
 ```
 
-## Aplicar migrations
+## Gerar clients Prisma
 ```bash
 cd bhsis
-DATABASE_URL="postgresql://bhsis:bhsis_password@localhost:5432/bhsis?options=-c%20search_path%3Dbhsis%2Cpublic" pnpm prisma migrate deploy
+pnpm prisma:generate
+```
+
+## Aplicar migrations (Auth + Food)
+```bash
+cd bhsis
+pnpm prisma:migrate:deploy
 ```
 
 ## Health check

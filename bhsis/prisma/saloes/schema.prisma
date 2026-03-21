@@ -1,0 +1,19 @@
+// Prisma schema - saloes module (placeholder)
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/saloes"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["bhsis"]
+}
+
+model ModuleMeta {
+  id        String   @id @default(cuid())
+  module    String   @default("saloes")
+  createdAt DateTime @default(now())
+
+  @@schema("bhsis")
+}

@@ -1,5 +1,5 @@
 import prisma from "../config/database";
-import { LoyaltyTier, LoyaltyTransactionType } from "@prisma/client";
+import { LoyaltyTier, LoyaltyTransactionType } from "../../prisma/generated/food";
 import { getSocketServer } from "../websocket/socket";
 
 const tierConfig: Array<{ tier: LoyaltyTier; minEarned: number; benefits: string[] }> = [

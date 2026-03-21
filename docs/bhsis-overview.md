@@ -6,7 +6,7 @@ O sistema centraliza autenticacao, cadastros, operacoes e modulos configuraveis 
 
 ## Modulos e responsabilidades
 - **BHSIS App**: aplicacao principal (web + API) com autenticação, gestão e operações.
-- **Database**: migrations Prisma para PostgreSQL (schema `bhsis`).
+- **Database**: um banco por módulo (Auth isolado em `auth_db`).
 - **Redis**: cache/filas internas (quando habilitado).
 - **Docker Stack**: orquestra backend + banco + redis para ambiente local.
 
@@ -25,7 +25,7 @@ O sistema centraliza autenticacao, cadastros, operacoes e modulos configuraveis 
 - bhsis (frontend + backend)
 
 [Infra]
-- postgres
+- postgres (um DB por módulo)
 - redis
 ```
 

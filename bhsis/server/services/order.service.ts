@@ -1,5 +1,5 @@
 import prisma from "../config/database";
-import { OrderStatus } from "@prisma/client";
+import { OrderStatus } from "../../prisma/generated/food";
 import logger from "../config/logger";
 import { getSocketServer } from "../websocket/socket";
 import couponService from "./coupon.service";
