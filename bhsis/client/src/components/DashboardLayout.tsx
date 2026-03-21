@@ -115,6 +115,16 @@ const filterMenuItems = (
   }, []);
 };
 
+const sortMenuItems = (items: DashboardMenuItem[]): DashboardMenuItem[] => {
+  return [...items]
+    .map((item) =>
+      item.children ? { ...item, children: sortMenuItems(item.children) } : item
+    )
+    .sort((a, b) =>
+      a.label.localeCompare(b.label, "pt-BR", { sensitivity: "base" })
+    );
+};
+
 const findActiveMenuItem = (
   menuItems: DashboardMenuEntry[],
   location: string
@@ -388,10 +398,12 @@ function DashboardLayoutContent({
           <SidebarContent className="gap-0">
             {menuGroups.map((group, index) => {
               const filteredItems = filterMenuItems(
-                group.items.filter((item) => {
-                  if (!item.adminOnly) return true;
-                  return user?.role?.toLowerCase() === "admin";
-                }),
+                sortMenuItems(
+                  group.items.filter((item) => {
+                    if (!item.adminOnly) return true;
+                    return user?.role?.toLowerCase() === "admin";
+                  })
+                ),
                 menuSearch.trim()
               );
 
