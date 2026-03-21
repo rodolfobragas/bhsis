@@ -115,6 +115,12 @@ const PREMIUM_MODULES = new Set([
   "Clínicas",
   "Shop",
   "Pet",
+  "Logística WMS",
+  "Oficinas",
+  "Escolas",
+  "Frota",
+  "Varejo",
+  "Igrejas",
 ]);
 
 export default function DashboardLayout({

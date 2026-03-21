@@ -1081,6 +1081,72 @@ const adminMenuItems: DashboardMenuEntry[] = [
       { label: "Serviços", path: "/pet/servicos" },
     ],
   },
+  {
+    icon: "fa-solid fa-warehouse",
+    label: "Logística WMS",
+    path: "/wms",
+    moduleKey: "wms",
+    children: [
+      { label: "Dashboard", path: "/wms/dashboard" },
+      { label: "Operações", path: "/wms/operacoes" },
+      { label: "Inventário", path: "/wms/inventario" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-screwdriver-wrench",
+    label: "Oficinas",
+    path: "/oficinas",
+    moduleKey: "oficinas",
+    children: [
+      { label: "Dashboard", path: "/oficinas/dashboard" },
+      { label: "Ordens de Serviço", path: "/oficinas/ordens-servico" },
+      { label: "Agendamentos", path: "/oficinas/agendamentos" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-graduation-cap",
+    label: "Escolas",
+    path: "/escolas",
+    moduleKey: "escolas",
+    children: [
+      { label: "Dashboard", path: "/escolas/dashboard" },
+      { label: "Alunos", path: "/escolas/alunos" },
+      { label: "Turmas", path: "/escolas/turmas" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-truck-fast",
+    label: "Frota",
+    path: "/frota",
+    moduleKey: "frota",
+    children: [
+      { label: "Dashboard", path: "/frota/dashboard" },
+      { label: "Veículos", path: "/frota/veiculos" },
+      { label: "Manutenções", path: "/frota/manutencoes" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-store",
+    label: "Varejo",
+    path: "/varejo",
+    moduleKey: "varejo",
+    children: [
+      { label: "Dashboard", path: "/varejo/dashboard" },
+      { label: "Vendas", path: "/varejo/vendas" },
+      { label: "Estoque", path: "/varejo/estoque" },
+    ],
+  },
+  {
+    icon: "fa-solid fa-church",
+    label: "Igrejas",
+    path: "/igrejas",
+    moduleKey: "igrejas",
+    children: [
+      { label: "Dashboard", path: "/igrejas/dashboard" },
+      { label: "Membros", path: "/igrejas/membros" },
+      { label: "Eventos", path: "/igrejas/eventos" },
+    ],
+  },
 ];
 
 export default function AdminLayout({
